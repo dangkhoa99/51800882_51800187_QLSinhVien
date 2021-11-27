@@ -45,6 +45,7 @@
                 @Html.ActionLink("Edit", "Edit", new { id = item.MaSV }) |
                 @Html.ActionLink("Details", "Details", new { id = item.MaSV }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.MaSV })
+                <a href='@Url.Action("Index", "Diem", new { id = item.MaSV })' class="btn btn-success">Xem diem</a>
             </td>
         </tr>
     }
