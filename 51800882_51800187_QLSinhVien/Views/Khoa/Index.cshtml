@@ -1,0 +1,77 @@
+﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.Khoa>
+
+@{
+    ViewBag.Title = "DANH SÁCH KHOA";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
+</p>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKhoa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenKhoa)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhoa)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.MaKhoa }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaKhoa }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaKhoa })*@
+                <a href='@Url.Action("Edit", new { id = item.MaKhoa })' class="btn btn-warning">Sửa</a>
+                
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaKhoa" data_name="@item.TenKhoa">Xóa</a>
+
+                <a href='@Url.Action("Index", "SinhVien", new { makhoa = item.MaKhoa })' class="btn btn-info">Xem SV</a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.btn-remove').click(function (e) {
+                e.preventDefault();
+                var atag = $(this);
+                var data_id = atag.attr('data_id');
+                var data_name = atag.attr('data_name');
+                if (!confirm("Bạn có chắc chắn xóa " + data_name + "?"))
+                    return;
+                $.ajax(
+                    {
+                        url: 'https://localhost:44328/api/KhoaAPI/' + data_id,
+                        method: "DELETE",
+                        success: function (data) {
+                            atag.closest('tr').remove();
+                            alert("Đã xóa thành công Khoa " + data_name);
+                            return;
+                        },
+                        failed: function () {
+
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+}
