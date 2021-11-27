@@ -169,9 +169,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111270807405_init.cs" />
-    <Compile Include="Migrations\202111270807405_init.designer.cs">
-      <DependentUpon>202111270807405_init.cs</DependentUpon>
+    <Compile Include="Migrations\202111271404534_init.cs" />
+    <Compile Include="Migrations\202111271404534_init.designer.cs">
+      <DependentUpon>202111271404534_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\KetQua.cs" />
@@ -238,6 +238,7 @@
     <Content Include="Views\Khoa\Create.cshtml" />
     <Content Include="Views\Khoa\Edit.cshtml" />
     <Content Include="Views\SinhVien\Index.cshtml" />
+    <Content Include="Views\SinhVien\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -272,8 +273,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111270807405_init.resx">
-      <DependentUpon>202111270807405_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111271404534_init.resx">
+      <DependentUpon>202111271404534_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -40,7 +40,7 @@
                 
                 <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaKhoa" data_name="@item.TenKhoa">Xóa</a>
 
-                <a href='@Url.Action("Index", "SinhVien", new { makhoa = item.MaKhoa })' class="btn btn-info">Xem SV</a>
+                <a href='@Url.Action("IndexByMaKhoa", "SinhVien", new { makhoa = item.MaKhoa })' class="btn btn-info">Xem SV</a>
             </td>
         </tr>
     }

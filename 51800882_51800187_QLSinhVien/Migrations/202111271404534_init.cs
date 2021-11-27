@@ -13,14 +13,14 @@
                     {
                         LanThi = c.Int(nullable: false, identity: true),
                         Diem = c.Int(nullable: false),
-                        MonHocs_MaMH = c.String(maxLength: 5),
-                        SinhViens_MaSV = c.String(maxLength: 5),
+                        MaMH = c.String(maxLength: 5),
+                        MaSV = c.String(maxLength: 5),
                     })
                 .PrimaryKey(t => t.LanThi)
-                .ForeignKey("dbo.MonHocs", t => t.MonHocs_MaMH)
-                .ForeignKey("dbo.SinhViens", t => t.SinhViens_MaSV)
-                .Index(t => t.MonHocs_MaMH)
-                .Index(t => t.SinhViens_MaSV);
+                .ForeignKey("dbo.MonHocs", t => t.MaMH)
+                .ForeignKey("dbo.SinhViens", t => t.MaSV)
+                .Index(t => t.MaMH)
+                .Index(t => t.MaSV);
             
             CreateTable(
                 "dbo.MonHocs",
@@ -40,11 +40,11 @@
                         HoTen = c.String(nullable: false, maxLength: 100),
                         NgaySinh = c.DateTime(nullable: false),
                         GioiTinh = c.String(),
-                        Khoa_MaKhoa = c.String(maxLength: 5),
+                        MaKhoa = c.String(maxLength: 5),
                     })
                 .PrimaryKey(t => t.MaSV)
-                .ForeignKey("dbo.Khoas", t => t.Khoa_MaKhoa)
-                .Index(t => t.Khoa_MaKhoa);
+                .ForeignKey("dbo.Khoas", t => t.MaKhoa)
+                .Index(t => t.MaKhoa);
             
             CreateTable(
                 "dbo.Khoas",
@@ -59,12 +59,12 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.SinhViens", "Khoa_MaKhoa", "dbo.Khoas");
-            DropForeignKey("dbo.KetQuas", "SinhViens_MaSV", "dbo.SinhViens");
-            DropForeignKey("dbo.KetQuas", "MonHocs_MaMH", "dbo.MonHocs");
-            DropIndex("dbo.SinhViens", new[] { "Khoa_MaKhoa" });
-            DropIndex("dbo.KetQuas", new[] { "SinhViens_MaSV" });
-            DropIndex("dbo.KetQuas", new[] { "MonHocs_MaMH" });
+            DropForeignKey("dbo.SinhViens", "MaKhoa", "dbo.Khoas");
+            DropForeignKey("dbo.KetQuas", "MaSV", "dbo.SinhViens");
+            DropForeignKey("dbo.KetQuas", "MaMH", "dbo.MonHocs");
+            DropIndex("dbo.SinhViens", new[] { "MaKhoa" });
+            DropIndex("dbo.KetQuas", new[] { "MaSV" });
+            DropIndex("dbo.KetQuas", new[] { "MaMH" });
             DropTable("dbo.Khoas");
             DropTable("dbo.SinhViens");
             DropTable("dbo.MonHocs");

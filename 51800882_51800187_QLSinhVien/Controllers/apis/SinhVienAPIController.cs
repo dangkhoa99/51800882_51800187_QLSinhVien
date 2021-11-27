@@ -12,20 +12,27 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
     {
         SinhVienDAO dao = new SinhVienDAO(new QLSVContext());
         // GET api/<controller>
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        public IHttpActionResult Get()
+        {
+            return Ok(dao.GetAllSinhVien());
+        }
 
         // GET api/<controller>/5
-        public IHttpActionResult Get(string makhoa)
+        public IHttpActionResult GetSVByMaKhoa(string makhoa)
         {
             return Ok(dao.GetAllSinhVienByKhoa(makhoa));
         }
 
         // POST api/<controller>
-        public void Post([FromBody] string value)
+        public IHttpActionResult Post(SinhVien model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Not a valid model");
+
+            if (!dao.AddSinhVien(model))
+                return BadRequest("Mã SV đã tồn tại");
+
+            return Ok();
         }
 
         // PUT api/<controller>/5

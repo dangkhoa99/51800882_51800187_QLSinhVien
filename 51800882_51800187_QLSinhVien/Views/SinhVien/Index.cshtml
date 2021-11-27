@@ -1,14 +1,24 @@
 ﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.SinhVien>
 
 @{
-    ViewBag.Title = "Index";
+    if (ViewBag.Loai == 0)
+    {
+        ViewBag.Title = "DANH SÁCH SINH VIÊN";
+    }
+    else
+    {
+        ViewBag.Title = "DANH SÁCH SINH VIÊN THEO KHOA";
+    }
 }
 
-<h2>Index</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
 </p>
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 <table class="table table-bordered">
     <tr>
         <th>
@@ -22,6 +32,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.GioiTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKhoa)
         </th>
         <th></th>
     </tr>
@@ -42,9 +55,14 @@
                 @Html.DisplayFor(modelItem => item.GioiTinh)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MaSV }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MaSV }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MaSV })
+                @Html.DisplayFor(modelItem => item.MaKhoa)
+                
+            </td>
+            <td>
+                <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">Sửa</a>
+
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">Xóa</a>
+
             </td>
         </tr>
     }
