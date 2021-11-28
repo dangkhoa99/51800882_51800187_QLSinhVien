@@ -22,14 +22,14 @@ namespace _51800882_51800187_QLSinhVien.Models
         public string HoTen { get; set; }
         [DisplayName("Ngày Sinh")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime NgaySinh { get; set; }
         [DisplayName("Giới tính")]
         public string GioiTinh { get; set; }
         [DisplayName("Mã Khoa")]
         public string MaKhoa { get; set; }
         [ForeignKey("MaKhoa")]
-        [JsonIgnore]
+        
         public virtual Khoa Khoa { get; set; }
         [JsonIgnore]
         public virtual ICollection<KetQua> KetQuas { get; set; }

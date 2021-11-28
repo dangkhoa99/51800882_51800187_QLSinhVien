@@ -44,7 +44,9 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
 
         public ActionResult IndexByMaKhoa(string makhoa)
         {
+            KhoaDAO khoadao = new KhoaDAO(new QLSVContext());
             ViewBag.Loai = 1;
+            ViewBag.MaKhoa = khoadao.GetTenKhoaByMaKhoa(makhoa);
             IList<SinhVien> sv = null;
             using (var client = new HttpClient())
             {
@@ -74,6 +76,14 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
         {
             var db = new QLSVContext();
             ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa");
+
+            List<SelectListItem> GioiTinh = new List<SelectListItem>() {
+                new SelectListItem(){Text="Nam", Value="Nam"},
+                new SelectListItem(){Text="Nữ", Value="Nữ"}
+            };
+
+            ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text");
+
             return View();
         }
 
@@ -108,7 +118,79 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             }
             var db = new QLSVContext();
             ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", sv.MaKhoa);
+            List<SelectListItem> GioiTinh = new List<SelectListItem>() {
+                new SelectListItem(){Text="Nam", Value="Nam"},
+                new SelectListItem(){Text="Nữ", Value="Nữ"}
+            };
 
+            ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text", sv.GioiTinh);
+
+            return View(sv);
+        }
+
+        public ActionResult Edit(string id)
+        {
+            SinhVien sv = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUrl);
+                //HTTP GET
+                var responseTask = client.GetAsync("SinhVienAPI?id=" + id);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<SinhVien>();
+                    readTask.Wait();
+
+                    sv = readTask.Result;
+                }
+            }
+
+            var db = new QLSVContext();
+            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", sv.MaKhoa);
+            List<SelectListItem> GioiTinh = new List<SelectListItem>() {
+                new SelectListItem(){Text="Nam", Value="Nam"},
+                new SelectListItem(){Text="Nữ", Value="Nữ"}
+            };
+
+            ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text", sv.GioiTinh);
+
+            
+
+            return View(sv);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(SinhVien sv)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    //HTTP POST
+                    var putTask = client.PutAsJsonAsync<SinhVien>("SinhVienAPI", sv);
+                    putTask.Wait();
+
+                    var result = putTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            var db = new QLSVContext();
+            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", sv.MaKhoa);
+            List<SelectListItem> GioiTinh = new List<SelectListItem>() {
+                new SelectListItem(){Text="Nam", Value="Nam"},
+                new SelectListItem(){Text="Nữ", Value="Nữ"}
+            };
+
+            ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text", sv.GioiTinh);
             return View(sv);
         }
     }

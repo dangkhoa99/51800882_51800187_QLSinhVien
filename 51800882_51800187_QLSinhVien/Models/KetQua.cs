@@ -12,6 +12,8 @@ namespace _51800882_51800187_QLSinhVien.Models
     public class KetQua
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int STT { get; set; }
         [Required]
         [DisplayName("Lần thi")]
         public int LanThi { get; set; }
@@ -20,12 +22,12 @@ namespace _51800882_51800187_QLSinhVien.Models
         [DisplayName("Mã môn học")]
         public string MaMH { get; set; }
         [ForeignKey("MaMH")]
-        [JsonIgnore]
+        
         public virtual MonHoc MonHocs { get; set; }
         [DisplayName("Mã SV")]
         public string MaSV { get; set; }
         [ForeignKey("MaSV")]
-        [JsonIgnore]
+        
         public virtual SinhVien SinhViens { get; set; }
     }
 }

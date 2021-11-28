@@ -16,11 +16,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("QUẢN LÝ SINH VIÊN", "Index", "Khoa", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("51800882-51800187", "Index", "Khoa", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Student", "Index", "SinhVien", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Quản lý Khoa", "Index", "Khoa", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Quản lý Sinh Viên", "Index", "SinhVien", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Quản lý Môn Học", "Index", "MonHoc", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Quản lý Điểm", "Index", "KetQua", new { area = "" }, null)</li>
                 </ul>
             </div>
         </div>

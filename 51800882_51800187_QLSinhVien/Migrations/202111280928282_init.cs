@@ -11,12 +11,13 @@
                 "dbo.KetQuas",
                 c => new
                     {
-                        LanThi = c.Int(nullable: false, identity: true),
+                        STT = c.Int(nullable: false, identity: true),
+                        LanThi = c.Int(nullable: false),
                         Diem = c.Int(nullable: false),
                         MaMH = c.String(maxLength: 5),
                         MaSV = c.String(maxLength: 5),
                     })
-                .PrimaryKey(t => t.LanThi)
+                .PrimaryKey(t => t.STT)
                 .ForeignKey("dbo.MonHocs", t => t.MaMH)
                 .ForeignKey("dbo.SinhViens", t => t.MaSV)
                 .Index(t => t.MaMH)

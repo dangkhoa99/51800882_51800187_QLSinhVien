@@ -18,9 +18,9 @@ namespace _51800882_51800187_QLSinhVien.Models
             return db.SinhViens.ToList();
         }
 
-        public List<SinhVien> GetAllSinhVienByKhoa(String MaKhoa)
+        public List<SinhVien> GetAllSinhVienByKhoa(string MaKhoa)
         {
-            var sv = db.SinhViens.Where(s => s.Khoa.MaKhoa == MaKhoa);
+            var sv = db.SinhViens.Where(s => s.MaKhoa == MaKhoa);
             return sv.ToList();
         }
 
@@ -35,9 +35,39 @@ namespace _51800882_51800187_QLSinhVien.Models
             return true;
         }
 
+        public bool EditSinhVien(SinhVien sv)
+        {
+            var oldSV = db.SinhViens.FirstOrDefault(s => s.MaSV == sv.MaSV);
+            if (oldSV == null)
+                return false;
+
+            oldSV.HoTen = sv.HoTen;
+            oldSV.GioiTinh = sv.GioiTinh;
+            oldSV.NgaySinh = sv.NgaySinh;
+            oldSV.MaKhoa = sv.MaKhoa;
+            db.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteSinhVien(string MaSV)
+        {
+            var sv = db.SinhViens.FirstOrDefault(s => s.MaSV == MaSV);
+            if (sv == null)
+                return false;
+
+            db.SinhViens.Remove(sv);
+            db.SaveChanges();
+            return true;
+        }
+
         public SinhVien GetByID(string MaSV)
         {
             return db.SinhViens.FirstOrDefault(s => s.MaSV == MaSV);
+        }
+
+        public string GetHoTenByMaSV(string MaSV)
+        {
+            return db.SinhViens.Where(s => s.MaSV == MaSV).Select(s => s.HoTen).First().ToString();
         }
     }
 }

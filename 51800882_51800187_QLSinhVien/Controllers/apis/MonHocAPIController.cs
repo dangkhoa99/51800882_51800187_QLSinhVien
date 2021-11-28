@@ -8,45 +8,44 @@ using System.Web.Http;
 
 namespace _51800882_51800187_QLSinhVien.Controllers.apis
 {
-    public class KhoaAPIController : ApiController
+    public class MonHocAPIController : ApiController
     {
-        KhoaDAO dao = new KhoaDAO(new QLSVContext());
-
-        // Read
+        MonHocDAO dao = new MonHocDAO(new QLSVContext());
+        // GET All MH
         public IHttpActionResult Get()
         {
-            return Ok(dao.GetAllKhoas());
+            return Ok(dao.GetAllMonHocs());
         }
 
-        // Get by id
+        // GET MH BY ID
         public IHttpActionResult Get(string id)
         {
-            Khoa kh = dao.GetByID(id);
-            if (kh == null)
+            MonHoc mh = dao.GetByID(id);
+            if (mh == null)
                 return NotFound();
 
-            return Ok(kh);
+            return Ok(mh);
         }
 
         // Create
-        public IHttpActionResult Post(Khoa model)
+        public IHttpActionResult Post(MonHoc model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid model");
 
-            if (!dao.AddKhoa(model))
-                return BadRequest("Mã Khoa đã tồn tại");
+            if (!dao.AddMonHoc(model))
+                return BadRequest("Mã MH đã tồn tại");
 
             return Ok();
         }
 
         // Update
-        public IHttpActionResult Put(Khoa model)
+        public IHttpActionResult Put(MonHoc model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid data");
 
-            if (!dao.EditKhoa(model))
+            if (!dao.EditMH(model))
                 return NotFound();
 
             return Ok();
@@ -55,8 +54,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
         // Delete
         public IHttpActionResult Delete(string id)
         {
-            if (!dao.DeleteKhoa(id))
-                return BadRequest("Mã Khoa không tồn tại");
+            if (!dao.DeleteMH(id))
+                return BadRequest("Mã MH không tồn tại");
 
             return Ok();
         }

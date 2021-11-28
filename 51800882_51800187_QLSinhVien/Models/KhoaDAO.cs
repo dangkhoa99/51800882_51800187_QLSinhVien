@@ -41,7 +41,7 @@ namespace _51800882_51800187_QLSinhVien.Models
             return true;
         }
 
-        public bool DeleteKhoa(String MaKhoa)
+        public bool DeleteKhoa(string MaKhoa)
         {
             var kh = db.Khoas.FirstOrDefault(k => k.MaKhoa == MaKhoa);
             if (kh == null)
@@ -55,6 +55,11 @@ namespace _51800882_51800187_QLSinhVien.Models
         public Khoa GetByID(string MaKhoa)
         {
             return db.Khoas.FirstOrDefault(k => k.MaKhoa == MaKhoa);
+        }
+
+        public string GetTenKhoaByMaKhoa(string MaKhoa)
+        {
+            return db.Khoas.Where(k => k.MaKhoa == MaKhoa).Select(k => k.TenKhoa).First().ToString();
         }
     }
 }

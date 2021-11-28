@@ -1,0 +1,72 @@
+﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.KetQua>
+
+@{
+    if (ViewBag.Loai == 0)
+    {
+        ViewBag.Title = "DANH SÁCH ĐIỂM";
+    }
+    else
+    {
+        ViewBag.Title = "ĐIỂM CỦA SINH VIÊN " + ViewBag.TenSV;
+    }
+}
+
+<h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
+
+<p>
+    <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
+</p>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LanThi)
+        </th>
+        <th>
+            Tên môn học
+        </th>
+        @if (ViewBag.Loai == 0)
+        {
+            <th>
+                Tên sinh viên
+            </th>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.Diem)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LanThi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonHocs.TenMH)
+            </td>
+            @if (ViewBag.Loai == 0) { 
+                <td>
+                    @Html.DisplayFor(modelItem => item.SinhViens.HoTen)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Diem)
+            </td>
+            <td>
+                <a href='@Url.Action("Edit", new { id = item.STT })' class="btn btn-warning">Sửa</a>
+
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">Xóa</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@if (ViewBag.Loai == 1)
+{
+    <div>
+        @Html.ActionLink("Quay lại", "Index", "SinhVien")
+    </div>
+}

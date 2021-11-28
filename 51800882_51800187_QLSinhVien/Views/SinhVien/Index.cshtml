@@ -7,11 +7,11 @@
     }
     else
     {
-        ViewBag.Title = "DANH SÁCH SINH VIÊN THEO KHOA";
+        ViewBag.Title = "DANH SÁCH SINH VIÊN KHOA " + ViewBag.MaKhoa;
     }
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
 
 <p>
     <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
@@ -49,26 +49,59 @@
                 @Html.DisplayFor(modelItem => item.HoTen)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NgaySinh)
+                @*@Html.DisplayFor(modelItem => item.NgaySinh)*@
+                @String.Format("{0:dd/MM/yyyy}", item.NgaySinh)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GioiTinh)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaKhoa)
-                
+
             </td>
             <td>
                 <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">Sửa</a>
 
                 <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">Xóa</a>
 
+                <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">Xem điểm</a>
             </td>
         </tr>
     }
 
 </table>
 
-<div>
-    @Html.ActionLink("Back to List", "Index", "Khoa")
-</div>
+@if (ViewBag.Loai == 1) {
+    <div>
+        @Html.ActionLink("Quay lại", "Index", "Khoa")
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.btn-remove').click(function (e) {
+                e.preventDefault();
+                var atag = $(this);
+                var data_id = atag.attr('data_id');
+                var data_name = atag.attr('data_name');
+                if (!confirm("Bạn có chắc chắn xóa " + data_name + "?"))
+                    return;
+                $.ajax(
+                    {
+                        url: 'https://localhost:44328/api/SinhVienAPI/' + data_id,
+                        method: "DELETE",
+                        success: function (data) {
+                            atag.closest('tr').remove();
+                            alert("Đã xóa thành công Sinh viên " + data_name);
+                            return;
+                        },
+                        failed: function () {
+
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+}

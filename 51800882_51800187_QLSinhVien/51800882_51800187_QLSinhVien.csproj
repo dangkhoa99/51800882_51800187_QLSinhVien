@@ -162,16 +162,20 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\apis\KetQuaAPIController.cs" />
     <Compile Include="Controllers\apis\KhoaAPIController.cs" />
+    <Compile Include="Controllers\apis\MonHocAPIController.cs" />
     <Compile Include="Controllers\apis\SinhVienAPIController.cs" />
+    <Compile Include="Controllers\KetQuaController.cs" />
+    <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\SinhVienController.cs" />
     <Compile Include="Controllers\KhoaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111271404534_init.cs" />
-    <Compile Include="Migrations\202111271404534_init.designer.cs">
-      <DependentUpon>202111271404534_init.cs</DependentUpon>
+    <Compile Include="Migrations\202111280928282_init.cs" />
+    <Compile Include="Migrations\202111280928282_init.designer.cs">
+      <DependentUpon>202111280928282_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\KetQua.cs" />
@@ -239,6 +243,11 @@
     <Content Include="Views\Khoa\Edit.cshtml" />
     <Content Include="Views\SinhVien\Index.cshtml" />
     <Content Include="Views\SinhVien\Create.cshtml" />
+    <Content Include="Views\SinhVien\Edit.cshtml" />
+    <Content Include="Views\MonHoc\Index.cshtml" />
+    <Content Include="Views\MonHoc\Create.cshtml" />
+    <Content Include="Views\MonHoc\Edit.cshtml" />
+    <Content Include="Views\KetQua\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -273,8 +282,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111271404534_init.resx">
-      <DependentUpon>202111271404534_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111280928282_init.resx">
+      <DependentUpon>202111280928282_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
