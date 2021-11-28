@@ -17,10 +17,11 @@
     <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
 </p>
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-<table class="table">
+
+<table class="table table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LanThi)
+            @Html.DisplayNameFor(model => model.STT)
         </th>
         <th>
             Tên môn học
@@ -41,12 +42,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.LanThi)
+                @Html.DisplayFor(modelItem => item.STT)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MonHocs.TenMH)
             </td>
-            @if (ViewBag.Loai == 0) { 
+            @if (ViewBag.Loai == 0)
+            {
                 <td>
                     @Html.DisplayFor(modelItem => item.SinhViens.HoTen)
                 </td>
@@ -55,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Diem)
             </td>
             <td>
-                <a href='@Url.Action("Edit", new { id = item.STT })' class="btn btn-warning">Sửa</a>
+                <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">Sửa</a>
 
                 <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">Xóa</a>
             </td>
@@ -70,3 +72,32 @@
         @Html.ActionLink("Quay lại", "Index", "SinhVien")
     </div>
 }
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.btn-remove').click(function (e) {
+                e.preventDefault();
+                var atag = $(this);
+                var data_id = atag.attr('data_id');
+                if (!confirm("Bạn có chắc chắn xóa?"))
+                    return;
+                $.ajax(
+                    {
+                        url: 'https://localhost:44328/api/KetQuaAPI/' + data_id,
+                        method: "DELETE",
+                        success: function (data) {
+                            atag.closest('tr').remove();
+                            alert("Đã xóa thành công ");
+                            return;
+                        },
+                        failed: function () {
+
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+}
+

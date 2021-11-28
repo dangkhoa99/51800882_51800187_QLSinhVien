@@ -12,14 +12,13 @@
                 c => new
                     {
                         STT = c.Int(nullable: false, identity: true),
-                        LanThi = c.Int(nullable: false),
                         Diem = c.Int(nullable: false),
-                        MaMH = c.String(maxLength: 5),
-                        MaSV = c.String(maxLength: 5),
+                        MaMH = c.String(nullable: false, maxLength: 5),
+                        MaSV = c.String(nullable: false, maxLength: 5),
                     })
                 .PrimaryKey(t => t.STT)
-                .ForeignKey("dbo.MonHocs", t => t.MaMH)
-                .ForeignKey("dbo.SinhViens", t => t.MaSV)
+                .ForeignKey("dbo.MonHocs", t => t.MaMH, cascadeDelete: true)
+                .ForeignKey("dbo.SinhViens", t => t.MaSV, cascadeDelete: true)
                 .Index(t => t.MaMH)
                 .Index(t => t.MaSV);
             
@@ -40,11 +39,11 @@
                         MaSV = c.String(nullable: false, maxLength: 5),
                         HoTen = c.String(nullable: false, maxLength: 100),
                         NgaySinh = c.DateTime(nullable: false),
-                        GioiTinh = c.String(),
-                        MaKhoa = c.String(maxLength: 5),
+                        GioiTinh = c.String(nullable: false),
+                        MaKhoa = c.String(nullable: false, maxLength: 5),
                     })
                 .PrimaryKey(t => t.MaSV)
-                .ForeignKey("dbo.Khoas", t => t.MaKhoa)
+                .ForeignKey("dbo.Khoas", t => t.MaKhoa, cascadeDelete: true)
                 .Index(t => t.MaKhoa);
             
             CreateTable(

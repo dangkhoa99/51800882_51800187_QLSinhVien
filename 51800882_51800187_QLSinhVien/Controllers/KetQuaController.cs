@@ -71,5 +71,94 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             }
             return View("Index", kq);
         }
+
+        public ActionResult Create()
+        {
+            var db = new QLSVContext();
+            ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen");
+            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(KetQua kq)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    //HTTP POST
+                    var postTask = client.PostAsJsonAsync<KetQua>("KetQuaAPI", kq);
+                    postTask.Wait();
+
+                    var result = postTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+
+            }
+            var db = new QLSVContext();
+            ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen", kq.MaSV);
+            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", kq.MaMH);
+
+            return View(kq);
+        }
+
+        public ActionResult Edit(int STT)
+        {
+            KetQua kq = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUrl);
+                //HTTP GET
+                var responseTask = client.GetAsync("KetQuaAPI?stt=" + STT);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<KetQua>();
+                    readTask.Wait();
+
+                    kq = readTask.Result;
+                }
+            }
+
+            var db = new QLSVContext();
+            ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen", kq.MaSV);
+            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", kq.MaMH);
+            return View(kq);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(KetQua kq)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    //HTTP POST
+                    var putTask = client.PutAsJsonAsync<KetQua>("KetQuaAPI", kq);
+                    putTask.Wait();
+
+                    var result = putTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            var db = new QLSVContext();
+            ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen", kq.MaSV);
+            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", kq.MaMH);
+            return View(kq);
+        }
     }
 }

@@ -17,31 +17,53 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return Ok(dao.GetAllKetQua());
         }
 
+        // Get by stt
+        public IHttpActionResult Get(int stt)
+        {
+            KetQua kq = dao.GetByID(stt);
+            if (kq == null)
+                return NotFound();
+
+            return Ok(kq);
+        }
+
         // GET Diem By MaSV
         public IHttpActionResult GetKQByMaSV(string masv)
         {
             return Ok(dao.GetAllKetQuaByMaSV(masv));
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        // Create
+        public IHttpActionResult Post(KetQua model)
         {
-            return "value";
+            if (!ModelState.IsValid)
+                return BadRequest("Not a valid model");
+
+            if (!dao.AddKetQua(model))
+                return BadRequest("STT đã tồn tại");
+
+            return Ok();
         }
 
-        // POST api/<controller>
-        public void Post([FromBody] string value)
+        // Update
+        public IHttpActionResult Put(KetQua model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Not a valid data");
+
+            if (!dao.EditKetQua(model))
+                return NotFound();
+
+            return Ok();
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
+        // Delete
+        public IHttpActionResult Delete(int id)
         {
-        }
+            if (!dao.DeleteKetQua(id))
+                return BadRequest("STT không tồn tại");
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            return Ok();
         }
     }
 }

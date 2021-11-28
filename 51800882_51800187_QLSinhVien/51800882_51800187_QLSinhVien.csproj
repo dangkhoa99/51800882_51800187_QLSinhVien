@@ -173,9 +173,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111280928282_init.cs" />
-    <Compile Include="Migrations\202111280928282_init.designer.cs">
-      <DependentUpon>202111280928282_init.cs</DependentUpon>
+    <Compile Include="Migrations\202111281426388_init.cs" />
+    <Compile Include="Migrations\202111281426388_init.designer.cs">
+      <DependentUpon>202111281426388_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\KetQua.cs" />
@@ -248,6 +248,8 @@
     <Content Include="Views\MonHoc\Create.cshtml" />
     <Content Include="Views\MonHoc\Edit.cshtml" />
     <Content Include="Views\KetQua\Index.cshtml" />
+    <Content Include="Views\KetQua\Create.cshtml" />
+    <Content Include="Views\KetQua\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,8 +284,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111280928282_init.resx">
-      <DependentUpon>202111280928282_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111281426388_init.resx">
+      <DependentUpon>202111281426388_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

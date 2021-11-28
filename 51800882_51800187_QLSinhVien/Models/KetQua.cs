@@ -14,20 +14,23 @@ namespace _51800882_51800187_QLSinhVien.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int STT { get; set; }
+
         [Required]
-        [DisplayName("Lần thi")]
-        public int LanThi { get; set; }
         [DisplayName("Điểm")]
         public int Diem { get; set; }
+
+        [Required]
         [DisplayName("Mã môn học")]
         public string MaMH { get; set; }
+
         [ForeignKey("MaMH")]
-        
         public virtual MonHoc MonHocs { get; set; }
+
+        [Required]
         [DisplayName("Mã SV")]
         public string MaSV { get; set; }
+
         [ForeignKey("MaSV")]
-        
         public virtual SinhVien SinhViens { get; set; }
     }
 }

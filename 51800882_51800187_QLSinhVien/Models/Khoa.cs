@@ -15,10 +15,12 @@ namespace _51800882_51800187_QLSinhVien.Models
         [StringLength(5)]
         [DisplayName("Mã Khoa")]
         public string MaKhoa { get; set; }
+
         [Required]
         [StringLength(100)]
         [DisplayName("Tên Khoa")]
         public string TenKhoa { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<SinhVien> SinhViens { get; set; }
     }
