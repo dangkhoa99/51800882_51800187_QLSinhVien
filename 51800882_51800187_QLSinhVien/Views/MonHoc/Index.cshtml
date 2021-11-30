@@ -5,10 +5,12 @@
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
-
+@if (Roles.IsUserInRole(User.Identity.Name, "admin"))
+{
 <p>
     <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
 </p>
+}
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <table class="table table-bordered">
     <tr>
@@ -21,8 +23,11 @@
         <th>
             @Html.DisplayNameFor(model => model.SoTiet)
         </th>
-        <th></th>
-    </tr>
+        @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
+        {
+            <th></th>
+        }
+        </tr>
 
     @foreach (var item in Model)
     {
@@ -36,11 +41,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SoTiet)
             </td>
+            @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
+            {
             <td>
                 <a href='@Url.Action("Edit", new { id = item.MaMH })' class="btn btn-warning">Sửa</a>
 
                 <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaMH" data_name="@item.TenMH">Xóa</a>
+
+                <a href='@Url.Action("IndexByMaMonHoc", "KetQua", new { mamh = item.MaMH })' class="btn btn-info">Chi tiết</a>
             </td>
+            }
         </tr>
     }
 

@@ -23,6 +23,11 @@ namespace _51800882_51800187_QLSinhVien.Models
             return db.KetQuas.Where(d => d.MaSV == masv).ToList();
         }
 
+        public List<KetQua> GetAllKetQuaByMaMH(string mamh)
+        {
+            return db.KetQuas.Where(d => d.MaMH == mamh).ToList();
+        }
+
         public bool AddKetQua(KetQua kq)
         {
             db.KetQuas.Add(kq);

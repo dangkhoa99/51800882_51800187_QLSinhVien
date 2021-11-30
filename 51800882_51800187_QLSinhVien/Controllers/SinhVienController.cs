@@ -13,10 +13,13 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
         SinhVienDAO dao = new SinhVienDAO(new QLSVContext());
         string apiUrl = "https://localhost:44328/api/";
 
+        [Authorize(Roles = "admin, user")]
         // GET: SinhVien
         public ActionResult Index()
         {
             ViewBag.Loai = 0;
+            var db = new QLSVContext();
+            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa");
             IList<SinhVien> sv = null;
             using (var client = new HttpClient())
             {
@@ -42,11 +45,14 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return View(sv);
         }
 
+        [Authorize(Roles = "admin, user")]
         public ActionResult IndexByMaKhoa(string makhoa)
         {
+            var db = new QLSVContext();
+            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", makhoa);
             KhoaDAO khoadao = new KhoaDAO(new QLSVContext());
             ViewBag.Loai = 1;
-            ViewBag.MaKhoa = khoadao.GetTenKhoaByMaKhoa(makhoa);
+            ViewBag.TenKhoa = khoadao.GetTenKhoaByMaKhoa(makhoa);
             IList<SinhVien> sv = null;
             using (var client = new HttpClient())
             {
@@ -72,6 +78,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return View("Index", sv);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             var db = new QLSVContext();
@@ -87,6 +94,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(SinhVien sv)
         {
@@ -128,6 +136,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return View(sv);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(string id)
         {
             SinhVien sv = null;
@@ -163,6 +172,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return View(sv);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Edit(SinhVien sv)
         {

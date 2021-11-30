@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Quan ly sinh vien</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+    <body>
+        <div class="header">
+            <div class="left">
+                <a href="#">Hệ thống quản lý sinh viên</a>
+            </div>
+
+            <div class="right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="user">Xin chào, <b>@User.Identity.Name!</b></a>
+
+                    using (Html.BeginForm("Logout", "Home", FormMethod.Post))
+                    {
+                        <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">Đăng xuất</a>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="container">
+            <a href="./Khoa" class="box" style="background-color: #90e25e">KHOA</a>
+            <a href="./SinhVien" class="box" style="background-color: #0061AD">SINH VIÊN</a>
+            <a href="./MonHoc" class="box" style="background-color: #b200ff">MÔN HỌC</a>
+            <a href="./KetQua" class="box" style="background-color: #ff006e">ĐIỂM</a>
+        </div>
+
+    </body>
+</html>
+
+<style>
+    * {
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        background-color: #222;
+        padding: 20px;
+        align-items: center;
+    }
+
+    .left {
+        text-transform: uppercase;
+        
+        font-size: 20px;
+    }
+
+    .left a, .right a {
+        color: #fff;
+        text-decoration: none !important;
+    }
+
+    .left a:hover {
+        color: #ddd;
+    }
+
+    .right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .user {
+        padding-right: 20px;
+    }
+
+    .user:hover {
+        color: #fff;
+    }
+
+    .container{
+        padding-top: 20px;
+        margin: 20px auto;
+        width:60%;
+        height:615px;
+        background-color:#fff;
+        display:grid;
+        grid-template-columns: 50% 50%;
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+    }
+
+    .box {
+        background-color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        font-family: sans-serif;
+        border: 0;
+        text-align: center;
+        text-decoration: none !important;
+        
+    }
+
+    .box:hover {
+        opacity: 0.8;
+        transition: 0.4s !important;
+        
+    }
+
+    .container::before{
+        display: none;
+    }
+
+    .container::after{
+        display: none;
+    }
+    a:hover{
+        color: rgb(212, 216, 216);
+        text-decoration: none;
+    }
+    a:visited{
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+    }
+</style>
+

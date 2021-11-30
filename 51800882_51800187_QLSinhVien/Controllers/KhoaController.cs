@@ -14,6 +14,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         string apiUrl = "https://localhost:44328/api/";
 
         // GET: Khoa
+        [Authorize(Roles = "admin, user")]
         public ActionResult Index()
         {
             IList<Khoa> khoas = null;
@@ -41,10 +42,12 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(khoas);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Create() {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(Khoa kh)
         {
@@ -76,6 +79,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(kh);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(string id)
         {
             Khoa kh = null;
@@ -100,6 +104,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(kh);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Edit(Khoa kh)
         {

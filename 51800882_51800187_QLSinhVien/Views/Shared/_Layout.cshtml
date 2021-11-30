@@ -16,15 +16,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("51800882-51800187", "Index", "Khoa", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("HỆ THỐNG QUẢN LÝ SINH VIÊN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                @*<ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Quản lý Khoa", "Index", "Khoa", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Quản lý Sinh Viên", "Index", "SinhVien", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Quản lý Môn Học", "Index", "MonHoc", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Quản lý Điểm", "Index", "KetQua", new { area = "" }, null)</li>
-                </ul>
+                </ul>*@
+                <div style="display: flex; align-items: center; height: 50px; justify-content:flex-end">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a style="padding-right: 20px; color: #fff; text-decoration:none">Xin chào, <b>@User.Identity.Name!</b></a>
+
+                        using (Html.BeginForm("Logout", "Home", FormMethod.Post))
+                        {
+                            <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">Đăng xuất</a>
+                        }
+                    }
+                </div>
             </div>
         </div>
     </div>

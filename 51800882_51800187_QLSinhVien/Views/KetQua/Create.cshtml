@@ -1,10 +1,10 @@
 ﻿@model _51800882_51800187_QLSinhVien.Models.KetQua
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create" + ViewBag.aaa;
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm()) 
@@ -17,26 +17,28 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Diem, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MonHocs.TenMH, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Diem, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Diem, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaMH, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaMH", null, new { @class = "form-control" } )
+                @Html.DropDownList("MaMH", null, new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.MonHocs.TenMH, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.MaMH } })*@
                 @Html.ValidationMessageFor(model => model.MaMH, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaSV, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SinhViens.HoTen, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MaSV", null, new { @class = "form-control" } )
+                @Html.DropDownList("MaSV", null, new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.SinhViens.HoTen, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.MaSV } })*@
                 @Html.ValidationMessageFor(model => model.MaSV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Diem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Diem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Diem, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -49,7 +51,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay lại", "Index", "SinhVien")
 </div>
 
 @section Scripts {

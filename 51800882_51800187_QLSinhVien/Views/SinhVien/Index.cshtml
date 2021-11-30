@@ -7,101 +7,124 @@
     }
     else
     {
-        ViewBag.Title = "DANH SÁCH SINH VIÊN KHOA " + ViewBag.MaKhoa;
+        ViewBag.Title = "DANH SÁCH SINH VIÊN KHOA " + ViewBag.TenKhoa;
     }
 }
 
 <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
 
-<p>
-    <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
-</p>
-
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-<table class="table table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaSV)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgaySinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GioiTinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaKhoa)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaSV)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoTen)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.NgaySinh)*@
-                @String.Format("{0:dd/MM/yyyy}", item.NgaySinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GioiTinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaKhoa)
 
-            </td>
-            <td>
-                <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">Sửa</a>
-
-                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">Xóa</a>
-
-                <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">Xem điểm</a>
-            </td>
-        </tr>
+        <p>
+            <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
+        </p>
     }
 
-</table>
+    @Html.DropDownList("MaKhoa", null, "-- Khoa --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
+</div>
 
-@if (ViewBag.Loai == 1) {
-    <div>
-        @Html.ActionLink("Quay lại", "Index", "Khoa")
-    </div>
-}
 
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $('.btn-remove').click(function (e) {
-                e.preventDefault();
-                var atag = $(this);
-                var data_id = atag.attr('data_id');
-                var data_name = atag.attr('data_name');
-                if (!confirm("Bạn có chắc chắn xóa " + data_name + "?"))
-                    return;
-                $.ajax(
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaSV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.NgaySinh)*@
+                    @String.Format("{0:dd/MM/yyyy}", item.NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Khoa.TenKhoa)
+
+                </td>
+                <td>
+                    @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
                     {
-                        url: 'https://localhost:44328/api/SinhVienAPI/' + data_id,
-                        method: "DELETE",
-                        success: function (data) {
-                            atag.closest('tr').remove();
-                            alert("Đã xóa thành công Sinh viên " + data_name);
-                            return;
-                        },
-                        failed: function () {
+                        <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">Sửa</a>
 
-                        }
+                        <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">Xóa</a>
                     }
-                );
+                        <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">Xem điểm</a>
+                    </td>
+            </tr>
+        }
+
+    </table>
+
+    @*@if (ViewBag.Loai == 1) {
+            <div>
+                @Html.ActionLink("Quay lại", "Index", "Khoa")
+            </div>
+        }*@
+
+    @section scripts{
+        <script>
+            function SelectedValue(ddlObject) {
+                //Selected value of dropdownlist
+                var selectedValue = ddlObject.value;
+                if (selectedValue != "") {
+                    window.location.href = '/SinhVien/IndexByMaKhoa?makhoa=' + selectedValue;
+                }
+                else {
+                    window.location.href = './Index';
+                }
+
+            }
+
+            $(document).ready(function () {
+                $('.btn-remove').click(function (e) {
+                    e.preventDefault();
+                    var atag = $(this);
+                    var data_id = atag.attr('data_id');
+                    var data_name = atag.attr('data_name');
+                    if (!confirm("Bạn có chắc chắn xóa " + data_name + "?"))
+                        return;
+                    $.ajax(
+                        {
+                            url: 'https://localhost:44328/api/SinhVienAPI/' + data_id,
+                            method: "DELETE",
+                            success: function (data) {
+                                atag.closest('tr').remove();
+                                alert("Đã xóa thành công Sinh viên " + data_name);
+                                return;
+                            },
+                            failed: function () {
+
+                            }
+                        }
+                    );
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }

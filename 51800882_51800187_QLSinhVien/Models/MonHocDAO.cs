@@ -56,5 +56,10 @@ namespace _51800882_51800187_QLSinhVien.Models
         {
             return db.MonHocs.FirstOrDefault(m => m.MaMH == MaMH);
         }
+
+        public string GetTenMHByMaMH(string MaMH)
+        {
+            return db.MonHocs.Where(m => m.MaMH == MaMH).Select(m => m.TenMH).First().ToString();
+        }
     }
 }

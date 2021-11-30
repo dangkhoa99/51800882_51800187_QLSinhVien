@@ -15,5 +15,6 @@ namespace _51800882_51800187_QLSinhVien.Models
         public DbSet<SinhVien> SinhViens { get; set; }
         public DbSet<MonHoc> MonHocs { get; set; }
         public DbSet<KetQua> KetQuas { get; set; }
+        public DbSet<MyUser> Users { get; set; }
     }
 }

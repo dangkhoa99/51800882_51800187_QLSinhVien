@@ -33,6 +33,12 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return Ok(dao.GetAllKetQuaByMaSV(masv));
         }
 
+        // GET Diem By MaMH
+        public IHttpActionResult GetKQByMaMH(string mamh)
+        {
+            return Ok(dao.GetAllKetQuaByMaMH(mamh));
+        }
+
         // Create
         public IHttpActionResult Post(KetQua model)
         {

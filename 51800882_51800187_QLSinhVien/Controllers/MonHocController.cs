@@ -13,6 +13,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         MonHocDAO dao = new MonHocDAO(new QLSVContext());
         string apiUrl = "https://localhost:44328/api/";
 
+        [Authorize(Roles = "admin, user")]
         // GET: MonHoc
         public ActionResult Index()
         {
@@ -41,11 +42,13 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(mh);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(MonHoc mh)
         {
@@ -78,6 +81,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(mh);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(string id)
         {
             MonHoc mh = null;
@@ -102,6 +106,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(mh);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Edit(MonHoc mh)
         {

@@ -55,6 +55,17 @@
                     })
                 .PrimaryKey(t => t.MaKhoa);
             
+            CreateTable(
+                "dbo.MyUsers",
+                c => new
+                    {
+                        id = c.Int(nullable: false, identity: true),
+                        userName = c.String(nullable: false, maxLength: 50),
+                        password = c.String(nullable: false, maxLength: 50),
+                        roles = c.String(nullable: false, maxLength: 50),
+                    })
+                .PrimaryKey(t => t.id);
+            
         }
         
         public override void Down()
@@ -65,6 +76,7 @@
             DropIndex("dbo.SinhViens", new[] { "MaKhoa" });
             DropIndex("dbo.KetQuas", new[] { "MaSV" });
             DropIndex("dbo.KetQuas", new[] { "MaMH" });
+            DropTable("dbo.MyUsers");
             DropTable("dbo.Khoas");
             DropTable("dbo.SinhViens");
             DropTable("dbo.MonHocs");
