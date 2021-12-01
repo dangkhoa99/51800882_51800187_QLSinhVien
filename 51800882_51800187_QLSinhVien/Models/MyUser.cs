@@ -12,13 +12,15 @@ namespace _51800882_51800187_QLSinhVien.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
+
         [Required(ErrorMessage = "Vui lòng nhập Tài khoản")]
         [StringLength(50, ErrorMessage = "Tài khoản không vượt quá 50 kí tự")]
         public string userName { get; set; }
+
         [Required(ErrorMessage = "Vui lòng nhập Mật khẩu")]
         [StringLength(50, ErrorMessage = "Mật khẩu không vượt quá 50 kí tự")]
         public string password { get; set; }
-        [Required]
+
         [StringLength(50)]
         public string roles { get; set; }
     }

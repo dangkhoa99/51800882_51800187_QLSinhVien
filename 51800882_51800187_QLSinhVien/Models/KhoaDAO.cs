@@ -9,6 +9,7 @@ namespace _51800882_51800187_QLSinhVien.Models
     public class KhoaDAO
     {
         private QLSVContext db;
+
         public KhoaDAO(QLSVContext context)
         {
             this.db = context;
@@ -16,7 +17,7 @@ namespace _51800882_51800187_QLSinhVien.Models
 
         public List<Khoa> GetAllKhoas()
         {
-            return db.Khoas.ToList() ;
+            return db.Khoas.ToList();
         }
 
         public bool AddKhoa(Khoa kh)
@@ -46,7 +47,9 @@ namespace _51800882_51800187_QLSinhVien.Models
             var kh = db.Khoas.FirstOrDefault(k => k.MaKhoa == MaKhoa);
             if (kh == null)
                 return false;
-
+            var sv = db.SinhViens.FirstOrDefault(s => s.MaKhoa == MaKhoa);
+            if (sv != null)
+                return false;
             db.Khoas.Remove(kh);
             db.SaveChanges();
             return true;

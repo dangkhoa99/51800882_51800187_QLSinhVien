@@ -10,7 +10,6 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 {
     public class KetQuaController : Controller
     {
-        KetQuaDAO dao = new KetQuaDAO(new QLSVContext());
         string apiUrl = "https://localhost:44328/api/";
 
         [Authorize(Roles = "admin, user")]
@@ -20,6 +19,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var db = new QLSVContext();
             ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH");
             ViewBag.Loai = 0;
+
             IList<KetQua> kq = null;
             using (var client = new HttpClient())
             {
@@ -36,11 +36,6 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 
                     kq = readTask.Result;
                 }
-                else //web api sent error response 
-                {
-
-                    ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
-                }
             }
             return View(kq);
         }
@@ -52,6 +47,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             ViewBag.Loai = 1;
             ViewBag.TenSV = svdao.GetHoTenByMaSV(masv);
             ViewBag.MaSV = masv;
+
             IList<KetQua> kq = null;
             using (var client = new HttpClient())
             {
@@ -68,11 +64,6 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 
                     kq = readTask.Result;
                 }
-                else //web api sent error response 
-                {
-
-                    ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
-                }
             }
             return View("Index", kq);
         }
@@ -82,9 +73,11 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         {
             var db = new QLSVContext();
             ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", mamh);
-            MonHocDAO mhdao = new MonHocDAO(new QLSVContext());
+
+            MonHocDAO mhdao = new MonHocDAO(db);
             ViewBag.Loai = 2;
             ViewBag.TenMH = mhdao.GetTenMHByMaMH(mamh);
+
             IList<KetQua> kq = null;
             using (var client = new HttpClient())
             {
@@ -101,11 +94,6 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 
                     kq = readTask.Result;
                 }
-                else //web api sent error response 
-                {
-
-                    ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
-                }
             }
             return View("Index", kq);
         }
@@ -116,16 +104,10 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var db = new QLSVContext();
             if (masv != null)
             {
-                //ViewBag.MaSV = db.SinhViens.Where(s => s.MaSV == masv).Select(s => s.HoTen).FirstOrDefault().ToString();
                 ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => s.MaSV == masv).ToList(), "MaSV", "HoTen");
                 var test = db.KetQuas.Where(k => k.MaSV == masv).Select(k => k.MaMH).ToList();
                 ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => !test.Contains(m.MaMH)), "MaMH", "TenMH");
             }
-
-
-
-            //ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen");
-            //ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH");
             return View();
         }
 
@@ -133,7 +115,6 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         [HttpPost]
         public ActionResult Create(KetQua kq)
         {
-
             if (ModelState.IsValid)
             {
                 using (var client = new HttpClient())
@@ -147,19 +128,14 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     var result = postTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
-                        //return RedirectToAction("Index");
                         return RedirectToAction("IndexByMaSinhVien", new { masv = kq.MaSV });
                     }
                 }
 
             }
             var db = new QLSVContext();
-            //ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen", kq.MaSV);
-            //ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", kq.MaMH);
-
             if (kq.MaSV != null)
             {
-                //ViewBag.MaSV = db.SinhViens.Where(s => s.MaSV == kq.MaSV).Select(s => s.HoTen).FirstOrDefault().ToString();
                 ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => s.MaSV == kq.MaSV).ToList(), "MaSV", "HoTen");
                 var test = db.KetQuas.Where(k => k.MaSV == kq.MaSV).Select(k => k.MaMH).ToList();
                 ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => !test.Contains(m.MaMH)), "MaMH", "TenMH", kq.MaMH);
@@ -172,7 +148,6 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         public ActionResult Edit(int STT)
         {
             KetQua kq = null;
-
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(apiUrl);
@@ -193,6 +168,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var db = new QLSVContext();
             ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen", kq.MaSV);
             ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", kq.MaMH);
+
             return View(kq);
         }
 
@@ -213,14 +189,15 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     var result = putTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
-                        //return RedirectToAction("Index");
                         return RedirectToAction("IndexByMaSinhVien", new { masv = kq.MaSV });
                     }
                 }
             }
+
             var db = new QLSVContext();
             ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen", kq.MaSV);
             ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", kq.MaMH);
+
             return View(kq);
         }
     }

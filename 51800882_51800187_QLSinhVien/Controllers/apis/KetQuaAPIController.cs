@@ -11,13 +11,14 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
     public class KetQuaAPIController : ApiController
     {
         KetQuaDAO dao = new KetQuaDAO(new QLSVContext());
-        // GET api/<controller>
+
+        // GET all
         public IHttpActionResult Get()
         {
             return Ok(dao.GetAllKetQua());
         }
 
-        // Get by stt
+        // GET by stt
         public IHttpActionResult Get(int stt)
         {
             KetQua kq = dao.GetByID(stt);
@@ -27,13 +28,13 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return Ok(kq);
         }
 
-        // GET Diem By MaSV
+        // GET diem BY MaSV
         public IHttpActionResult GetKQByMaSV(string masv)
         {
             return Ok(dao.GetAllKetQuaByMaSV(masv));
         }
 
-        // GET Diem By MaMH
+        // GET Diem BY MaMH
         public IHttpActionResult GetKQByMaMH(string mamh)
         {
             return Ok(dao.GetAllKetQuaByMaMH(mamh));

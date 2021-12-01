@@ -71,8 +71,8 @@
                             alert("Đã xóa thành công Khoa " + data_name);
                             return;
                         },
-                        failed: function () {
-
+                        error: function () {
+                            alert("Đã xóa thất bại Khoa " + data_name + ". Vui lòng thử lại khi Khoa không có Sinh Viên !!!");
                         }
                     }
                 );

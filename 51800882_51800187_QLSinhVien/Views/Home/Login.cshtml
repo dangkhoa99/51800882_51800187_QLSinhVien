@@ -8,100 +8,99 @@
 {
     <h4>Bạn đã đăng nhập hoặc không có quyền truy cập trang này. Vui lòng quay về <a href="/" title="Home">trang chủ</a></h4>
 }
-else { 
+else
+{
+    <html>
+    <head>
+        <title>Đăng nhập</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="login-page">
+            <div class="form">
+                <h1>ĐĂNG NHẬP</h1>
 
-<html>
-<head>
-    <title>Đăng nhập</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+                <div class="alert-danger">
+                    @ViewBag.Error
+                </div>
 
-    <style>
-        .login-page {
-            width: 400px;
-            padding: 8% 0 0;
-            margin: auto;
-        }
+                @using (Html.BeginForm())
+                {
+                    @Html.TextBoxFor(m => m.userName, new { @placeholder = "Tài khoản" })
+                    @Html.ValidationMessageFor(m => m.userName, "", new { @class = "text-danger" })
+                    @Html.PasswordFor(m => m.password, new { @placeholder = "Mật khẩu" })
+                    @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+                    <button type="submit">ĐĂNG NHẬP</button>
 
-        .form {
-            position: relative;
-            z-index: 1;
-            background: #FFFFFF;
-            width: 400px;
-            padding: 35px;
-            text-align: center;
-            border-radius: 20px;
-            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-        }
-
-            .form input {
-                outline: 0;
-                background: #f2f2f2;
-                width: 100%;
-                border-radius: 8px;
-                border: 0;
-                margin: 0 0 15px;
-                padding: 15px;
-                box-sizing: border-box;
-                font-size: 14px;
-            }
-
-            .form button {
-                text-transform: uppercase;
-                outline: 0;
-                background: #0061AD;
-                width: 100%;
-                border-radius: 8px;
-                border: 0;
-                padding: 15px;
-                color: #FFFFFF;
-                font-size: 14px;
-                -webkit-transition: all 0.3 ease;
-                transition: all 0.3 ease;
-                cursor: pointer;
-                .form button:hover, .form button:active, .form button:focus
-
-        {
-            background: #43A047;
-        }
-
-        .form .message {
-            margin: 15px 0 0;
-            color: #b3b3b3;
-            font-size: 12px;
-        }
-
-            .form .message a {
-                color: #4CAF50;
-                text-decoration: none;
-            }
-
-        .form .register-form {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="login-page">
-        <div class="form">
-            <h1>ĐĂNG NHẬP</h1>
-
-            <div class="alert-danger">
-                @ViewBag.Error
+                }
             </div>
-
-            @using (Html.BeginForm())
-            {
-                @Html.TextBoxFor(m => m.userName, new { @placeholder = "Tài khoản" })
-                @Html.ValidationMessageFor(m => m.userName, "", new { @class = "text-danger" })
-                @Html.PasswordFor(m => m.password, new { @placeholder = "Mật khẩu" })
-                @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
-                <button type="submit">ĐĂNG NHẬP</button>
-
-            }
         </div>
-    </div>
 
-</body>
+    </body>
 </html>
+<style>
+    .login-page {
+        width: 400px;
+        padding: 8% 0 0;
+        margin: auto;
+    }
+
+    .form {
+        position: relative;
+        z-index: 1;
+        background: #FFFFFF;
+        width: 400px;
+        padding: 35px;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    .form input {
+        outline: 0;
+        background: #f2f2f2;
+        width: 100%;
+        border-radius: 8px;
+        border: 0;
+        margin: 0 0 15px;
+        padding: 15px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    .form button {
+        text-transform: uppercase;
+        outline: 0;
+        background: #0061AD;
+        width: 100%;
+        border-radius: 8px;
+        border: 0;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+    }
+
+    .form button:hover, .form button:active, .form button:focus {
+        opacity: 0.9;
+        transition: 0.4s ease-out;
+    }
+
+    .form .message {
+        margin: 15px 0 0;
+        color: #b3b3b3;
+        font-size: 12px;
+    }
+
+    .form .message a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+
+    .form .register-form {
+        display: none;
+    }
+</style>
 }

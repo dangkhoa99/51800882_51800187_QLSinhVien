@@ -167,7 +167,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
 
             ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text", sv.GioiTinh);
 
-            
+
 
             return View(sv);
         }

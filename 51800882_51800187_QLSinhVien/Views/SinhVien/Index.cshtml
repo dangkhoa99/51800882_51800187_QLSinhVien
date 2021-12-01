@@ -119,8 +119,8 @@
                                 alert("Đã xóa thành công Sinh viên " + data_name);
                                 return;
                             },
-                            failed: function () {
-
+                            error: function () {
+                                alert("Đã xóa thất bại Sinh viên " + data_name);
                             }
                         }
                     );

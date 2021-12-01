@@ -62,7 +62,7 @@
                         id = c.Int(nullable: false, identity: true),
                         userName = c.String(nullable: false, maxLength: 50),
                         password = c.String(nullable: false, maxLength: 50),
-                        roles = c.String(nullable: false, maxLength: 50),
+                        roles = c.String(maxLength: 50),
                     })
                 .PrimaryKey(t => t.id);
             

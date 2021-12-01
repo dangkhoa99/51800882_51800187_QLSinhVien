@@ -43,7 +43,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult Create() {
+        public ActionResult Create()
+        {
             return View();
         }
 
@@ -72,7 +73,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                         }
                     }
                 }
-                else {
+                else
+                {
                     ModelState.AddModelError(string.Empty, "Mã Khoa đã tồn tại.");
                 }
             }

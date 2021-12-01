@@ -56,7 +56,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
         public IHttpActionResult Delete(string id)
         {
             if (!dao.DeleteKhoa(id))
-                return BadRequest("Mã Khoa không tồn tại");
+                return BadRequest("Xóa thất bại");
 
             return Ok();
         }

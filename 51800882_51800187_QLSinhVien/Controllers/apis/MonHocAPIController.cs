@@ -11,7 +11,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
     public class MonHocAPIController : ApiController
     {
         MonHocDAO dao = new MonHocDAO(new QLSVContext());
-        // GET All MH
+
+        // GET All
         public IHttpActionResult Get()
         {
             return Ok(dao.GetAllMonHocs());

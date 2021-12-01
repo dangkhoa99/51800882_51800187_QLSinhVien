@@ -13,7 +13,7 @@ namespace _51800882_51800187_QLSinhVien.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202112010301225_init"; }
+            get { return "202112011314593_init"; }
         }
         
         string IMigrationMetadata.Source

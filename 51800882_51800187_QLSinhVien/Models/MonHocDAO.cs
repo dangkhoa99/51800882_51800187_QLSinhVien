@@ -8,6 +8,7 @@ namespace _51800882_51800187_QLSinhVien.Models
     public class MonHocDAO
     {
         private QLSVContext db;
+
         public MonHocDAO(QLSVContext context)
         {
             this.db = context;
@@ -45,6 +46,10 @@ namespace _51800882_51800187_QLSinhVien.Models
         {
             var mh = db.MonHocs.FirstOrDefault(m => m.MaMH == MaMH);
             if (mh == null)
+                return false;
+
+            var kq = db.KetQuas.FirstOrDefault(d => d.MaMH == MaMH);
+            if (kq != null)
                 return false;
 
             db.MonHocs.Remove(mh);

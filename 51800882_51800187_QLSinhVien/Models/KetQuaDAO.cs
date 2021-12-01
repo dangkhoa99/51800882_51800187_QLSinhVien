@@ -8,6 +8,7 @@ namespace _51800882_51800187_QLSinhVien.Models
     public class KetQuaDAO
     {
         private QLSVContext db;
+
         public KetQuaDAO(QLSVContext context)
         {
             this.db = context;

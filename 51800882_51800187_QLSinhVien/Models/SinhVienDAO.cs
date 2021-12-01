@@ -8,6 +8,7 @@ namespace _51800882_51800187_QLSinhVien.Models
     public class SinhVienDAO
     {
         private QLSVContext db;
+
         public SinhVienDAO(QLSVContext context)
         {
             this.db = context;
@@ -20,8 +21,7 @@ namespace _51800882_51800187_QLSinhVien.Models
 
         public List<SinhVien> GetAllSinhVienByKhoa(string MaKhoa)
         {
-            var sv = db.SinhViens.Where(s => s.MaKhoa == MaKhoa);
-            return sv.ToList();
+            return db.SinhViens.Where(s => s.MaKhoa == MaKhoa).ToList();
         }
 
         public bool AddSinhVien(SinhVien sv)
@@ -53,6 +53,10 @@ namespace _51800882_51800187_QLSinhVien.Models
         {
             var sv = db.SinhViens.FirstOrDefault(s => s.MaSV == MaSV);
             if (sv == null)
+                return false;
+
+            var kq = db.KetQuas.FirstOrDefault(d => d.MaSV == MaSV);
+            if (kq != null)
                 return false;
 
             db.SinhViens.Remove(sv);
