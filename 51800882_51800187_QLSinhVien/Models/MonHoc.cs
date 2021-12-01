@@ -11,17 +11,18 @@ namespace _51800882_51800187_QLSinhVien.Models
     public class MonHoc
     {
         [Key]
-        [Required]
-        [StringLength(5)]
+        [Required(ErrorMessage = "Vui lòng nhập Mã Môn Học")]
+        [StringLength(5, ErrorMessage = "Mã Môn học không vượt quá 5 kí tự")]
         [DisplayName("Mã môn học")]
         public string MaMH { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "Vui lòng nhập Tên Môn Học")]
+        [StringLength(100, ErrorMessage = "Tên môn học không vượt quá 100 kí tự")]
         [DisplayName("Tên môn học")]
         public string TenMH { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Số tiết học")]
+        [Range(1, Int32.MaxValue, ErrorMessage = "Số tiết học phải lớn hơn 0")]
         [DisplayName("Số tiết")]
         public int SoTiet { get; set; }
 

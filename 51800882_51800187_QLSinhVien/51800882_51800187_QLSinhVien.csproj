@@ -174,11 +174,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111291404086_init.cs" />
-    <Compile Include="Migrations\202111291404086_init.designer.cs">
-      <DependentUpon>202111291404086_init.cs</DependentUpon>
+    <Compile Include="Migrations\202112010301225_init.cs" />
+    <Compile Include="Migrations\202112010301225_init.designer.cs">
+      <DependentUpon>202112010301225_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DateValidationAttribute.cs" />
     <Compile Include="Models\KetQua.cs" />
     <Compile Include="Models\KetQuaDAO.cs" />
     <Compile Include="Models\Khoa.cs" />
@@ -290,8 +291,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111291404086_init.resx">
-      <DependentUpon>202111291404086_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112010301225_init.resx">
+      <DependentUpon>202112010301225_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

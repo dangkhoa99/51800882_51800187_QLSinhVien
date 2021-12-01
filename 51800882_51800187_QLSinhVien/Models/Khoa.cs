@@ -11,13 +11,13 @@ namespace _51800882_51800187_QLSinhVien.Models
     public class Khoa
     {
         [Key]
-        [Required]
-        [StringLength(5)]
+        [Required(ErrorMessage = "Vui lòng nhập Mã Khoa")]
+        [StringLength(5, ErrorMessage="Mã Khoa không vượt quá 5 kí tự")]
         [DisplayName("Mã Khoa")]
         public string MaKhoa { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "Vui lòng nhập Tên Khoa")]
+        [StringLength(100, ErrorMessage = "Mã Khoa không vượt quá 100 kí tự")]
         [DisplayName("Tên Khoa")]
         public string TenKhoa { get; set; }
 

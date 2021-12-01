@@ -147,7 +147,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     var result = postTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("Index");
+                        //return RedirectToAction("Index");
+                        return RedirectToAction("IndexByMaSinhVien", new { masv = kq.MaSV });
                     }
                 }
 
@@ -212,7 +213,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     var result = putTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("Index");
+                        //return RedirectToAction("Index");
+                        return RedirectToAction("IndexByMaSinhVien", new { masv = kq.MaSV });
                     }
                 }
             }

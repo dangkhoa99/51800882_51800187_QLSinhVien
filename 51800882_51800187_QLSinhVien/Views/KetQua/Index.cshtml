@@ -4,32 +4,40 @@
     if (ViewBag.Loai == 0)
     {
         ViewBag.Title = "DANH SÁCH ĐIỂM";
+        <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
     }
     else if (ViewBag.Loai == 1)
     {
-        ViewBag.Title = "ĐIỂM CỦA SINH VIÊN " + ViewBag.TenSV;
+        ViewBag.Title = "ĐIỂM CỦA SINH VIÊN";
+        <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenSV</b></h2>
     }
     else
     {
-        ViewBag.Title = "DANH SÁCH ĐIỂM MÔN " + ViewBag.TenMH;
+        ViewBag.Title = "DANH SÁCH ĐIỂM MÔN";
+        <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenMH</b></h2>
     }
     var STT = 1;
 }
 
-<h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
+
 <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-    <a href='@Url.Action("Create", new { masv = ViewBag.MaSV })' class="btn btn-warning">Thêm TEST</a>
+
     @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
     {
-        <p>
-            <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
-        </p>
-    }
-        @if (ViewBag.Loai != 1)
+        if (ViewBag.Loai == 1)
         {
-            @Html.DropDownList("MaMH", null, "-- Môn Học --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
+            <p>
+                @*<a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>*@
+                <a href='@Url.Action("Create", new { masv = ViewBag.MaSV })' class="btn btn-primary">Tạo mới</a>
+            </p>
         }
-    </div>
+
+    }
+    @if (ViewBag.Loai != 1)
+    {
+        @Html.DropDownList("MaMH", null, "-- Môn Học --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
+    }
+</div>
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 <table class="table table-bordered">
@@ -56,7 +64,7 @@
         {
             <th></th>
         }
-        </tr>
+    </tr>
 
     @foreach (var item in Model)
     {
@@ -66,9 +74,9 @@
             </td>
             @if (ViewBag.Loai != 2)
             {
-            <td>
-                @Html.DisplayFor(modelItem => item.MonHocs.TenMH)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonHocs.TenMH)
+                </td>
             }
             @if (ViewBag.Loai != 1)
             {
@@ -81,11 +89,15 @@
             </td>
             @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
             {
-            <td>
-                <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">Sửa</a>
+                <td>
+                    @if (ViewBag.Loai == 1)
+                    {
+                        <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">Sửa</a>
+                    }
 
-                <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">Xóa</a>
-            </td>
+
+                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">Xóa</a>
+                </td>
             }
         </tr>
         STT++;
@@ -103,7 +115,7 @@
 @section scripts{
     <script>
         function SelectedValue(ddlObject) {
-            //Selected value of dropdownlist  
+            //Selected value of dropdownlist
             var selectedValue = ddlObject.value;
             if (selectedValue != "") {
                 window.location.href = '/KetQua/IndexByMaMonHoc?mamh=' + selectedValue;

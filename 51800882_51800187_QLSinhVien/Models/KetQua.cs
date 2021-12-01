@@ -15,18 +15,19 @@ namespace _51800882_51800187_QLSinhVien.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int STT { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập Điểm")]
+        [Range(0, 10, ErrorMessage = "Số điểm từ 0 - 10")]
         [DisplayName("Điểm")]
         public int Diem { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn Môn Học")]
         [DisplayName("Mã môn học")]
         public string MaMH { get; set; }
 
         [ForeignKey("MaMH")]
         public virtual MonHoc MonHocs { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn Sinh Viên")]
         [DisplayName("Mã SV")]
         public string MaSV { get; set; }
 

@@ -7,11 +7,11 @@
     }
     else
     {
-        ViewBag.Title = "DANH SÁCH SINH VIÊN KHOA " + ViewBag.TenKhoa;
+        ViewBag.Title = "DANH SÁCH SINH VIÊN KHOA";
     }
 }
 
-<h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
+<h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenKhoa</b></h2>
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
     @if (Roles.IsUserInRole(User.Identity.Name, "admin"))

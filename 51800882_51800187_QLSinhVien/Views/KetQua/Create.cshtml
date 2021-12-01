@@ -1,7 +1,12 @@
 ﻿@model _51800882_51800187_QLSinhVien.Models.KetQua
 
 @{
-    ViewBag.Title = "Create" + ViewBag.aaa;
+    ViewBag.Title = "Create";
+    if (Request.UrlReferrer != null)
+    {
+        string returnURL = Request.UrlReferrer.ToString();
+        ViewBag.ReturnURL = returnURL;
+    }
 }
 
 <h2>@ViewBag.Title</h2>
@@ -51,7 +56,8 @@
 }
 
 <div>
-    @Html.ActionLink("Quay lại", "Index", "SinhVien")
+    @*@Html.ActionLink("Quay lại", "Index")*@
+    <a href="@ViewBag.ReturnURL">Quay lại</a>
 </div>
 
 @section Scripts {

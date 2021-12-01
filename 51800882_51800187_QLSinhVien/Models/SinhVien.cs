@@ -12,27 +12,28 @@ namespace _51800882_51800187_QLSinhVien.Models
     public class SinhVien
     {
         [Key]
-        [Required]
-        [StringLength(5)]
+        [Required(ErrorMessage = "Vui lòng nhập Mã SV")]
+        [StringLength(5, ErrorMessage = "Mã SV không vượt quá 5 kí tự")]
         [DisplayName("Mã SV")]
         public string MaSV { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "Vui lòng nhập Họ Tên")]
+        [StringLength(100, ErrorMessage = "Họ Tên không vượt quá 100 kí tự")]
         [DisplayName("Họ Tên")]
         public string HoTen { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn Ngày Sinh")]
         [DisplayName("Ngày Sinh")]
         [DataType(DataType.Date)]
+        [DateValidationAttribute(ErrorMessage = "Bạn đến từ tương lai à !!!")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime NgaySinh { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn Giới tính")]
         [DisplayName("Giới tính")]
         public string GioiTinh { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn Khoa")]
         [DisplayName("Mã Khoa")]
         public string MaKhoa { get; set; }
 
