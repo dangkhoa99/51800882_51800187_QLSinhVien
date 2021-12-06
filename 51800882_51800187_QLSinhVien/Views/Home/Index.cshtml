@@ -12,43 +12,49 @@
     <title>Quan ly sinh vien</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
-    <body>
-        <div class="header">
-            <div class="left">
-                <a href="#">Hệ thống quản lý sinh viên</a>
+<body>
+    <div class="header">
+        <div class="left">
+            <a class="item item-1" href="#">Hệ thống quản lý sinh viên</a>
+            <div class="item item-2">
+                @*Chọn ngôn ngữ:*@
+                <a href="#">Tiếng Việt</a> &nbsp / &nbsp
+                <a href="#">Tiếng Anh</a>
             </div>
+            
+        </div>
+        
+        <div class="right">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="user">Xin chào, <b>@User.Identity.Name!</b></a>
 
-            <div class="right">
-                @if (User.Identity.IsAuthenticated)
+                using (Html.BeginForm("Logout", "Home", FormMethod.Post))
                 {
-                    <a class="user">Xin chào, <b>@User.Identity.Name!</b></a>
-
-                    using (Html.BeginForm("Logout", "Home", FormMethod.Post))
-                    {
-                        <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">Đăng xuất</a>
-                    }
+                    <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">Đăng xuất</a>
                 }
-            </div>
-        </div>
-
-        <div class="container">
-            @if (gv == "admin")
-            {
-                <a href="./Khoa" class="box" style="background-color: #90e25e">KHOA</a>
-                <a href="./MonHoc" class="box" style="background-color: #b200ff">MÔN HỌC</a>
-                <a href="./GiangVien" class="box" style="background-color: #39e4de">GIẢNG VIÊN</a>
-                <a href="./KetQua" class="box" style="background-color: #ff006e">ĐIỂM</a>
-                <a href="./SinhVien" class="box" style="background-color: #0061AD">SINH VIÊN</a>
-
-            }
-            else
-            {
-                <a href="./SinhVien" class="box" style="background-color: #0061AD">SINH VIÊN</a>
-                <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff">MÔN HỌC</a>
             }
         </div>
+        
+    </div>
+    <div class="container">
+        @if (gv == "admin")
+        {
+            <a href="./Khoa" class="box" style="background-color: #90e25e" target="_blank">KHOA</a>
+            <a href="./MonHoc" class="box" style="background-color: #b200ff" target="_blank">MÔN HỌC</a>
+            <a href="./GiangVien" class="box" style="background-color: #39e4de" target="_blank">GIẢNG VIÊN</a>
+            <a href="./KetQua" class="box" style="background-color: #ff006e" target="_blank">ĐIỂM</a>
+            <a href="./SinhVien" class="box box-1" style="background-color: #0061AD" target="_blank">SINH VIÊN</a>
 
-    </body>
+        }
+        else
+        {
+            <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">SINH VIÊN</a>
+            <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff" target="_blank">MÔN HỌC</a>
+        }
+    </div>
+
+</body>
 </html>
 
 <style>
@@ -56,6 +62,21 @@
         margin:0;
         padding:0;
         box-sizing: border-box;
+    }
+    
+
+
+    .item {
+        width:fit-content;
+    }
+    .item-2 {
+        text-transform: none;
+        font-size: 13px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        color: white;
+        padding-top: 5px
     }
 
     .header {
@@ -69,8 +90,11 @@
 
     .left {
         text-transform: uppercase;
-        
+        width: 310px;
         font-size: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
     }
 
     .left a, .right a {
@@ -122,6 +146,10 @@
         text-align: center;
         text-decoration: none !important;
         
+    }
+    .box-1 {
+        grid-column-start: 1;
+        grid-column-end: 3;
     }
 
     .box:hover {
