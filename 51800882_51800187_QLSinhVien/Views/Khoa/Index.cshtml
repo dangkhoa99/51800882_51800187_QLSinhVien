@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.Khoa>
 
 @{
-    ViewBag.Title = "DANH SÁCH KHOA";
+    ViewBag.Title = Resources.Content.facultyList;
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
 {
     <p>
-        <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
+        <a href='@Url.Action("Create")' class="btn btn-primary">@Resources.Content.create</a>
     </p>
 }
 
@@ -17,10 +17,10 @@
 <table class="table table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MaKhoa)
+            @Resources.Content.facultyId
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TenKhoa)
+            @Resources.Content.facultyName
         </th>
         @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
         {
@@ -40,9 +40,9 @@
             @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
             {
             <td>
-                <a href='@Url.Action("Edit", new { id = item.MaKhoa })' class="btn btn-warning">Sửa</a>
+                <a href='@Url.Action("Edit", new { id = item.MaKhoa })' class="btn btn-warning">@Resources.Content.edit</a>
 
-                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaKhoa" data_name="@item.TenKhoa">Xóa</a>
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaKhoa" data_name="@item.TenKhoa">@Resources.Content.delete</a>
 
                 @*<a href='@Url.Action("IndexByMaKhoa", "SinhVien", new { makhoa = item.MaKhoa })' class="btn btn-info">Xem SV</a>*@
             </td>

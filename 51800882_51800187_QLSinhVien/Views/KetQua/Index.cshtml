@@ -3,17 +3,17 @@
 @{
     if (ViewBag.Loai == 0)
     {
-        ViewBag.Title = "DANH SÁCH ĐIỂM";
+        ViewBag.Title = Resources.Content.resultList;
         <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
     }
     else if (ViewBag.Loai == 1)
     {
-        ViewBag.Title = "ĐIỂM CỦA SINH VIÊN";
+        ViewBag.Title = Resources.Content.resultForStudent;
         <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenSV</b></h2>
     }
     else
     {
-        ViewBag.Title = "DANH SÁCH ĐIỂM MÔN";
+        ViewBag.Title = Resources.Content.resultListForSubject;
         <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenMH</b></h2>
     }
     var STT = 1;
@@ -27,12 +27,12 @@
         if (ViewBag.Loai == 1)
         {
             <p>
-                <a href='@Url.Action("Create", new { masv = ViewBag.MaSV })' class="btn btn-primary">Tạo mới</a>
+                <a href='@Url.Action("Create", new { masv = ViewBag.MaSV })' class="btn btn-primary">@Resources.Content.create</a>
             </p>
         }
         else
         {
-            @Html.DropDownList("MaMH", null, "-- Môn Học --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
+            @Html.DropDownList("MaMH", null, "-- " + @Resources.Content.subject + " --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
         }
     }
 
@@ -41,7 +41,7 @@
         if (ViewBag.Loai == 2)
         {
             <p>
-                <a href='@Url.Action("CreateFromMH", new { mamh = ViewBag.aaa })' class="btn btn-primary">Tạo mới</a>
+                <a href='@Url.Action("CreateFromMH", new { mamh = ViewBag.aaa })' class="btn btn-primary">@Resources.Content.create</a>
             </p>
         }
 
@@ -59,13 +59,13 @@
         @if (ViewBag.Loai != 2)
         {
             <th>
-                Tên môn học
+                @Resources.Content.subjectName
             </th>
         }
         @if (ViewBag.Loai != 1)
         {
             <th>
-                Tên sinh viên
+                @Resources.Content.fullName
             </th>
         }
         <th>
@@ -104,14 +104,14 @@
                 {
                     if (ViewBag.Loai == 1)
                     {
-                        <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">Sửa</a>
+                        <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@Resources.Content.edit</a>
                     }
                 }
                 else {
-                    <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">Sửa</a>
+                    <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@Resources.Content.edit</a>
                 } 
 
-                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">Xóa</a>
+                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">@Resources.Content.delete</a>
                 </td>
             
         </tr>
@@ -123,7 +123,7 @@
 @if (ViewBag.Loai == 1)
 {
     <div>
-        @Html.ActionLink("Quay lại", "Index", "SinhVien")
+        @Html.ActionLink(Resources.Content.back, "Index", "SinhVien")
     </div>
 }
 

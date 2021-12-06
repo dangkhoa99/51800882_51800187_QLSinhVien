@@ -9,42 +9,46 @@
 
 <html>
 <head>
-    <title>Hệ thống quản lý sinh viên</title>
+    <title>@Resources.Content.systemManagementStudent</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
     <body>
         <div class="header">
             <div class="left">
-                <a href="#">Hệ thống quản lý sinh viên</a>
+                <a href="#">@Resources.Content.systemManagementStudent</a>
             </div>
 
             <div class="right">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a class="user">Xin chào, <b>@User.Identity.Name!</b></a>
+                    <a class="user">@Resources.Content.hello, <b>@User.Identity.Name!</b></a>
 
                     using (Html.BeginForm("Logout", "Home", FormMethod.Post))
                     {
-                        <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">Đăng xuất</a>
+                        <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">@Resources.Content.logout</a>
                     }
                 }
             </div>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-right: 20px;">
+            <a style="color: red" href="@Url.Action("ChangeLanguage", "Home", new { lang = "en" })">@Resources.Content.english</a>|
+            <a style="color: red" href="@Url.Action("ChangeLanguage", "Home", new { lang = "vi" })"> @Resources.Content.vietnamese</a>
         </div>
 
         <div class="container">
             @if (gv == "admin")
             {
-                <a href="./Khoa" class="box" style="background-color: #90e25e" target="_blank">KHOA</a>
-                <a href="./MonHoc" class="box" style="background-color: #b200ff" target="_blank">MÔN HỌC</a>
-                <a href="./GiangVien" class="box" style="background-color: #39e4de" target="_blank">GIẢNG VIÊN</a>
-                <a href="./KetQua" class="box" style="background-color: #ff006e" target="_blank">KẾT QUẢ</a>
-                <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">SINH VIÊN</a>
+                <a href="./Khoa" class="box" style="background-color: #90e25e" target="_blank">@Resources.Content.faculty</a>
+                <a href="./MonHoc" class="box" style="background-color: #b200ff" target="_blank">@Resources.Content.subject</a>
+                <a href="./GiangVien" class="box" style="background-color: #39e4de" target="_blank">@Resources.Content.teacher</a>
+                <a href="./KetQua" class="box" style="background-color: #ff006e" target="_blank">@Resources.Content.result</a>
+                <a href="./SinhVien" class="box box-1" style="background-color: #0061AD" target="_blank">@Resources.Content.student</a>
 
             }
             else
             {
-                <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">SINH VIÊN</a>
-                <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff" target="_blank">MÔN HỌC</a>
+                <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">@Resources.Content.student</a>
+                <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff" target="_blank">@Resources.Content.subject</a>
             }
         </div>
 
@@ -121,7 +125,13 @@
         border: 0;
         text-align: center;
         text-decoration: none !important;
+        text-transform: uppercase;
         
+    }
+
+    .box-1 {
+        grid-column-start: 1;
+        grid-column-end: 3;
     }
 
     .box:hover {

@@ -1,27 +1,27 @@
 ﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.MonHoc>
 
 @{
-    ViewBag.Title = "DANH SÁCH MÔN HỌC";
+    ViewBag.Title = Resources.Content.subjectList;
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
 {
 <p>
-    <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
+    <a href='@Url.Action("Create")' class="btn btn-primary">@Resources.Content.create</a>
 </p>
 }
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <table class="table table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MaMH)
+            @Resources.Content.subjectId
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TenMH)
+            @Resources.Content.subjectName
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SoTiet)
+            @Resources.Content.numberLessons
         </th>
         @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
         {
@@ -44,15 +44,15 @@
             @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
             {
             <td>
-                <a href='@Url.Action("Edit", new { id = item.MaMH })' class="btn btn-warning">Sửa</a>
+                <a href='@Url.Action("Edit", new { id = item.MaMH })' class="btn btn-warning">@Resources.Content.edit</a>
 
-                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaMH" data_name="@item.TenMH">Xóa</a>
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaMH" data_name="@item.TenMH">@Resources.Content.delete</a>
 
             </td>
             }
             else { 
             <td>
-                <a href='@Url.Action("IndexByMaMonHoc", "KetQua", new { mamh = item.MaMH })' class="btn btn-info">Chi tiết</a>
+                <a href='@Url.Action("IndexByMaMonHoc", "KetQua", new { mamh = item.MaMH })' class="btn btn-info">@Resources.Content.detail</a>
             </td> 
             }
         </tr>

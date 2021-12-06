@@ -18,6 +18,13 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View();
         }
 
+        public ActionResult ChangeLanguage(string lang)
+        {
+            Session["lang"] = lang;
+            //return RedirectToAction(null, new { language = lang });
+            return Redirect(Request.UrlReferrer.PathAndQuery);
+        }
+
         public ActionResult NotFound()
         {
             return View();

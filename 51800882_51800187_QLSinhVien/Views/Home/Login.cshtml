@@ -6,19 +6,21 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <h4>Bạn đã đăng nhập hoặc không có quyền truy cập trang này. Vui lòng quay về <a href="/" title="Home">trang chủ</a></h4>
+    <h4>@Resources.Content.messageIsLogin <a href="/" title="Home">@Resources.Content.home</a></h4>
 }
 else
 {
     <html>
     <head>
-        <title>Đăng nhập</title>
+        <title>@Resources.Content.login</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     </head>
     <body>
+        <a style="color: red" href="@Url.Action("ChangeLanguage", "Home", new { lang = "en" })">@Resources.Content.english</a> |
+        <a style="color: red" href="@Url.Action("ChangeLanguage", "Home", new { lang = "vi" })">@Resources.Content.vietnamese</a>
         <div class="login-page">
             <div class="form">
-                <h1>ĐĂNG NHẬP</h1>
+                <h1 style="text-transform: uppercase">@Resources.Content.login</h1>
 
                 <div class="alert-danger">
                     @ViewBag.Error
@@ -26,11 +28,11 @@ else
 
                 @using (Html.BeginForm())
                 {
-                    @Html.TextBoxFor(m => m.userName, new { @placeholder = "Tài khoản" })
+                    @Html.TextBoxFor(m => m.userName, new { @placeholder = @Resources.Content.username })
                     @Html.ValidationMessageFor(m => m.userName, "", new { @class = "text-danger" })
-                    @Html.PasswordFor(m => m.password, new { @placeholder = "Mật khẩu" })
+                    @Html.PasswordFor(m => m.password, new { @placeholder = @Resources.Content.password })
                     @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
-                    <button type="submit">ĐĂNG NHẬP</button>
+                    <button type="submit" style="text-transform: uppercase">@Resources.Content.login</button>
 
                 }
             </div>

@@ -1,7 +1,7 @@
 ﻿@model _51800882_51800187_QLSinhVien.Models.KetQua
 
 @{
-    ViewBag.Title = "Sửa";
+    ViewBag.Title = Resources.Content.edit;
     FormsIdentity id = (FormsIdentity)User.Identity;
     FormsAuthenticationTicket ticket = id.Ticket;
     var gv = ticket.UserData;
@@ -15,7 +15,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Kết Quả</h4>
+        <h4>@Resources.Content.result</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.STT)
@@ -48,7 +48,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Lưu" class="btn btn-default" />
+                <input type="submit" value=@Resources.Content.edit class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -58,11 +58,11 @@
     @*@Html.ActionLink("Quay lại", "Index")*@
     @if (gv == "admin")
     {
-        @Html.ActionLink("Quay lại", "IndexByMaSinhVien", new { masv = ViewBag.aaa })
+        @Html.ActionLink(Resources.Content.back, "IndexByMaSinhVien", new { masv = ViewBag.aaa })
     }
     else
     {
-        @Html.ActionLink("Quay lại", "IndexByMaMonHoc", new { mamh = ViewBag.aaa })
+        @Html.ActionLink(Resources.Content.back, "IndexByMaMonHoc", new { mamh = ViewBag.aaa })
     }
 </div>
 

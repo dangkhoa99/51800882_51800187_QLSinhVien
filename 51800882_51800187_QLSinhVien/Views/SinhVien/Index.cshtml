@@ -3,11 +3,11 @@
 @{
     if (ViewBag.Loai == 0)
     {
-        ViewBag.Title = "DANH SÁCH SINH VIÊN";
+        ViewBag.Title = Resources.Content.studentList;
     }
     else
     {
-        ViewBag.Title = "DANH SÁCH SINH VIÊN KHOA";
+        ViewBag.Title = Resources.Content.studentListForFaculty;
     }
 }
 
@@ -18,11 +18,11 @@
     {
 
         <p>
-            <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
+            <a href='@Url.Action("Create")' class="btn btn-primary">@Resources.Content.create</a>
         </p>
     }
 
-    @Html.DropDownList("MaKhoa", null, "-- Khoa --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
+    @Html.DropDownList("MaKhoa", null, "-- " + @Resources.Content.faculty + " --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
 </div>
 
 
@@ -31,19 +31,19 @@
     <table class="table table-bordered">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MaSV)
+                @Resources.Content.studentId
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HoTen)
+                @Resources.Content.fullName
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgaySinh)
+                @Resources.Content.birthDay
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GioiTinh)
+                @Resources.Content.gender
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
+                @Resources.Content.facultyName
             </th>
             @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
             {
@@ -74,11 +74,11 @@
                  @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
                 {
                 <td>
-                    <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">Sửa</a>
+                    <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">@Resources.Content.edit</a>
 
-                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">Xóa</a>
+                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">@Resources.Content.delete</a>
 
-                    <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">Xem điểm</a>
+                    <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">@Resources.Content.checkResult</a>
                 </td>
                  }
             </tr>

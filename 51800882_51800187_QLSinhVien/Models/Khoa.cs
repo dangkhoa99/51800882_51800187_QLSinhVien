@@ -12,7 +12,7 @@ namespace _51800882_51800187_QLSinhVien.Models
     {
         [Key]
         [Required(ErrorMessage = "Vui lòng nhập Mã Khoa")]
-        [StringLength(5, ErrorMessage="Mã Khoa không vượt quá 5 kí tự")]
+        [StringLength(5, ErrorMessage = "Mã Khoa không vượt quá 5 kí tự")]
         [DisplayName("Mã Khoa")]
         public string MaKhoa { get; set; }
 

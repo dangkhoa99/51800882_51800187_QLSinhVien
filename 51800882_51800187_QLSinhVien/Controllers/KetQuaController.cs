@@ -113,7 +113,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             }
             return View();
         }
-        
+
         [Authorize(Roles = "user")]
         public ActionResult CreateFromMH(string mamh)
         {
@@ -253,7 +253,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     var result = putTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
-                        
+
                         if (gv != "admin")
                             return RedirectToAction("IndexByMaMonHoc", new { mamh = kq.MaMH });
                         return RedirectToAction("IndexByMaSinhVien", new { masv = kq.MaSV });
