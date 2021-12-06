@@ -2,11 +2,9 @@
 
 @{
     ViewBag.Title = "Sửa";
-    if (Request.UrlReferrer != null)
-    {
-        string returnURL = Request.UrlReferrer.ToString();
-        ViewBag.ReturnURL = returnURL;
-    }
+    FormsIdentity id = (FormsIdentity)User.Identity;
+    FormsAuthenticationTicket ticket = id.Ticket;
+    var gv = ticket.UserData;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -17,7 +15,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>KetQua</h4>
+        <h4>Kết Quả</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.STT)
@@ -58,7 +56,14 @@
 
 <div>
     @*@Html.ActionLink("Quay lại", "Index")*@
-    <a href="@ViewBag.ReturnURL">Quay lại</a>
+    @if (gv == "admin")
+    {
+        @Html.ActionLink("Quay lại", "IndexByMaSinhVien", new { masv = ViewBag.aaa })
+    }
+    else
+    {
+        @Html.ActionLink("Quay lại", "IndexByMaMonHoc", new { mamh = ViewBag.aaa })
+    }
 </div>
 
 @section Scripts {

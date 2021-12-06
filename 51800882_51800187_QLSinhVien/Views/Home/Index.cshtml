@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>Quan ly sinh vien</title>
+    <title>Hệ thống quản lý sinh viên</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
     <body>
@@ -34,17 +34,17 @@
         <div class="container">
             @if (gv == "admin")
             {
-                <a href="./Khoa" class="box" style="background-color: #90e25e">KHOA</a>
-                <a href="./MonHoc" class="box" style="background-color: #b200ff">MÔN HỌC</a>
-                <a href="./GiangVien" class="box" style="background-color: #39e4de">GIẢNG VIÊN</a>
-                <a href="./KetQua" class="box" style="background-color: #ff006e">ĐIỂM</a>
-                <a href="./SinhVien" class="box" style="background-color: #0061AD">SINH VIÊN</a>
+                <a href="./Khoa" class="box" style="background-color: #90e25e" target="_blank">KHOA</a>
+                <a href="./MonHoc" class="box" style="background-color: #b200ff" target="_blank">MÔN HỌC</a>
+                <a href="./GiangVien" class="box" style="background-color: #39e4de" target="_blank">GIẢNG VIÊN</a>
+                <a href="./KetQua" class="box" style="background-color: #ff006e" target="_blank">KẾT QUẢ</a>
+                <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">SINH VIÊN</a>
 
             }
             else
             {
-                <a href="./SinhVien" class="box" style="background-color: #0061AD">SINH VIÊN</a>
-                <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff">MÔN HỌC</a>
+                <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">SINH VIÊN</a>
+                <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff" target="_blank">MÔN HỌC</a>
             }
         </div>
 

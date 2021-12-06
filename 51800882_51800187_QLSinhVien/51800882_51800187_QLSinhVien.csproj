@@ -177,9 +177,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202112050654026_init.cs" />
-    <Compile Include="Migrations\202112050654026_init.designer.cs">
-      <DependentUpon>202112050654026_init.cs</DependentUpon>
+    <Compile Include="Migrations\202112060241105_init.cs" />
+    <Compile Include="Migrations\202112060241105_init.designer.cs">
+      <DependentUpon>202112060241105_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DateValidationAttribute.cs" />
@@ -300,8 +300,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112050654026_init.resx">
-      <DependentUpon>202112050654026_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112060241105_init.resx">
+      <DependentUpon>202112060241105_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

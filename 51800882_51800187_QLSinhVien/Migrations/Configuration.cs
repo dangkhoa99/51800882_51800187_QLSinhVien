@@ -18,6 +18,10 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+            context.Users.AddOrUpdate(
+                    x => x.id,
+                    new Models.MyUser() { userName="admin", password="admin", roles="admin" }
+                );
         }
     }
 }

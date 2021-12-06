@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace _51800882_51800187_QLSinhVien.Controllers
 {
@@ -72,12 +73,12 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         public ActionResult IndexByMaMonHoc(string mamh)
         {
             var db = new QLSVContext();
-            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", mamh);
+            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH");
 
             MonHocDAO mhdao = new MonHocDAO(db);
             ViewBag.Loai = 2;
             ViewBag.TenMH = mhdao.GetTenMHByMaMH(mamh);
-            ViewBag.mamh = mamh;
+            ViewBag.aaa = mamh;
 
             IList<KetQua> kq = null;
             using (var client = new HttpClient())
@@ -108,6 +109,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => s.MaSV == masv).ToList(), "MaSV", "HoTen");
                 var test = db.KetQuas.Where(k => k.MaSV == masv).Select(k => k.MaMH).ToList();
                 ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => !test.Contains(m.MaMH)), "MaMH", "TenMH");
+                ViewBag.aaa = masv;
             }
             return View();
         }
@@ -121,6 +123,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => m.MaMH == mamh), "MaMH", "TenMH");
                 var test = db.KetQuas.Where(k => k.MaMH == mamh).Select(k => k.MaSV).ToList();
                 ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => !test.Contains(s.MaSV)), "MaSV", "HoTen");
+                ViewBag.aaa = mamh;
             }
             return View("Create");
         }
@@ -154,6 +157,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => s.MaSV == kq.MaSV).ToList(), "MaSV", "HoTen");
                 var test = db.KetQuas.Where(k => k.MaSV == kq.MaSV).Select(k => k.MaMH).ToList();
                 ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => !test.Contains(m.MaMH)), "MaMH", "TenMH", kq.MaMH);
+                ViewBag.aaa = kq.MaSV;
             }
 
             return View(kq);
@@ -186,13 +190,14 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             {
                 ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => m.MaMH == kq.MaMH), "MaMH", "TenMH");
                 var test = db.KetQuas.Where(k => k.MaMH == kq.MaMH).Select(k => k.MaSV).ToList();
-                ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => !test.Contains(s.MaSV)), "MaSV", "HoTen");
+                ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => !test.Contains(s.MaSV)), "MaSV", "HoTen", kq.MaSV);
+                ViewBag.aaa = kq.MaMH;
             }
 
-            return View(kq);
+            return View("Create", kq);
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, user")]
         public ActionResult Edit(int STT)
         {
             KetQua kq = null;
@@ -216,14 +221,25 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var db = new QLSVContext();
             ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen", kq.MaSV);
             ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", kq.MaMH);
+            ViewBag.aaa = kq.MaSV;
+
+            FormsIdentity id = (FormsIdentity)User.Identity;
+            FormsAuthenticationTicket ticket = id.Ticket;
+            var gv = ticket.UserData;
+            if (gv != "admin")
+                ViewBag.aaa = kq.MaMH;
 
             return View(kq);
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, user")]
         [HttpPost]
         public ActionResult Edit(KetQua kq)
         {
+            FormsIdentity id = (FormsIdentity)User.Identity;
+            FormsAuthenticationTicket ticket = id.Ticket;
+            var gv = ticket.UserData;
+
             if (ModelState.IsValid)
             {
                 using (var client = new HttpClient())
@@ -237,6 +253,9 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     var result = putTask.Result;
                     if (result.IsSuccessStatusCode)
                     {
+                        
+                        if (gv != "admin")
+                            return RedirectToAction("IndexByMaMonHoc", new { mamh = kq.MaMH });
                         return RedirectToAction("IndexByMaSinhVien", new { masv = kq.MaSV });
                     }
                 }
@@ -245,6 +264,9 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var db = new QLSVContext();
             ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "HoTen", kq.MaSV);
             ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", kq.MaMH);
+            ViewBag.aaa = kq.MaSV;
+            if (gv != "admin")
+                ViewBag.aaa = kq.MaMH;
 
             return View(kq);
         }

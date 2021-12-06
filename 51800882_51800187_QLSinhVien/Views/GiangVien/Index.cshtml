@@ -4,7 +4,7 @@
     ViewBag.Title = "Danh sách giảng viên";
 }
 
-<h2 lass="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
+<h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
 
 <p>
     <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
@@ -57,7 +57,7 @@
             <td>
                 <a href='@Url.Action("Edit", new { id = item.MaGV })' class="btn btn-warning">Sửa</a>
 
-                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaGV" data_name="@item.HoTen">Xóa</a>
+                @*<a href='#' class="btn btn-danger btn-remove" data_id="@item.MaGV" data_name="@item.HoTen">Xóa</a>*@
             </td>
         </tr>
     }
