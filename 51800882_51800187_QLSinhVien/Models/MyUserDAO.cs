@@ -14,17 +14,22 @@ namespace _51800882_51800187_QLSinhVien.Models
             this.db = context;
         }
 
-        public bool CheckUser(MyUser user)
+        public MyUser CheckUser(MyUser user)
         {
             var myUser = db.Users.FirstOrDefault(u => (u.userName == user.userName && u.password == user.password));
-            if (myUser == null)
-                return false;
-            return true;
+            return myUser;
         }
 
         public List<MyUser> GetAllUser()
         {
             return db.Users.ToList();
+        }
+
+        public bool AddUser(MyUser u)
+        {
+            db.Users.Add(u);
+            db.SaveChanges();
+            return true;
         }
     }
 }

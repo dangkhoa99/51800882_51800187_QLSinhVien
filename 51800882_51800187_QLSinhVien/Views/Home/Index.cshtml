@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Index";
     Layout = null;
+    FormsIdentity id = (FormsIdentity)User.Identity;
+    FormsAuthenticationTicket ticket = id.Ticket;
+    var gv = ticket.UserData;
 }
 
 <html>
@@ -29,10 +32,20 @@
         </div>
 
         <div class="container">
-            <a href="./Khoa" class="box" style="background-color: #90e25e">KHOA</a>
-            <a href="./SinhVien" class="box" style="background-color: #0061AD">SINH VIÊN</a>
-            <a href="./MonHoc" class="box" style="background-color: #b200ff">MÔN HỌC</a>
-            <a href="./KetQua" class="box" style="background-color: #ff006e">ĐIỂM</a>
+            @if (gv == "admin")
+            {
+                <a href="./Khoa" class="box" style="background-color: #90e25e">KHOA</a>
+                <a href="./MonHoc" class="box" style="background-color: #b200ff">MÔN HỌC</a>
+                <a href="./GiangVien" class="box" style="background-color: #39e4de">GIẢNG VIÊN</a>
+                <a href="./KetQua" class="box" style="background-color: #ff006e">ĐIỂM</a>
+                <a href="./SinhVien" class="box" style="background-color: #0061AD">SINH VIÊN</a>
+
+            }
+            else
+            {
+                <a href="./SinhVien" class="box" style="background-color: #0061AD">SINH VIÊN</a>
+                <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff">MÔN HỌC</a>
+            }
         </div>
 
     </body>

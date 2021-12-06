@@ -42,6 +42,35 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(mh);
         }
 
+        [Authorize(Roles = "user")]
+        // GET: MonHoc
+        public ActionResult IndexByMaGV(string magv)
+        {
+            IList<MonHoc> mh = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUrl);
+                //HTTP GET
+                var responseTask = client.GetAsync("MonHocAPI?magv=" + magv);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<MonHoc>>();
+                    readTask.Wait();
+
+                    mh = readTask.Result;
+                }
+                else //web api sent error response 
+                {
+
+                    ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
+                }
+            }
+            return View("Index", mh);
+        }
+
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {

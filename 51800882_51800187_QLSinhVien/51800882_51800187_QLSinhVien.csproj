@@ -162,11 +162,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\apis\GiangVienAPIController.cs" />
     <Compile Include="Controllers\apis\KetQuaAPIController.cs" />
     <Compile Include="Controllers\apis\KhoaAPIController.cs" />
     <Compile Include="Controllers\apis\MonHocAPIController.cs" />
     <Compile Include="Controllers\apis\MyUserAPIController.cs" />
     <Compile Include="Controllers\apis\SinhVienAPIController.cs" />
+    <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KetQuaController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
@@ -175,12 +177,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202112011314593_init.cs" />
-    <Compile Include="Migrations\202112011314593_init.designer.cs">
-      <DependentUpon>202112011314593_init.cs</DependentUpon>
+    <Compile Include="Migrations\202112050654026_init.cs" />
+    <Compile Include="Migrations\202112050654026_init.designer.cs">
+      <DependentUpon>202112050654026_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DateValidationAttribute.cs" />
+    <Compile Include="Models\GiangVien.cs" />
+    <Compile Include="Models\GiangVienDAO.cs" />
     <Compile Include="Models\KetQua.cs" />
     <Compile Include="Models\KetQuaDAO.cs" />
     <Compile Include="Models\Khoa.cs" />
@@ -259,6 +263,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\GiangVien\Index.cshtml" />
+    <Content Include="Views\GiangVien\Create.cshtml" />
+    <Content Include="Views\GiangVien\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,8 +300,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112011314593_init.resx">
-      <DependentUpon>202112011314593_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202112050654026_init.resx">
+      <DependentUpon>202112050654026_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

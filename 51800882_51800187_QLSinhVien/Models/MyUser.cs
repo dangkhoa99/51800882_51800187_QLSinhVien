@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -23,5 +24,11 @@ namespace _51800882_51800187_QLSinhVien.Models
 
         [StringLength(50)]
         public string roles { get; set; }
+
+        [DisplayName("Mã giảng viên")]
+        public string MaGV { get; set; }
+
+        [ForeignKey("MaGV")]
+        public virtual GiangVien GiangViens { get; set; }
     }
 }

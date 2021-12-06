@@ -19,6 +19,12 @@ namespace _51800882_51800187_QLSinhVien.Models
             return db.MonHocs.ToList();
         }
 
+        public List<MonHoc> GetAllMonHocsByMaGV(string magv)
+        {
+            var mhgv = db.GiangViens.Where(gv => gv.MaGV == magv).Select(k => k.MaMH).ToList();
+            return db.MonHocs.Where(m => mhgv.Contains(m.MaMH)).ToList();
+        }
+
         public bool AddMonHoc(MonHoc mh)
         {
             var oldMH = db.MonHocs.FirstOrDefault(m => m.MaMH == mh.MaMH);

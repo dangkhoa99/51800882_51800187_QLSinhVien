@@ -8,61 +8,61 @@ using System.Web.Http;
 
 namespace _51800882_51800187_QLSinhVien.Controllers.apis
 {
-    public class MonHocAPIController : ApiController
+    public class GiangVienAPIController : ApiController
     {
-        MonHocDAO dao = new MonHocDAO(new QLSVContext());
+        GiangVienDAO dao = new GiangVienDAO(new QLSVContext());
 
         // GET All
         public IHttpActionResult Get()
         {
-            return Ok(dao.GetAllMonHocs());
+            return Ok(dao.GetAllGV());
         }
 
-        // GET MH BY ID
+        // Get SV by MaSV
         public IHttpActionResult Get(string id)
         {
-            MonHoc mh = dao.GetByID(id);
-            if (mh == null)
+            GiangVien gv = dao.GetByID(id);
+            if (gv == null)
                 return NotFound();
 
-            return Ok(mh);
+            return Ok(gv);
         }
 
-        // GET MH BY MaGV
-        public IHttpActionResult GetMHByGV(string magv)
+        // GET SV By MAKHOA
+        public IHttpActionResult GetGVByMaKhoa(string makhoa)
         {
-            return Ok(dao.GetAllMonHocsByMaGV(magv));
+            return Ok(dao.GetAllGVByKhoa(makhoa));
         }
 
-        // Create
-        public IHttpActionResult Post(MonHoc model)
+        // Create SV
+        public IHttpActionResult Post(GiangVien model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid model");
 
-            if (!dao.AddMonHoc(model))
-                return BadRequest("Mã MH đã tồn tại");
+            if (!dao.AddGV(model))
+                return BadRequest("Mã GV đã tồn tại");
 
             return Ok();
         }
 
-        // Update
-        public IHttpActionResult Put(MonHoc model)
+        // Edit SV
+        public IHttpActionResult Put(GiangVien model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid data");
 
-            if (!dao.EditMH(model))
+            if (!dao.EditGV(model))
                 return NotFound();
 
             return Ok();
         }
 
-        // Delete
+        // DELETE SV
         public IHttpActionResult Delete(string id)
         {
-            if (!dao.DeleteMH(id))
-                return BadRequest("Mã MH không tồn tại");
+            if (!dao.DeleteGV(id))
+                return BadRequest("Mã GV không tồn tại");
 
             return Ok();
         }

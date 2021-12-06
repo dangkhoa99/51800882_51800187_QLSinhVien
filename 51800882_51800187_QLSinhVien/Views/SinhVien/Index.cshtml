@@ -45,8 +45,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
             </th>
-            <th></th>
-        </tr>
+            @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
+            {
+                <th></th>
+            }
+            </tr>
 
         @foreach (var item in Model)
         {
@@ -68,15 +71,16 @@
                     @Html.DisplayFor(modelItem => item.Khoa.TenKhoa)
 
                 </td>
+                 @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
+                {
                 <td>
-                    @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
-                    {
-                        <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">Sửa</a>
+                    <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">Sửa</a>
 
-                        <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">Xóa</a>
-                    }
-                        <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">Xem điểm</a>
-                    </td>
+                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">Xóa</a>
+
+                    <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">Xem điểm</a>
+                </td>
+                 }
             </tr>
         }
 

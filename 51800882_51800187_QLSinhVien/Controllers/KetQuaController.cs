@@ -77,6 +77,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             MonHocDAO mhdao = new MonHocDAO(db);
             ViewBag.Loai = 2;
             ViewBag.TenMH = mhdao.GetTenMHByMaMH(mamh);
+            ViewBag.mamh = mamh;
 
             IList<KetQua> kq = null;
             using (var client = new HttpClient())
@@ -110,6 +111,20 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             }
             return View();
         }
+        
+        [Authorize(Roles = "user")]
+        public ActionResult CreateFromMH(string mamh)
+        {
+            var db = new QLSVContext();
+            if (mamh != null)
+            {
+                ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => m.MaMH == mamh), "MaMH", "TenMH");
+                var test = db.KetQuas.Where(k => k.MaMH == mamh).Select(k => k.MaSV).ToList();
+                ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => !test.Contains(s.MaSV)), "MaSV", "HoTen");
+            }
+            return View("Create");
+        }
+
 
         [Authorize(Roles = "admin")]
         [HttpPost]
@@ -139,6 +154,39 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => s.MaSV == kq.MaSV).ToList(), "MaSV", "HoTen");
                 var test = db.KetQuas.Where(k => k.MaSV == kq.MaSV).Select(k => k.MaMH).ToList();
                 ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => !test.Contains(m.MaMH)), "MaMH", "TenMH", kq.MaMH);
+            }
+
+            return View(kq);
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpPost]
+        public ActionResult CreateFromMH(KetQua kq)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(apiUrl);
+
+                    //HTTP POST
+                    var postTask = client.PostAsJsonAsync<KetQua>("KetQuaAPI", kq);
+                    postTask.Wait();
+
+                    var result = postTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("IndexByMaMonHoc", new { mamh = kq.MaMH });
+                    }
+                }
+
+            }
+            var db = new QLSVContext();
+            if (kq.MaMH != null)
+            {
+                ViewBag.MaMH = new SelectList(db.MonHocs.Where(m => m.MaMH == kq.MaMH), "MaMH", "TenMH");
+                var test = db.KetQuas.Where(k => k.MaMH == kq.MaMH).Select(k => k.MaSV).ToList();
+                ViewBag.MaSV = new SelectList(db.SinhViens.Where(s => !test.Contains(s.MaSV)), "MaSV", "HoTen");
             }
 
             return View(kq);

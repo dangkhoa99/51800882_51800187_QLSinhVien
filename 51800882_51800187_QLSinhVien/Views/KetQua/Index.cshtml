@@ -27,13 +27,23 @@
         if (ViewBag.Loai == 1)
         {
             <p>
-                @*<a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>*@
                 <a href='@Url.Action("Create", new { masv = ViewBag.MaSV })' class="btn btn-primary">Tạo mới</a>
+            </p>
+        }
+    }
+
+    @if (Roles.IsUserInRole(User.Identity.Name, "user"))
+    {
+        if (ViewBag.Loai == 2)
+        {
+            <p>
+                <a href='@Url.Action("CreateFromMH", new { mamh = ViewBag.mamh })' class="btn btn-primary">Tạo mới</a>
             </p>
         }
 
     }
-    @if (ViewBag.Loai != 1)
+
+    @if (ViewBag.Loai == 0)
     {
         @Html.DropDownList("MaMH", null, "-- Môn Học --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
     }
@@ -87,10 +97,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Diem)
             </td>
-            @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
-            {
+            @*@if (Roles.IsUserInRole(User.Identity.Name, "admin"))
+            {*@
                 <td>
-                    @if (ViewBag.Loai == 1)
+                    @if (ViewBag.Loai != 0)
                     {
                         <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">Sửa</a>
                     }
@@ -98,7 +108,7 @@
 
                     <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">Xóa</a>
                 </td>
-            }
+            @*}*@
         </tr>
         STT++;
     }

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.GiangVien>
+
+@{
+    ViewBag.Title = "Danh sách giảng viên";
+}
+
+<h2 lass="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
+
+<p>
+    <a href='@Url.Action("Create")' class="btn btn-primary">Tạo mới</a>
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaGV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MonHocs.TenMH)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaGV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyyy}", item.NgaySinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Khoa.TenKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonHocs.TenMH)
+            </td>
+            <td>
+                <a href='@Url.Action("Edit", new { id = item.MaGV })' class="btn btn-warning">Sửa</a>
+
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaGV" data_name="@item.HoTen">Xóa</a>
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script>
+            $(document).ready(function () {
+                $('.btn-remove').click(function (e) {
+                    e.preventDefault();
+                    var atag = $(this);
+                    var data_id = atag.attr('data_id');
+                    var data_name = atag.attr('data_name');
+                    if (!confirm("Bạn có chắc chắn xóa " + data_name + "?"))
+                        return;
+                    $.ajax(
+                        {
+                            url: 'https://localhost:44328/api/GiangVienAPI/' + data_id,
+                            method: "DELETE",
+                            success: function (data) {
+                                atag.closest('tr').remove();
+                                alert("Đã xóa thành công Giảng Viên " + data_name);
+                                return;
+                            },
+                            error: function () {
+                                alert("Đã xóa thất bại Giảng Viên " + data_name);
+                            }
+                        }
+                    );
+                });
+            });
+    </script>
+}

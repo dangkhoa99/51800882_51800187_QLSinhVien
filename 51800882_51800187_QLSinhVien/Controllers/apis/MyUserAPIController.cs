@@ -24,10 +24,21 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid model");
 
-            if (!dao.CheckUser(model))
+            if (dao.CheckUser(model) == null)
                 return BadRequest("Not Found");
 
-            return Ok(model);
+            return Ok(dao.CheckUser(model));
+        }
+
+        public IHttpActionResult Put(MyUser model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Not a valid data");
+
+            if (!dao.AddUser(model))
+                return BadRequest("Error");
+
+            return Ok();
         }
     }
 }

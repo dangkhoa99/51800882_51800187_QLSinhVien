@@ -50,13 +50,15 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                         readTask.Wait();
 
                         var us = readTask.Result;
-
-                        Session["user"] = us.userName;
-                        FormsAuthentication.SetAuthCookie(user.userName, false);
-                        var ticket = new FormsAuthenticationTicket(1, us.userName, DateTime.Now, DateTime.Now.AddDays(1), false, "admin");
+                        if (us.MaGV == null)
+                        {
+                            us.MaGV = "admin";
+                        }
+                        var ticket = new FormsAuthenticationTicket(1, us.userName, DateTime.Now, DateTime.Now.AddDays(1), false, us.MaGV);
                         var encrypted = FormsAuthentication.Encrypt(ticket);
                         var authcookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
                         HttpContext.Response.Cookies.Add(authcookie);
+
                         return Redirect("/");
                     }
                 }
