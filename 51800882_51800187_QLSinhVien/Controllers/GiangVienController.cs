@@ -45,17 +45,52 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(gv);
         }
 
+        public ActionResult GetMH(string makhoa)
+        {
+            if (!string.IsNullOrWhiteSpace(makhoa))
+            {
+                var db = new QLSVContext();
+                var c = db.MonHocs.Where(m => m.MaKhoa == makhoa).ToList().Select(u => new SelectListItem { Value=u.MaMH, Text=u.TenMH });
+
+                return Json(c, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
 
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             var db = new QLSVContext();
-            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa");
-            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH");
+            //SelectList khoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa");
+            //ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH");
+            List<SelectListItem> khoa = db.Khoas.Select(n =>
+                                                            new SelectListItem
+                                                            {
+                                                                Value = n.MaKhoa,
+                                                                Text = n.TenKhoa
+                                                            }).ToList();
+
+            var tmp = new SelectListItem()
+            {
+                Value = null,
+                Text = "-- Khoa --"
+            };
+
+            List<SelectListItem> mh = new List<SelectListItem>()
+            {
+                new SelectListItem
+                {
+                    Value = null,
+                    Text = " -- Môn học --"
+                }
+            };
+            khoa.Insert(0, tmp);
+            ViewBag.MaKhoa = new SelectList(khoa, "Value", "Text");
+            ViewBag.MaMH = mh;
 
             List<SelectListItem> GioiTinh = new List<SelectListItem>() {
-                new SelectListItem(){Text="Nam", Value="Nam"},
-                new SelectListItem(){Text="Nữ", Value="Nữ"}
+                new SelectListItem(){ Text="Nam", Value="Nam" },
+                new SelectListItem(){ Text="Nữ", Value="Nữ" }
             };
 
             ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text");
@@ -110,11 +145,34 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 }
             }
             var db = new QLSVContext();
-            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", gv.MaKhoa);
-            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", gv.MaMH);
+            List<SelectListItem> khoa = db.Khoas.Select(n =>
+                                                            new SelectListItem
+                                                            {
+                                                                Value = n.MaKhoa,
+                                                                Text = n.TenKhoa
+                                                            }).ToList();
+
+            var tmp = new SelectListItem()
+            {
+                Value = null,
+                Text = "-- Khoa --"
+            };
+
+            List<SelectListItem> mh = new List<SelectListItem>()
+            {
+                new SelectListItem
+                {
+                    Value = null,
+                    Text = " -- Môn học --"
+                }
+            };
+            khoa.Insert(0, tmp);
+            ViewBag.MaKhoa = new SelectList(khoa, "Value", "Text", gv.MaKhoa);
+            ViewBag.MaMH = db.MonHocs.Where(m => m.MaKhoa == gv.MaKhoa).ToList().Select(u => new SelectListItem { Value = u.MaMH, Text = u.TenMH });
+
             List<SelectListItem> GioiTinh = new List<SelectListItem>() {
-                new SelectListItem(){Text="Nam", Value="Nam"},
-                new SelectListItem(){Text="Nữ", Value="Nữ"}
+                new SelectListItem(){ Text="Nam", Value="Nam" },
+                new SelectListItem(){ Text="Nữ", Value="Nữ" }
             };
 
             ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text", gv.GioiTinh);
@@ -145,11 +203,34 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             }
 
             var db = new QLSVContext();
-            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", gv.MaKhoa);
-            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", gv.MaMH);
-            List<SelectListItem> GioiTinh = new List<SelectListItem>() {
-                new SelectListItem(){Text="Nam", Value="Nam"},
-                new SelectListItem(){Text="Nữ", Value="Nữ"}
+            List<SelectListItem> khoa = db.Khoas.Select(n =>
+                                                            new SelectListItem
+                                                            {
+                                                                Value = n.MaKhoa,
+                                                                Text = n.TenKhoa
+                                                            }).ToList();
+
+            var tmp = new SelectListItem()
+            {
+                Value = null,
+                Text = "-- Khoa --"
+            };
+
+            List<SelectListItem> mh = new List<SelectListItem>()
+            {
+                new SelectListItem
+                {
+                    Value = null,
+                    Text = " -- Môn học --"
+                }
+            };
+            khoa.Insert(0, tmp);
+            ViewBag.MaKhoa = new SelectList(khoa, "Value", "Text", gv.MaKhoa);
+            List<SelectListItem> mhList = db.MonHocs.Where(m => m.MaKhoa == gv.MaKhoa).Select(u => new SelectListItem { Value = u.MaMH, Text = u.TenMH }).ToList();
+            ViewBag.MaMH = new SelectList(mhList, "Value", "Text", gv.MaMH);
+            List <SelectListItem> GioiTinh = new List<SelectListItem>() {
+                new SelectListItem(){ Text="Nam", Value="Nam" },
+                new SelectListItem(){ Text="Nữ", Value="Nữ" }
             };
 
             ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text", gv.GioiTinh);
@@ -181,11 +262,34 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 }
             }
             var db = new QLSVContext();
-            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", gv.MaKhoa);
-            ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH", gv.MaMH);
+            List<SelectListItem> khoa = db.Khoas.Select(n =>
+                                                            new SelectListItem
+                                                            {
+                                                                Value = n.MaKhoa,
+                                                                Text = n.TenKhoa
+                                                            }).ToList();
+
+            var tmp = new SelectListItem()
+            {
+                Value = null,
+                Text = "-- Khoa --"
+            };
+
+            List<SelectListItem> mh = new List<SelectListItem>()
+            {
+                new SelectListItem
+                {
+                    Value = null,
+                    Text = " -- Môn học --"
+                }
+            };
+            khoa.Insert(0, tmp);
+            ViewBag.MaKhoa = new SelectList(khoa, "Value", "Text", gv.MaKhoa);
+            List<SelectListItem> mhList = db.MonHocs.Where(m => m.MaKhoa == gv.MaKhoa).Select(u => new SelectListItem { Value = u.MaMH, Text = u.TenMH }).ToList();
+            ViewBag.MaMH = new SelectList(mhList, "Value", "Text", gv.MaMH);
             List<SelectListItem> GioiTinh = new List<SelectListItem>() {
-                new SelectListItem(){Text="Nam", Value="Nam"},
-                new SelectListItem(){Text="Nữ", Value="Nữ"}
+                new SelectListItem(){ Text="Nam", Value="Nam" },
+                new SelectListItem(){ Text="Nữ", Value="Nữ" }
             };
 
             ViewBag.GioiTinh = new SelectList(GioiTinh, "Value", "Text", gv.GioiTinh);

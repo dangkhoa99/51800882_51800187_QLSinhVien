@@ -74,6 +74,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
+            var db = new QLSVContext();
+            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa");
             return View();
         }
 
@@ -107,6 +109,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     ModelState.AddModelError(string.Empty, "Mã MH đã tồn tại.");
                 }
             }
+            var db = new QLSVContext();
+            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", mh.MaKhoa);
             return View(mh);
         }
 
@@ -131,6 +135,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     mh = readTask.Result;
                 }
             }
+            var db = new QLSVContext();
+            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", mh.MaKhoa);
 
             return View(mh);
         }
@@ -156,6 +162,8 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                     }
                 }
             }
+            var db = new QLSVContext();
+            ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa", mh.MaKhoa);
             return View(mh);
         }
     }

@@ -44,6 +44,7 @@ namespace _51800882_51800187_QLSinhVien.Models
 
             oldMH.TenMH = mh.TenMH;
             oldMH.SoTiet = mh.SoTiet;
+            oldMH.MaKhoa = mh.MaKhoa;
             db.SaveChanges();
             return true;
         }

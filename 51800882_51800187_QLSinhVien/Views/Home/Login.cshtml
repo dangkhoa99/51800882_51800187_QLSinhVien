@@ -16,8 +16,10 @@ else
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     </head>
     <body>
-        <a style="color: red" href="@Url.Action("ChangeLanguage", "Home", new { lang = "en" })">@Resources.Content.english</a> |
-        <a style="color: red" href="@Url.Action("ChangeLanguage", "Home", new { lang = "vi" })">@Resources.Content.vietnamese</a>
+        <div style="display: flex; justify-content: flex-end; margin-right: 20px; margin-top:20px;">
+            <a style="margin-left: 10px" href="@Url.Action("ChangeLanguage", "Home", new { lang = "en" })"><img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-800.png" width="40" height="26" /></a>
+            <a style="margin-left: 10px" href="@Url.Action("ChangeLanguage", "Home", new { lang = "vi" })"><img src="https://cdn.countryflags.com/thumbs/vietnam/flag-400.png" width="40" height="26" /></a>
+        </div>
         <div class="login-page">
             <div class="form">
                 <h1 style="text-transform: uppercase">@Resources.Content.login</h1>

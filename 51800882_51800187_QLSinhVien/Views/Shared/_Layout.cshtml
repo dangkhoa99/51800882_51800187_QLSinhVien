@@ -35,13 +35,13 @@
                             <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">@Resources.Content.logout</a>
                         }
                     }
+                    <div style="display: flex; justify-content: flex-end; margin-right: 20px;">
+                        <a style="margin-left: 10px" href="@Url.Action("ChangeLanguage", "Home", new { lang = "en" })"><img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-800.png" width="40" height="26" /></a>
+                        <a style="margin-left: 10px" href="@Url.Action("ChangeLanguage", "Home", new { lang = "vi" })"><img src="https://cdn.countryflags.com/thumbs/vietnam/flag-400.png" width="40" height="26" /></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div style="display: flex; justify-content: flex-end; margin-right: 20px;">
-        <a style="color: red" href="@Url.Action("ChangeLanguage", "Home", new { lang = "en" })">@Resources.Content.english</a>|
-        <a style="color: red" href="@Url.Action("ChangeLanguage", "Home", new { lang = "vi" })"> @Resources.Content.vietnamese</a>
     </div>
     <div class="container body-content">
         @RenderBody()

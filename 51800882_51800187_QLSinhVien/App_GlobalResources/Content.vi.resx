@@ -198,6 +198,9 @@
   <data name="resultListForSubject" xml:space="preserve">
     <value>Danh sách kết quả môn</value>
   </data>
+  <data name="score" xml:space="preserve">
+    <value>Điểm</value>
+  </data>
   <data name="student" xml:space="preserve">
     <value>Sinh Viên</value>
   </data>

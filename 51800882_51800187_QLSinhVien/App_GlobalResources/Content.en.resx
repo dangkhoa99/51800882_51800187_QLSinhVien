@@ -198,6 +198,9 @@
   <data name="resultListForSubject" xml:space="preserve">
     <value>List of results in</value>
   </data>
+  <data name="score" xml:space="preserve">
+    <value>Score</value>
+  </data>
   <data name="student" xml:space="preserve">
     <value>Student</value>
   </data>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -25,6 +26,13 @@ namespace _51800882_51800187_QLSinhVien.Models
         [Range(1, Int32.MaxValue, ErrorMessage = "Số tiết học phải lớn hơn 0")]
         [DisplayName("Số tiết")]
         public int SoTiet { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn Khoa")]
+        [DisplayName("Mã Khoa")]
+        public string MaKhoa { get; set; }
+
+        [ForeignKey("MaKhoa")]
+        public virtual Khoa Khoa { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<KetQua> KetQuas { get; set; }

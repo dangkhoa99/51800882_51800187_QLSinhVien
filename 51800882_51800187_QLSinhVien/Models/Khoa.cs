@@ -23,5 +23,8 @@ namespace _51800882_51800187_QLSinhVien.Models
 
         [JsonIgnore]
         public virtual ICollection<SinhVien> SinhViens { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<MonHoc> MonHocs { get; set; }
     }
 }

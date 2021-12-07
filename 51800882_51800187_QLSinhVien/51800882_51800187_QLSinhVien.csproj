@@ -192,9 +192,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202112060241105_init.cs" />
-    <Compile Include="Migrations\202112060241105_init.designer.cs">
-      <DependentUpon>202112060241105_init.cs</DependentUpon>
+    <Compile Include="Migrations\202112070353583_init.cs" />
+    <Compile Include="Migrations\202112070353583_init.designer.cs">
+      <DependentUpon>202112070353583_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DateValidationAttribute.cs" />
@@ -327,8 +327,10 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Content.designer.cs</LastGenOutput>
     </Content>
-    <EmbeddedResource Include="Migrations\202112060241105_init.resx">
-      <DependentUpon>202112060241105_init.cs</DependentUpon>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202112070353583_init.resx">
+      <DependentUpon>202112070353583_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,8 +19,8 @@
                         MaMH = c.String(nullable: false, maxLength: 5),
                     })
                 .PrimaryKey(t => t.MaGV)
-                .ForeignKey("dbo.Khoas", t => t.MaKhoa, cascadeDelete: true)
-                .ForeignKey("dbo.MonHocs", t => t.MaMH, cascadeDelete: true)
+                .ForeignKey("dbo.Khoas", t => t.MaKhoa)
+                .ForeignKey("dbo.MonHocs", t => t.MaMH)
                 .Index(t => t.MaKhoa)
                 .Index(t => t.MaMH);
             
@@ -34,17 +34,16 @@
                 .PrimaryKey(t => t.MaKhoa);
             
             CreateTable(
-                "dbo.SinhViens",
+                "dbo.MonHocs",
                 c => new
                     {
-                        MaSV = c.String(nullable: false, maxLength: 5),
-                        HoTen = c.String(nullable: false, maxLength: 100),
-                        NgaySinh = c.DateTime(nullable: false),
-                        GioiTinh = c.String(nullable: false),
+                        MaMH = c.String(nullable: false, maxLength: 5),
+                        TenMH = c.String(nullable: false, maxLength: 100),
+                        SoTiet = c.Int(nullable: false),
                         MaKhoa = c.String(nullable: false, maxLength: 5),
                     })
-                .PrimaryKey(t => t.MaSV)
-                .ForeignKey("dbo.Khoas", t => t.MaKhoa, cascadeDelete: true)
+                .PrimaryKey(t => t.MaMH)
+                .ForeignKey("dbo.Khoas", t => t.MaKhoa)
                 .Index(t => t.MaKhoa);
             
             CreateTable(
@@ -57,20 +56,24 @@
                         MaSV = c.String(nullable: false, maxLength: 5),
                     })
                 .PrimaryKey(t => t.STT)
-                .ForeignKey("dbo.MonHocs", t => t.MaMH, cascadeDelete: true)
-                .ForeignKey("dbo.SinhViens", t => t.MaSV, cascadeDelete: true)
+                .ForeignKey("dbo.MonHocs", t => t.MaMH)
+                .ForeignKey("dbo.SinhViens", t => t.MaSV)
                 .Index(t => t.MaMH)
                 .Index(t => t.MaSV);
             
             CreateTable(
-                "dbo.MonHocs",
+                "dbo.SinhViens",
                 c => new
                     {
-                        MaMH = c.String(nullable: false, maxLength: 5),
-                        TenMH = c.String(nullable: false, maxLength: 100),
-                        SoTiet = c.Int(nullable: false),
+                        MaSV = c.String(nullable: false, maxLength: 5),
+                        HoTen = c.String(nullable: false, maxLength: 100),
+                        NgaySinh = c.DateTime(nullable: false),
+                        GioiTinh = c.String(nullable: false),
+                        MaKhoa = c.String(nullable: false, maxLength: 5),
                     })
-                .PrimaryKey(t => t.MaMH);
+                .PrimaryKey(t => t.MaSV)
+                .ForeignKey("dbo.Khoas", t => t.MaKhoa)
+                .Index(t => t.MaKhoa);
             
             CreateTable(
                 "dbo.MyUsers",
@@ -93,19 +96,21 @@
             DropForeignKey("dbo.MyUsers", "MaGV", "dbo.GiangViens");
             DropForeignKey("dbo.GiangViens", "MaMH", "dbo.MonHocs");
             DropForeignKey("dbo.GiangViens", "MaKhoa", "dbo.Khoas");
+            DropForeignKey("dbo.MonHocs", "MaKhoa", "dbo.Khoas");
             DropForeignKey("dbo.SinhViens", "MaKhoa", "dbo.Khoas");
             DropForeignKey("dbo.KetQuas", "MaSV", "dbo.SinhViens");
             DropForeignKey("dbo.KetQuas", "MaMH", "dbo.MonHocs");
             DropIndex("dbo.MyUsers", new[] { "MaGV" });
+            DropIndex("dbo.SinhViens", new[] { "MaKhoa" });
             DropIndex("dbo.KetQuas", new[] { "MaSV" });
             DropIndex("dbo.KetQuas", new[] { "MaMH" });
-            DropIndex("dbo.SinhViens", new[] { "MaKhoa" });
+            DropIndex("dbo.MonHocs", new[] { "MaKhoa" });
             DropIndex("dbo.GiangViens", new[] { "MaMH" });
             DropIndex("dbo.GiangViens", new[] { "MaKhoa" });
             DropTable("dbo.MyUsers");
-            DropTable("dbo.MonHocs");
-            DropTable("dbo.KetQuas");
             DropTable("dbo.SinhViens");
+            DropTable("dbo.KetQuas");
+            DropTable("dbo.MonHocs");
             DropTable("dbo.Khoas");
             DropTable("dbo.GiangViens");
         }

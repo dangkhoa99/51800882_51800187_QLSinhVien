@@ -6,10 +6,10 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>@Resources.Content.teacher</h4>
         <hr />
@@ -49,7 +49,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Khoa.TenKhoa, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MaKhoa", null, new { @class = "form-control" })
+                @Html.DropDownList("MaKhoa", null, new { @class = "form-control", @id = "Khoa" })
                 @Html.ValidationMessageFor(model => model.MaKhoa, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MonHocs.TenMH, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MaMH", null, new { @class = "form-control" })
+                @Html.DropDownList("MaMH", null, new { @class = "form-control", @id = "MonHoc" })
                 @Html.ValidationMessageFor(model => model.MaMH, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -73,3 +73,33 @@
 <div>
     @Html.ActionLink(Resources.Content.back, "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+            $('#Khoa').change(function () {
+                var selectedKhoa = $("#Khoa").val();
+                var mhSelect = $('#MonHoc');
+                mhSelect.empty();
+                mhSelect.append($('<option/>', {
+                    value: null,
+                    text: "-- Môn học --"
+                }));
+                if (selectedKhoa != null && selectedKhoa != '') {
+                    $.getJSON('@Url.Action("GetMH")', { makhoa: selectedKhoa }, function (monhocs) {
+                        
+                        if (monhocs != null && !jQuery.isEmptyObject(monhocs))
+                        {
+                            
+                            $.each(monhocs, function (index, monhoc) {
+                                mhSelect.append($('<option/>', {
+                                    value: monhoc.Value,
+                                    text: monhoc.Text
+                                }));
+                            });
+                        };
+                    });
+                }
+            });
+    </script>
+}
