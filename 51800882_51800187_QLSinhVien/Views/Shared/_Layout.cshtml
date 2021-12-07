@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(@Resources.Content.systemManagementStudent, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(@_51800882_51800187_QLSinhVien.Res.LangResource.systemManagementStudent, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 @*<ul class="nav navbar-nav">
@@ -28,11 +28,11 @@
                 <div style="display: flex; align-items: center; height: 50px; justify-content:flex-end">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a style="padding-right: 20px; color: #fff; text-decoration:none">@Resources.Content.hello, <b>@User.Identity.Name!</b></a>
+                        <a style="padding-right: 20px; color: #fff; text-decoration:none">@_51800882_51800187_QLSinhVien.Res.LangResource.hello, <b>@User.Identity.Name!</b></a>
 
                         using (Html.BeginForm("Logout", "Home", FormMethod.Post))
                         {
-                            <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">@Resources.Content.logout</a>
+                            <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">@_51800882_51800187_QLSinhVien.Res.LangResource.logout</a>
                         }
                     }
                     <div style="display: flex; justify-content: flex-end; margin-right: 20px;">

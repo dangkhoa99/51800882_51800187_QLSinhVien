@@ -1,7 +1,7 @@
 ﻿@model _51800882_51800187_QLSinhVien.Models.GiangVien
 
 @{
-    ViewBag.Title = Resources.Content.create;
+    ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.create;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>@Resources.Content.teacher</h4>
+        <h4>@_51800882_51800187_QLSinhVien.Res.LangResource.teacher</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -64,33 +64,33 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@Resources.Content.create" class="btn btn-default" />
+                <input type="submit" value="@_51800882_51800187_QLSinhVien.Res.LangResource.create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink(Resources.Content.back, "Index")
+    @Html.ActionLink(_51800882_51800187_QLSinhVien.Res.LangResource.back, "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
+<script type="text/javascript">
             $('#Khoa').change(function () {
                 var selectedKhoa = $("#Khoa").val();
                 var mhSelect = $('#MonHoc');
                 mhSelect.empty();
                 mhSelect.append($('<option/>', {
                     value: null,
-                    text: "-- Môn học --"
+                    text: "-- " + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.subject)' + " --"
                 }));
                 if (selectedKhoa != null && selectedKhoa != '') {
                     $.getJSON('@Url.Action("GetMH")', { makhoa: selectedKhoa }, function (monhocs) {
-                        
+
                         if (monhocs != null && !jQuery.isEmptyObject(monhocs))
                         {
-                            
+
                             $.each(monhocs, function (index, monhoc) {
                                 mhSelect.append($('<option/>', {
                                     value: monhoc.Value,
@@ -101,5 +101,5 @@
                     });
                 }
             });
-    </script>
+</script>
 }

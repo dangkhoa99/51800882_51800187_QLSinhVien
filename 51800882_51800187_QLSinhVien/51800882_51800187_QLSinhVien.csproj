@@ -130,21 +130,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\Content.designer.cs">
-      <DependentUpon>Content.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="App_GlobalResources\Content.en.designer.cs">
-      <DependentUpon>Content.en.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="App_GlobalResources\Content.vi.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Content.vi.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -187,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KetQuaController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
+    <Compile Include="Controllers\MyUserController.cs" />
     <Compile Include="Controllers\SinhVienController.cs" />
     <Compile Include="Controllers\KhoaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -213,6 +199,21 @@
     <Compile Include="Models\SinhVienDAO.cs" />
     <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Res\LangResource.vi.Designer.cs">
+      <DependentUpon>LangResource.vi.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Res\LangResource.en.Designer.cs">
+      <DependentUpon>LangResource.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Res\LangResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LangResource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -281,6 +282,10 @@
     <Content Include="Views\GiangVien\Index.cshtml" />
     <Content Include="Views\GiangVien\Create.cshtml" />
     <Content Include="Views\GiangVien\Edit.cshtml" />
+    <Content Include="Views\MyUser\Index.cshtml" />
+    <Content Include="Views\MyUser\Create.cshtml" />
+    <Content Include="Views\MyUser\Edit.cshtml" />
+    <Content Include="Views\MyUser\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -315,22 +320,20 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Content.vi.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Content.vi.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\Content.en.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Content.en.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\Content.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Content.designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\202112070353583_init.resx">
       <DependentUpon>202112070353583_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Res\LangResource.vi.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LangResource.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Res\LangResource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LangResource.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Res\LangResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LangResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

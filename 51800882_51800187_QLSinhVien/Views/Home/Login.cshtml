@@ -6,13 +6,13 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <h4>@Resources.Content.messageIsLogin <a href="/" title="Home">@Resources.Content.home</a></h4>
+    <h4>@_51800882_51800187_QLSinhVien.Res.LangResource.messageIsLogin <a href="/" title="Home">@_51800882_51800187_QLSinhVien.Res.LangResource.home</a></h4>
 }
 else
 {
     <html>
     <head>
-        <title>@Resources.Content.login</title>
+        <title>@_51800882_51800187_QLSinhVien.Res.LangResource.login</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     </head>
     <body>
@@ -22,7 +22,7 @@ else
         </div>
         <div class="login-page">
             <div class="form">
-                <h1 style="text-transform: uppercase">@Resources.Content.login</h1>
+                <h1 style="text-transform: uppercase">@_51800882_51800187_QLSinhVien.Res.LangResource.login</h1>
 
                 <div class="alert-danger">
                     @ViewBag.Error
@@ -30,11 +30,11 @@ else
 
                 @using (Html.BeginForm())
                 {
-                    @Html.TextBoxFor(m => m.userName, new { @placeholder = @Resources.Content.username })
+                    @Html.TextBoxFor(m => m.userName, new { @placeholder = @_51800882_51800187_QLSinhVien.Res.LangResource.username })
                     @Html.ValidationMessageFor(m => m.userName, "", new { @class = "text-danger" })
-                    @Html.PasswordFor(m => m.password, new { @placeholder = @Resources.Content.password })
+                    @Html.PasswordFor(m => m.password, new { @placeholder = @_51800882_51800187_QLSinhVien.Res.LangResource.password })
                     @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
-                    <button type="submit" style="text-transform: uppercase">@Resources.Content.login</button>
+                    <button type="submit" style="text-transform: uppercase">@_51800882_51800187_QLSinhVien.Res.LangResource.login</button>
 
                 }
             </div>

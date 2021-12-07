@@ -5,21 +5,22 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using _51800882_51800187_QLSinhVien.Res;
 
 namespace _51800882_51800187_QLSinhVien.Controllers
 {
     public class GiangVienController : Controller
     {
+        // GET: GiangVien
         GiangVienDAO dao = new GiangVienDAO(new QLSVContext());
         string apiUrl = "https://localhost:44328/api/";
 
+        // Danh sách GV
         [Authorize(Roles = "admin")]
-        // GET: GiangVien
         public ActionResult Index()
         {
             ViewBag.Loai = 0;
-            //var db = new QLSVContext();
-            //ViewBag.MaKhoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa");
+
             IList<GiangVien> gv = null;
             using (var client = new HttpClient())
             {
@@ -36,15 +37,15 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 
                     gv = readTask.Result;
                 }
-                else //web api sent error response 
+                else
                 {
-
                     ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
                 }
             }
             return View(gv);
         }
 
+        // Lọc ra những môn học có trong Khoa đã chọn trong Create, Edit của GV
         public ActionResult GetMH(string makhoa)
         {
             if (!string.IsNullOrWhiteSpace(makhoa))
@@ -57,12 +58,11 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return null;
         }
 
+        // Tạo form Create GV
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             var db = new QLSVContext();
-            //SelectList khoa = new SelectList(db.Khoas, "MaKhoa", "TenKhoa");
-            //ViewBag.MaMH = new SelectList(db.MonHocs, "MaMH", "TenMH");
             List<SelectListItem> khoa = db.Khoas.Select(n =>
                                                             new SelectListItem
                                                             {
@@ -73,7 +73,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var tmp = new SelectListItem()
             {
                 Value = null,
-                Text = "-- Khoa --"
+                Text = "-- " + LangResource.faculty + " --"
             };
 
             List<SelectListItem> mh = new List<SelectListItem>()
@@ -81,7 +81,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 new SelectListItem
                 {
                     Value = null,
-                    Text = " -- Môn học --"
+                    Text = "-- " + LangResource.subject + " --"
                 }
             };
             khoa.Insert(0, tmp);
@@ -98,6 +98,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View();
         }
 
+        // Tạo GV
         [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(GiangVien gv)
@@ -120,28 +121,28 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                         if (result.IsSuccessStatusCode)
                         {
                             // Create Account
-                            MyUser user = new MyUser();
-                            user.roles= "user";
-                            user.MaGV = gv.MaGV;
-                            user.userName = "user" + gv.MaGV;
-                            user.password = "user" + gv.MaGV;
+                            //MyUser user = new MyUser();
+                            //user.roles= "user";
+                            //user.MaGV = gv.MaGV;
+                            //user.userName = "user" + gv.MaGV;
+                            //user.password = "user" + gv.MaGV;
 
-                            var putTask = client.PutAsJsonAsync<MyUser>("MyUserAPI", user);
-                            putTask.Wait();
+                            //var putTask = client.PutAsJsonAsync<MyUser>("MyUserAPI", user);
+                            //putTask.Wait();
 
-                            var result1 = putTask.Result;
-                            if (result1.IsSuccessStatusCode)
-                            {
-                                return RedirectToAction("Index");
-                            }
+                            //var result1 = putTask.Result;
+                            //if (result1.IsSuccessStatusCode)
+                            //{
+                            //    return RedirectToAction("Index");
+                            //}
 
-                            //return RedirectToAction("Index");
+                            return RedirectToAction("Index");
                         }
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Mã GV đã tồn tại.");
+                    ModelState.AddModelError(string.Empty, LangResource.messExistsTeacherID);
                 }
             }
             var db = new QLSVContext();
@@ -155,7 +156,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var tmp = new SelectListItem()
             {
                 Value = null,
-                Text = "-- Khoa --"
+                Text = "-- " + LangResource.faculty + " --"
             };
 
             List<SelectListItem> mh = new List<SelectListItem>()
@@ -163,7 +164,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 new SelectListItem
                 {
                     Value = null,
-                    Text = " -- Môn học --"
+                    Text = "-- " + LangResource.subject + " --"
                 }
             };
             khoa.Insert(0, tmp);
@@ -180,6 +181,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(gv);
         }
 
+        // Tạo form Edit GV, Get giá trị trong db điền vào các field
         [Authorize(Roles = "admin")]
         public ActionResult Edit(string id)
         {
@@ -213,7 +215,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var tmp = new SelectListItem()
             {
                 Value = null,
-                Text = "-- Khoa --"
+                Text = "-- " + LangResource.faculty + " --"
             };
 
             List<SelectListItem> mh = new List<SelectListItem>()
@@ -221,7 +223,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 new SelectListItem
                 {
                     Value = null,
-                    Text = " -- Môn học --"
+                    Text = "-- " + LangResource.subject + " --"
                 }
             };
             khoa.Insert(0, tmp);
@@ -240,6 +242,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(gv);
         }
 
+        // Sửa thông tin GV
         [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Edit(GiangVien gv)
@@ -272,7 +275,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             var tmp = new SelectListItem()
             {
                 Value = null,
-                Text = "-- Khoa --"
+                Text = "-- " + LangResource.faculty + " --"
             };
 
             List<SelectListItem> mh = new List<SelectListItem>()
@@ -280,7 +283,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 new SelectListItem
                 {
                     Value = null,
-                    Text = " -- Môn học --"
+                    Text = "-- " + LangResource.subject + " --"
                 }
             };
             khoa.Insert(0, tmp);

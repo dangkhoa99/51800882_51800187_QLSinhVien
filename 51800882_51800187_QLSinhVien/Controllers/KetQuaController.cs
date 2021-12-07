@@ -11,10 +11,11 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 {
     public class KetQuaController : Controller
     {
+        // GET: KetQua
         string apiUrl = "https://localhost:44328/api/";
 
-        [Authorize(Roles = "admin, user")]
-        // GET: KetQua
+        // Danh sách kết quả
+        [Authorize(Roles = "admin, user")] 
         public ActionResult Index()
         {
             var db = new QLSVContext();
@@ -41,6 +42,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(kq);
         }
 
+        // Danh sách Kết quả tất cả môn của 1 sinh viên
         [Authorize(Roles = "admin, user")]
         public ActionResult IndexByMaSinhVien(string masv)
         {
@@ -69,6 +71,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View("Index", kq);
         }
 
+        // Danh sách kết quả của tất cả sinh viên của 1 môn học
         [Authorize(Roles = "admin, user")]
         public ActionResult IndexByMaMonHoc(string mamh)
         {
@@ -100,6 +103,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View("Index", kq);
         }
 
+        // Tạo form Create Kết Quả các môn học cho 1 sinh viên
         [Authorize(Roles = "admin")]
         public ActionResult Create(string masv)
         {
@@ -114,6 +118,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View();
         }
 
+        // Tạo form Create Kết Quả tất cả sinh viên của 1 môn học
         [Authorize(Roles = "user")]
         public ActionResult CreateFromMH(string mamh)
         {
@@ -128,7 +133,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View("Create");
         }
 
-
+        // Create Kết Quả các môn học cho 1 sinh viên
         [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(KetQua kq)
@@ -163,6 +168,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(kq);
         }
 
+        // Create Kết Quả tất cả sinh viên của 1 môn học
         [Authorize(Roles = "user")]
         [HttpPost]
         public ActionResult CreateFromMH(KetQua kq)
@@ -197,6 +203,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View("Create", kq);
         }
 
+        // Tạo form Edit Kết Quả
         [Authorize(Roles = "admin, user")]
         public ActionResult Edit(int STT)
         {
@@ -225,20 +232,25 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 
             FormsIdentity id = (FormsIdentity)User.Identity;
             FormsAuthenticationTicket ticket = id.Ticket;
-            var gv = ticket.UserData;
+            var data = ticket.UserData;
+
+            string gv = data.Split(",".ToCharArray())[0];
             if (gv != "admin")
                 ViewBag.aaa = kq.MaMH;
 
             return View(kq);
         }
 
+        // Edit Kết Quả
         [Authorize(Roles = "admin, user")]
         [HttpPost]
         public ActionResult Edit(KetQua kq)
         {
             FormsIdentity id = (FormsIdentity)User.Identity;
             FormsAuthenticationTicket ticket = id.Ticket;
-            var gv = ticket.UserData;
+            var data = ticket.UserData;
+
+            string gv = data.Split(",".ToCharArray())[0];
 
             if (ModelState.IsValid)
             {

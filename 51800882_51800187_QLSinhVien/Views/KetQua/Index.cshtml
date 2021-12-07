@@ -3,18 +3,18 @@
 @{
     if (ViewBag.Loai == 0)
     {
-        ViewBag.Title = Resources.Content.resultList;
-        <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
+        ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.resultList;
+        <h2 style="text-transform:uppercase" class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
     }
     else if (ViewBag.Loai == 1)
     {
-        ViewBag.Title = Resources.Content.resultForStudent;
-        <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenSV</b></h2>
+        ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.resultForStudent;
+        <h2 style="text-transform:uppercase" class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenSV</b></h2>
     }
     else
     {
-        ViewBag.Title = Resources.Content.resultListForSubject;
-        <h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenMH</b></h2>
+        ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.resultListForSubject;
+        <h2 style="text-transform:uppercase" class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenMH</b></h2>
     }
     var STT = 1;
 }
@@ -27,12 +27,12 @@
         if (ViewBag.Loai == 1)
         {
             <p>
-                <a href='@Url.Action("Create", new { masv = ViewBag.MaSV })' class="btn btn-primary">@Resources.Content.create</a>
+                <a href='@Url.Action("Create", new { masv = ViewBag.MaSV })' class="btn btn-primary">@_51800882_51800187_QLSinhVien.Res.LangResource.create</a>
             </p>
         }
         else
         {
-            @Html.DropDownList("MaMH", null, "-- " + @Resources.Content.subject + " --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
+            @Html.DropDownList("MaMH", null, "-- " + @_51800882_51800187_QLSinhVien.Res.LangResource.subject + " --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
         }
     }
 
@@ -41,7 +41,7 @@
         if (ViewBag.Loai == 2)
         {
             <p>
-                <a href='@Url.Action("CreateFromMH", new { mamh = ViewBag.aaa })' class="btn btn-primary">@Resources.Content.create</a>
+                <a href='@Url.Action("CreateFromMH", new { mamh = ViewBag.aaa })' class="btn btn-primary">@_51800882_51800187_QLSinhVien.Res.LangResource.create</a>
             </p>
         }
 
@@ -59,17 +59,17 @@
         @if (ViewBag.Loai != 2)
         {
             <th>
-                @Resources.Content.subjectName
+                @Html.DisplayNameFor(model => model.MonHocs.TenMH)
             </th>
         }
         @if (ViewBag.Loai != 1)
         {
             <th>
-                @Resources.Content.fullName
+                @Html.DisplayNameFor(model => model.SinhViens.HoTen)
             </th>
         }
         <th>
-            @Resources.Content.score
+            @Html.DisplayNameFor(model => model.Diem)
         </th>
         @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
         {
@@ -104,14 +104,14 @@
                 {
                     if (ViewBag.Loai == 1)
                     {
-                        <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@Resources.Content.edit</a>
+                        <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
                     }
                 }
                 else {
-                    <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@Resources.Content.edit</a>
+                    <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
                 } 
 
-                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">@Resources.Content.delete</a>
+                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
                 </td>
             
         </tr>
@@ -123,7 +123,7 @@
 @if (ViewBag.Loai == 1)
 {
     <div>
-        @Html.ActionLink(Resources.Content.back, "Index", "SinhVien")
+        @Html.ActionLink(_51800882_51800187_QLSinhVien.Res.LangResource.back, "Index", "SinhVien")
     </div>
 }
 
@@ -145,7 +145,7 @@
                 e.preventDefault();
                 var atag = $(this);
                 var data_id = atag.attr('data_id');
-                if (!confirm("Bạn có chắc chắn xóa?"))
+                if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + "?"))
                     return;
                 $.ajax(
                     {
@@ -153,7 +153,7 @@
                         method: "DELETE",
                         success: function (data) {
                             atag.closest('tr').remove();
-                            alert("Đã xóa thành công ");
+                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess)');
                             return;
                         },
                         failed: function () {

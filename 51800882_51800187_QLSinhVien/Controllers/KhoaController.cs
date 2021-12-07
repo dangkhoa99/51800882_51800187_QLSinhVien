@@ -5,15 +5,17 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using _51800882_51800187_QLSinhVien.Res;
 
 namespace _51800882_51800187_QLSinhVien.Controllers
 {
     public class KhoaController : Controller
     {
+        // GET: Khoa
         KhoaDAO dao = new KhoaDAO(new QLSVContext());
         string apiUrl = "https://localhost:44328/api/";
 
-        // GET: Khoa
+        // Danh sách Khoa
         [Authorize(Roles = "admin, user")]
         public ActionResult Index()
         {
@@ -33,21 +35,22 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 
                     khoas = readTask.Result;
                 }
-                else //web api sent error response 
+                else
                 {
-
                     ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
                 }
             }
             return View(khoas);
         }
 
+        // Tạo form Create Khoa
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
         }
 
+        // Tạo Khoa
         [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(Khoa kh)
@@ -75,7 +78,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Mã Khoa đã tồn tại.");
+                    ModelState.AddModelError(string.Empty, LangResource.messExistsFacultyID);
                 }
             }
             return View(kh);
@@ -130,6 +133,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(kh);
         }
 
+        // Xóa Khoa
         //public ActionResult Delete(String id)
         //{
         //    using (var client = new HttpClient())

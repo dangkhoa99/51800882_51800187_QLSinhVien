@@ -180,6 +180,117 @@
   <data name="messageIsLogin" xml:space="preserve">
     <value>You are logged in or do not have permission to access this page. Please come back</value>
   </data>
+  <data name="messDateValidationAttribute" xml:space="preserve">
+    <value>Are you from the future?</value>
+  </data>
+  <data name="messDeleteError" xml:space="preserve">
+    <value>Failed to delete</value>
+  </data>
+  <data name="messDeleteErrorFaculty" xml:space="preserve">
+    <value>. Please try again when the Faculty has no Students!!!</value>
+  </data>
+  <data name="messDeleteSuccess" xml:space="preserve">
+    <value>Successfully deleted</value>
+  </data>
+  <data name="messErrorLogin" xml:space="preserve">
+    <value>Wrong username or password</value>
+  </data>
+  <data name="messExistsFacultyID" xml:space="preserve">
+    <value>Faculty ID already exists</value>
+  </data>
+  <data name="messExistsStudentID" xml:space="preserve">
+    <value>Student ID already exists</value>
+  </data>
+  <data name="messExistsSubjectID" xml:space="preserve">
+    <value>Subject ID already exists</value>
+  </data>
+  <data name="messExistsTeacherID" xml:space="preserve">
+    <value>Teacher ID already exists</value>
+  </data>
+  <data name="messQuestionDelete" xml:space="preserve">
+    <value>Are you sure delete</value>
+  </data>
+  <data name="messRequiredBirthday" xml:space="preserve">
+    <value>Please select Birthday</value>
+  </data>
+  <data name="messRequiredFaculty" xml:space="preserve">
+    <value>Please select Faculty</value>
+  </data>
+  <data name="messRequiredFacultyId" xml:space="preserve">
+    <value>Please enter Faculty ID</value>
+  </data>
+  <data name="messRequiredFacultyName" xml:space="preserve">
+    <value>Please enter Faculty Name</value>
+  </data>
+  <data name="messRequiredFullName" xml:space="preserve">
+    <value>Please enter Full Name</value>
+  </data>
+  <data name="messRequiredGender" xml:space="preserve">
+    <value>Please select Gender</value>
+  </data>
+  <data name="messRequiredNumberLess" xml:space="preserve">
+    <value>Please enter the number of lessons</value>
+  </data>
+  <data name="messRequiredPassword" xml:space="preserve">
+    <value>Please enter a password</value>
+  </data>
+  <data name="messRequiredScore" xml:space="preserve">
+    <value>Please enter Score</value>
+  </data>
+  <data name="messRequiredStudent" xml:space="preserve">
+    <value>Please select Student</value>
+  </data>
+  <data name="messRequiredStudentId" xml:space="preserve">
+    <value>Please enter the Student ID</value>
+  </data>
+  <data name="messRequiredSubject" xml:space="preserve">
+    <value>Please select a Subject</value>
+  </data>
+  <data name="messRequiredSubjectId" xml:space="preserve">
+    <value>Please enter Subject ID</value>
+  </data>
+  <data name="messRequiredSubjectName" xml:space="preserve">
+    <value>Please enter Subject Name</value>
+  </data>
+  <data name="messRequiredTeacherId" xml:space="preserve">
+    <value>Please enter Teacher ID</value>
+  </data>
+  <data name="messRequiredUsername" xml:space="preserve">
+    <value>Please enter Username</value>
+  </data>
+  <data name="messStringFacultyId" xml:space="preserve">
+    <value>Faculty ID does not exceed 5 characters</value>
+  </data>
+  <data name="messStringFacultyName" xml:space="preserve">
+    <value>Faculty Name must not exceed 100 characters</value>
+  </data>
+  <data name="messStringFullName" xml:space="preserve">
+    <value>Full Name must not exceed 100 characters</value>
+  </data>
+  <data name="messStringNumberLess" xml:space="preserve">
+    <value>Number of lessons must be greater than 0</value>
+  </data>
+  <data name="messStringPassword" xml:space="preserve">
+    <value>Password must not exceed 50 characters</value>
+  </data>
+  <data name="messStringScore" xml:space="preserve">
+    <value>Score from 0 - 10</value>
+  </data>
+  <data name="messStringStudentId" xml:space="preserve">
+    <value>Student ID should not exceed 5 characters</value>
+  </data>
+  <data name="messStringSubjectId" xml:space="preserve">
+    <value>Subject ID should not exceed 5 characters</value>
+  </data>
+  <data name="messStringSubjectName" xml:space="preserve">
+    <value>Subject Name should not exceed 100 characters</value>
+  </data>
+  <data name="messStringTeacherId" xml:space="preserve">
+    <value>Teacher ID should not exceed 5 characters</value>
+  </data>
+  <data name="messStringUsername" xml:space="preserve">
+    <value>Username must not exceed 50 characters</value>
+  </data>
   <data name="numberLessons" xml:space="preserve">
     <value>Number of lessons</value>
   </data>
@@ -197,6 +308,9 @@
   </data>
   <data name="resultListForSubject" xml:space="preserve">
     <value>List of results in</value>
+  </data>
+  <data name="roles" xml:space="preserve">
+    <value>Roles</value>
   </data>
   <data name="score" xml:space="preserve">
     <value>Score</value>
@@ -236,6 +350,12 @@
   </data>
   <data name="teacherList" xml:space="preserve">
     <value>Teacher List</value>
+  </data>
+  <data name="user" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="userList" xml:space="preserve">
+    <value>User List</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>UserName</value>

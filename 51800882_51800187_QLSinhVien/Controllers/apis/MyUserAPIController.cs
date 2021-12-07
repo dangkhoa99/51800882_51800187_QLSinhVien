@@ -18,25 +18,58 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return Ok(dao.GetAllUser());
         }
 
+        // Get by id
+        public IHttpActionResult Get(int id)
+        {
+            MyUser u = dao.GetByID(id);
+            if (u == null)
+                return NotFound();
+
+            return Ok(u);
+        }
+
         // Login
+        //[HttpPost]
+        //public IHttpActionResult Login(MyUser model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest("Not a valid model");
+
+        //    if (dao.CheckUser(model) == null)
+        //        return BadRequest("Not Found");
+
+        //    return Ok(dao.CheckUser(model));
+        //}
+
+        // Create User
         public IHttpActionResult Post(MyUser model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid model");
 
-            if (dao.CheckUser(model) == null)
-                return BadRequest("Not Found");
+            if (!dao.AddUser(model))
+                return BadRequest("Error");
 
-            return Ok(dao.CheckUser(model));
+            return Ok(model);
         }
-
+        
+        // Edit User
         public IHttpActionResult Put(MyUser model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Not a valid data");
 
-            if (!dao.AddUser(model))
+            if (!dao.EditUser(model))
                 return BadRequest("Error");
+
+            return Ok();
+        }
+
+        // Delete
+        public IHttpActionResult Delete(int id)
+        {
+            if (!dao.DeleteUser(id))
+                return BadRequest("Xóa thất bại");
 
             return Ok();
         }

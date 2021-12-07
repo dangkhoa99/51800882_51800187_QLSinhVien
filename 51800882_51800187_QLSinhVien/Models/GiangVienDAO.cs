@@ -56,10 +56,6 @@ namespace _51800882_51800187_QLSinhVien.Models
             if (gv == null)
                 return false;
 
-            //var kq = db.KetQuas.FirstOrDefault(d => d.MaSV == MaSV);
-            //if (kq != null)
-            //    return false;
-
             db.GiangViens.Remove(gv);
             db.SaveChanges();
             return true;

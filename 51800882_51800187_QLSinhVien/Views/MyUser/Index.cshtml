@@ -1,0 +1,80 @@
+﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.MyUser>
+
+@{
+    ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.userList;
+}
+
+<h2 style="text-transform:uppercase" class="text-center">@ViewBag.Title</h2>
+
+<p>
+    <a href='@Url.Action("Create")' class="btn btn-primary">@_51800882_51800187_QLSinhVien.Res.LangResource.create</a>
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.userName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roles)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiangViens.HoTen)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.userName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.roles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiangViens.HoTen)
+            </td>
+            <td>
+                <a href='@Url.Action("Edit", new { id = item.id })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
+
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.id">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.btn-remove').click(function (e) {
+                e.preventDefault();
+                var atag = $(this);
+                var data_id = atag.attr('data_id');
+                if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + "?"))
+                    return;
+                $.ajax(
+                    {
+                        url: 'https://localhost:44328/api/MyUserAPI/' + data_id,
+                        method: "DELETE",
+                        success: function (data) {
+                            atag.closest('tr').remove();
+                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess) ' + 'Tài khoản ' + data_name);
+                            return;
+                        },
+                        error: function () {
+                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteError) ' + 'Tài khoản ' + data_name);
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+}

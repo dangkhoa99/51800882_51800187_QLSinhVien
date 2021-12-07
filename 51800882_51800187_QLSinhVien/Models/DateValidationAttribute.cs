@@ -6,6 +6,7 @@ using System.Web;
 
 namespace _51800882_51800187_QLSinhVien.Models
 {
+    // Valid không được lớn hơn ngày hiện tại
     public class DateValidationAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)

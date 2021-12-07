@@ -1,34 +1,34 @@
 ﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.GiangVien>
 
 @{
-    ViewBag.Title = Resources.Content.teacherList;
+    ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.teacherList;
 }
 
-<h2 class="text-center" style="text-transform:uppercase">@ViewBag.Title</h2>
+<h2 class="text-center" style="text-transform:uppercase"><b>@ViewBag.Title</b></h2>
 
 <p>
-    <a href='@Url.Action("Create")' class="btn btn-primary">@Resources.Content.create</a>
+    <a href='@Url.Action("Create")' class="btn btn-primary">@_51800882_51800187_QLSinhVien.Res.LangResource.create</a>
 </p>
 
 <table class="table table-bordered">
     <tr>
         <th>
-            @Resources.Content.teacherId
+            @Html.DisplayNameFor(model => model.MaGV)
         </th>
         <th>
-            @Resources.Content.fullName
+            @Html.DisplayNameFor(model => model.HoTen)
         </th>
         <th>
-            @Resources.Content.birthDay
+            @Html.DisplayNameFor(model => model.NgaySinh)
         </th>
         <th>
-            @Resources.Content.gender
+            @Html.DisplayNameFor(model => model.GioiTinh)
         </th>
         <th>
-            @Resources.Content.facultyName
+            @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
         </th>
         <th>
-            @Resources.Content.subjectName
+            @Html.DisplayNameFor(model => model.MonHocs.TenMH)
         </th>
         <th></th>
     </tr>
@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.MonHocs.TenMH)
             </td>
             <td>
-                <a href='@Url.Action("Edit", new { id = item.MaGV })' class="btn btn-warning">@Resources.Content.edit</a>
+                <a href='@Url.Action("Edit", new { id = item.MaGV })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
 
-                @*<a href='#' class="btn btn-danger btn-remove" data_id="@item.MaGV" data_name="@item.HoTen">Xóa</a>*@
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaGV" data_name="@item.HoTen">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
             </td>
         </tr>
     }
@@ -71,7 +71,7 @@
                     var atag = $(this);
                     var data_id = atag.attr('data_id');
                     var data_name = atag.attr('data_name');
-                    if (!confirm("Bạn có chắc chắn xóa " + data_name + "?"))
+                    if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + data_name + "?"))
                         return;
                     $.ajax(
                         {
@@ -79,11 +79,11 @@
                             method: "DELETE",
                             success: function (data) {
                                 atag.closest('tr').remove();
-                                alert("Đã xóa thành công Giảng Viên " + data_name);
+                                alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.teacher) ' + data_name);
                                 return;
                             },
                             error: function () {
-                                alert("Đã xóa thất bại Giảng Viên " + data_name);
+                                alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteError) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.teacher) ' + data_name);
                             }
                         }
                     );

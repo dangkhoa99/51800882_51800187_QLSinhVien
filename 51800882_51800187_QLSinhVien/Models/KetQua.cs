@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using _51800882_51800187_QLSinhVien.Res;
 
 namespace _51800882_51800187_QLSinhVien.Models
 {
@@ -15,20 +16,20 @@ namespace _51800882_51800187_QLSinhVien.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int STT { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập Điểm")]
-        [Range(0, 10, ErrorMessage = "Số điểm từ 0 - 10")]
-        [DisplayName("Điểm")]
+        [Required(ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messRequiredScore")]
+        [Range(0, 10, ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messStringScore")]
+        [Display(Name = "score", ResourceType = typeof(LangResource))]
         public int Diem { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn Môn Học")]
-        [DisplayName("Mã môn học")]
+        [Required(ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messRequiredSubject")]
+        [Display(Name = "subjectId", ResourceType = typeof(LangResource))]
         public string MaMH { get; set; }
 
         [ForeignKey("MaMH")]
         public virtual MonHoc MonHocs { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn Sinh Viên")]
-        [DisplayName("Mã SV")]
+        [Required(ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messRequiredStudent")]
+        [Display(Name = "studentId", ResourceType = typeof(LangResource))]
         public string MaSV { get; set; }
 
         [ForeignKey("MaSV")]

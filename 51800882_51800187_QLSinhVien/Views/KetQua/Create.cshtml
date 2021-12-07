@@ -1,10 +1,13 @@
 ﻿@model _51800882_51800187_QLSinhVien.Models.KetQua
 
 @{
-    ViewBag.Title = Resources.Content.create;
+    ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.create;
     FormsIdentity id = (FormsIdentity)User.Identity;
     FormsAuthenticationTicket ticket = id.Ticket;
-    var gv = ticket.UserData;
+    var data = ticket.UserData;
+
+    string iid = data.Split(",".ToCharArray())[1];
+    string gv = data.Split(",".ToCharArray())[0];
 }
 
 <h2>@ViewBag.Title</h2>
@@ -15,7 +18,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>@Resources.Content.result</h4>
+        <h4>@_51800882_51800187_QLSinhVien.Res.LangResource.result</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -47,7 +50,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@Resources.Content.create" class="btn btn-default" />
+                <input type="submit" value="@_51800882_51800187_QLSinhVien.Res.LangResource.create" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -57,11 +60,11 @@
     @*@Html.ActionLink("Quay lại", "Index")*@
     @if (gv == "admin")
     {
-        @Html.ActionLink(Resources.Content.back, "IndexByMaSinhVien", new { masv = ViewBag.aaa })
+        @Html.ActionLink(_51800882_51800187_QLSinhVien.Res.LangResource.back, "IndexByMaSinhVien", new { masv = ViewBag.aaa })
     }
     else
     {
-        @Html.ActionLink(Resources.Content.back, "IndexByMaMonHoc", new { mamh = ViewBag.aaa })
+        @Html.ActionLink(_51800882_51800187_QLSinhVien.Res.LangResource.back, "IndexByMaMonHoc", new { mamh = ViewBag.aaa })
     }
 </div>
 

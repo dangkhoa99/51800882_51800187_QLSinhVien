@@ -27,9 +27,38 @@ namespace _51800882_51800187_QLSinhVien.Models
 
         public bool AddUser(MyUser u)
         {
+            u.roles = "user";
             db.Users.Add(u);
             db.SaveChanges();
             return true;
+        }
+
+        public bool EditUser(MyUser u)
+        {
+            var oldUser = db.Users.FirstOrDefault(m => m.id == u.id);
+            if (oldUser == null)
+                return false;
+
+            oldUser.password = u.password;
+
+            db.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteUser(int id)
+        {
+            var u = db.Users.FirstOrDefault(m => m.id == id);
+            if (u == null)
+                return false;
+
+            db.Users.Remove(u);
+            db.SaveChanges();
+            return true;
+        }
+
+        public MyUser GetByID(int id)
+        {
+            return db.Users.FirstOrDefault(m => m.id == id);
         }
     }
 }

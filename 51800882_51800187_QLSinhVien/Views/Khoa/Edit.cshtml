@@ -1,7 +1,7 @@
 ﻿@model _51800882_51800187_QLSinhVien.Models.Khoa
 
 @{
-    ViewBag.Title = Resources.Content.edit;
+    ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.edit;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>@Resources.Content.faculty</h4>
+        <h4>@_51800882_51800187_QLSinhVien.Res.LangResource.faculty</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -33,14 +33,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@Resources.Content.edit" class="btn btn-default" />
+                <input type="submit" value="@_51800882_51800187_QLSinhVien.Res.LangResource.edit" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink(Resources.Content.back, "Index")
+    @Html.ActionLink(_51800882_51800187_QLSinhVien.Res.LangResource.back, "Index")
 </div>
 
 @section Scripts {

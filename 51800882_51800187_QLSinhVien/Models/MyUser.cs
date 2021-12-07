@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using _51800882_51800187_QLSinhVien.Res;
 
 namespace _51800882_51800187_QLSinhVien.Models
 {
@@ -14,18 +15,21 @@ namespace _51800882_51800187_QLSinhVien.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập Tài khoản")]
-        [StringLength(50, ErrorMessage = "Tài khoản không vượt quá 50 kí tự")]
+        [Required(ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messRequiredUsername")]
+        [StringLength(50, ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messStringUsername")]
+        [Display(Name = "username", ResourceType = typeof(LangResource))]
         public string userName { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập Mật khẩu")]
-        [StringLength(50, ErrorMessage = "Mật khẩu không vượt quá 50 kí tự")]
+        [Required(ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messRequiredPassword")]
+        [StringLength(50, ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messStringPassword")]
+        [Display(Name = "password", ResourceType = typeof(LangResource))]
         public string password { get; set; }
 
+        [Display(Name = "roles", ResourceType = typeof(LangResource))]
         [StringLength(50)]
         public string roles { get; set; }
 
-        [DisplayName("Mã giảng viên")]
+        [Display(Name = "teacherId", ResourceType = typeof(LangResource))]
         public string MaGV { get; set; }
 
         [ForeignKey("MaGV")]

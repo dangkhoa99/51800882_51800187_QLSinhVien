@@ -5,16 +5,18 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using _51800882_51800187_QLSinhVien.Res;
 
-namespace _51800882_51800187_QLSinhVien.Controllers.apis
+namespace _51800882_51800187_QLSinhVien.Controllers
 {
     public class SinhVienController : Controller
     {
+        // GET: SinhVien
         SinhVienDAO dao = new SinhVienDAO(new QLSVContext());
         string apiUrl = "https://localhost:44328/api/";
 
+        // Danh sách sinh viên
         [Authorize(Roles = "admin, user")]
-        // GET: SinhVien
         public ActionResult Index()
         {
             ViewBag.Loai = 0;
@@ -36,15 +38,15 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
 
                     sv = readTask.Result;
                 }
-                else //web api sent error response 
+                else
                 {
-
                     ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
                 }
             }
             return View(sv);
         }
 
+        // Danh sách sinh viên lọc theo Khoa
         [Authorize(Roles = "admin, user")]
         public ActionResult IndexByMaKhoa(string makhoa)
         {
@@ -69,15 +71,15 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
 
                     sv = readTask.Result;
                 }
-                else //web api sent error response 
+                else
                 {
-
                     ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
                 }
             }
             return View("Index", sv);
         }
 
+        // Tạo form Create SV
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
@@ -94,6 +96,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return View();
         }
 
+        // Create SV
         [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(SinhVien sv)
@@ -121,7 +124,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Mã SV đã tồn tại.");
+                    ModelState.AddModelError(string.Empty, LangResource.messExistsStudentID);
                 }
             }
             var db = new QLSVContext();
@@ -136,6 +139,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return View(sv);
         }
 
+        // Tạo form Edit SV
         [Authorize(Roles = "admin")]
         public ActionResult Edit(string id)
         {
@@ -172,6 +176,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
             return View(sv);
         }
 
+        // Edit SV
         [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Edit(SinhVien sv)

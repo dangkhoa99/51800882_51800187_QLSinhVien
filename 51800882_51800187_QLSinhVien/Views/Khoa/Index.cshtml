@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<_51800882_51800187_QLSinhVien.Models.Khoa>
 
 @{
-    ViewBag.Title = Resources.Content.facultyList;
+    ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.facultyList;
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 style="text-transform:uppercase" class="text-center"><b>@ViewBag.Title</b></h2>
 @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
 {
     <p>
-        <a href='@Url.Action("Create")' class="btn btn-primary">@Resources.Content.create</a>
+        <a href='@Url.Action("Create")' class="btn btn-primary">@_51800882_51800187_QLSinhVien.Res.LangResource.create</a>
     </p>
 }
 
@@ -17,16 +17,16 @@
 <table class="table table-bordered">
     <tr>
         <th>
-            @Resources.Content.facultyId
+            @Html.DisplayNameFor(model => model.MaKhoa)
         </th>
         <th>
-            @Resources.Content.facultyName
+            @Html.DisplayNameFor(model => model.TenKhoa)
         </th>
         @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
         {
             <th></th>
         }
-        </tr>
+    </tr>
 
     @foreach (var item in Model)
     {
@@ -40,9 +40,9 @@
             @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
             {
             <td>
-                <a href='@Url.Action("Edit", new { id = item.MaKhoa })' class="btn btn-warning">@Resources.Content.edit</a>
+                <a href='@Url.Action("Edit", new { id = item.MaKhoa })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
 
-                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaKhoa" data_name="@item.TenKhoa">@Resources.Content.delete</a>
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaKhoa" data_name="@item.TenKhoa">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
 
                 @*<a href='@Url.Action("IndexByMaKhoa", "SinhVien", new { makhoa = item.MaKhoa })' class="btn btn-info">Xem SV</a>*@
             </td>
@@ -60,7 +60,7 @@
                 var atag = $(this);
                 var data_id = atag.attr('data_id');
                 var data_name = atag.attr('data_name');
-                if (!confirm("Bạn có chắc chắn xóa " + data_name + "?"))
+                if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + data_name + "?"))
                     return;
                 $.ajax(
                     {
@@ -68,11 +68,11 @@
                         method: "DELETE",
                         success: function (data) {
                             atag.closest('tr').remove();
-                            alert("Đã xóa thành công Khoa " + data_name);
+                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.faculty) ' + data_name);
                             return;
                         },
                         error: function () {
-                            alert("Đã xóa thất bại Khoa " + data_name + ". Vui lòng thử lại khi Khoa không có Sinh Viên !!!");
+                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteError) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.faculty) ' + data_name + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteErrorFaculty)');
                         }
                     }
                 );

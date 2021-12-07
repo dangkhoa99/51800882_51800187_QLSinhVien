@@ -4,28 +4,31 @@
     Layout = null;
     FormsIdentity id = (FormsIdentity)User.Identity;
     FormsAuthenticationTicket ticket = id.Ticket;
-    var gv = ticket.UserData;
+    var data = ticket.UserData;
+
+    string iid = data.Split(",".ToCharArray())[1];
+    string gv = data.Split(",".ToCharArray())[0];
 }
 
 <html>
 <head>
-    <title>@Resources.Content.systemManagementStudent</title>
+    <title>@_51800882_51800187_QLSinhVien.Res.LangResource.systemManagementStudent</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
     <body>
         <div class="header">
             <div class="left">
-                <a href="#">@Resources.Content.systemManagementStudent</a>
+                <a href="#">@_51800882_51800187_QLSinhVien.Res.LangResource.systemManagementStudent</a>
             </div>
 
             <div class="right">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a class="user">@Resources.Content.hello, <b>@User.Identity.Name!</b></a>
+                    <a class="user">@_51800882_51800187_QLSinhVien.Res.LangResource.hello, <b>@User.Identity.Name!</b></a>
 
                     using (Html.BeginForm("Logout", "Home", FormMethod.Post))
                     {
-                        <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">@Resources.Content.logout</a>
+                        <a class="btn btn-danger" href="javascript:;" onclick="document.forms[0].submit();">@_51800882_51800187_QLSinhVien.Res.LangResource.logout</a>
                     }
                 }
                 <div style="display: flex; justify-content: flex-end; margin-right: 20px;">
@@ -38,17 +41,21 @@
         <div class="container">
             @if (gv == "admin")
             {
-                <a href="./Khoa" class="box" style="background-color: #90e25e" target="_blank">@Resources.Content.faculty</a>
-                <a href="./MonHoc" class="box" style="background-color: #b200ff" target="_blank">@Resources.Content.subject</a>
-                <a href="./GiangVien" class="box" style="background-color: #39e4de" target="_blank">@Resources.Content.teacher</a>
-                <a href="./KetQua" class="box" style="background-color: #ff006e" target="_blank">@Resources.Content.result</a>
-                <a href="./SinhVien" class="box box-1" style="background-color: #0061AD" target="_blank">@Resources.Content.student</a>
+                <a href="./Khoa" class="box" style="background-color: #90e25e" target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.faculty</a>
+                <a href="./MonHoc" class="box" style="background-color: #b200ff" target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.subject</a>
+                <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.student</a>
+                <a href="./KetQua" class="box" style="background-color: #ff006e" target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.result</a>
+                <a href="./GiangVien" class="box" style="background-color: #39e4de" target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.teacher</a>
+
+                <a href="./MyUser" class="box" style="background-color: #3ba57d" target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.user</a>
 
             }
             else
             {
-                <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">@Resources.Content.student</a>
-                <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff" target="_blank">@Resources.Content.subject</a>
+                <a href="./SinhVien" class="box" style="background-color: #0061AD" target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.student</a>
+                <a href="./MonHoc/IndexByMaGV?magv=@gv" class="box" style="background-color: #b200ff" target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.subject</a>
+
+                <a href="./MyUser/Detail?id=@iid" class="box box-1" style="background-color: #3ba57d " target="_blank">@_51800882_51800187_QLSinhVien.Res.LangResource.user</a>
             }
         </div>
 

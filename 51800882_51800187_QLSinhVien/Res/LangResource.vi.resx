@@ -180,6 +180,117 @@
   <data name="messageIsLogin" xml:space="preserve">
     <value>Bạn đã đăng nhập hoặc không có quyền truy cập trang này. Vui lòng quay về</value>
   </data>
+  <data name="messDateValidationAttribute" xml:space="preserve">
+    <value>Bạn đến từ tương lai à ?</value>
+  </data>
+  <data name="messDeleteError" xml:space="preserve">
+    <value>Đã xóa thất bại</value>
+  </data>
+  <data name="messDeleteErrorFaculty" xml:space="preserve">
+    <value>. Vui lòng thử lại khi Khoa không có Sinh Viên !!!</value>
+  </data>
+  <data name="messDeleteSuccess" xml:space="preserve">
+    <value>Đã xóa thành công</value>
+  </data>
+  <data name="messErrorLogin" xml:space="preserve">
+    <value>Sai tên đăng nhập hoặc mật khẩu</value>
+  </data>
+  <data name="messExistsFacultyID" xml:space="preserve">
+    <value>Mã Khoa đã tồn tại</value>
+  </data>
+  <data name="messExistsStudentID" xml:space="preserve">
+    <value>Mã Sinh Viên đã tồn tại</value>
+  </data>
+  <data name="messExistsSubjectID" xml:space="preserve">
+    <value>Mã Môn học đã tồn tại</value>
+  </data>
+  <data name="messExistsTeacherID" xml:space="preserve">
+    <value>Mã GV đã tồn tại</value>
+  </data>
+  <data name="messQuestionDelete" xml:space="preserve">
+    <value>Bạn có chắc chắn xóa</value>
+  </data>
+  <data name="messRequiredBirthday" xml:space="preserve">
+    <value>Vui lòng chọn Ngày Sinh</value>
+  </data>
+  <data name="messRequiredFaculty" xml:space="preserve">
+    <value>Vui lòng chọn Khoa</value>
+  </data>
+  <data name="messRequiredFacultyId" xml:space="preserve">
+    <value>Vui lòng nhập Mã Khoa</value>
+  </data>
+  <data name="messRequiredFacultyName" xml:space="preserve">
+    <value>Vui lòng nhập Tên Khoa</value>
+  </data>
+  <data name="messRequiredFullName" xml:space="preserve">
+    <value>Vui lòng nhập Họ Tên</value>
+  </data>
+  <data name="messRequiredGender" xml:space="preserve">
+    <value>Vui lòng chọn Giới tính</value>
+  </data>
+  <data name="messRequiredNumberLess" xml:space="preserve">
+    <value>Vui lòng nhập Số tiết học</value>
+  </data>
+  <data name="messRequiredPassword" xml:space="preserve">
+    <value>Vui lòng nhập Mật khẩu</value>
+  </data>
+  <data name="messRequiredScore" xml:space="preserve">
+    <value>Vui lòng nhập Điểm</value>
+  </data>
+  <data name="messRequiredStudent" xml:space="preserve">
+    <value>Vui lòng chọn Sinh Viên</value>
+  </data>
+  <data name="messRequiredStudentId" xml:space="preserve">
+    <value>Vui lòng nhập Mã SV</value>
+  </data>
+  <data name="messRequiredSubject" xml:space="preserve">
+    <value>Vui lòng chọn Môn Học</value>
+  </data>
+  <data name="messRequiredSubjectId" xml:space="preserve">
+    <value>Vui lòng nhập Mã Môn Học</value>
+  </data>
+  <data name="messRequiredSubjectName" xml:space="preserve">
+    <value>Vui lòng nhập Tên Môn Học</value>
+  </data>
+  <data name="messRequiredTeacherId" xml:space="preserve">
+    <value>Vui lòng nhập Mã GV</value>
+  </data>
+  <data name="messRequiredUsername" xml:space="preserve">
+    <value>Vui lòng nhập Tài khoản</value>
+  </data>
+  <data name="messStringFacultyId" xml:space="preserve">
+    <value>Mã Khoa không vượt quá 5 kí tự</value>
+  </data>
+  <data name="messStringFacultyName" xml:space="preserve">
+    <value>Tên Khoa không vượt quá 100 kí tự</value>
+  </data>
+  <data name="messStringFullName" xml:space="preserve">
+    <value>Họ Tên không vượt quá 100 kí tự</value>
+  </data>
+  <data name="messStringNumberLess" xml:space="preserve">
+    <value>Số tiết học phải lớn hơn 0</value>
+  </data>
+  <data name="messStringPassword" xml:space="preserve">
+    <value>Mật khẩu không vượt quá 50 kí tự</value>
+  </data>
+  <data name="messStringScore" xml:space="preserve">
+    <value>Số điểm từ 0 - 10</value>
+  </data>
+  <data name="messStringStudentId" xml:space="preserve">
+    <value>Mã SV không vượt quá 5 kí tự</value>
+  </data>
+  <data name="messStringSubjectId" xml:space="preserve">
+    <value>Mã Môn học không vượt quá 5 kí tự</value>
+  </data>
+  <data name="messStringSubjectName" xml:space="preserve">
+    <value>Tên môn học không vượt quá 100 kí tự</value>
+  </data>
+  <data name="messStringTeacherId" xml:space="preserve">
+    <value>Mã GV không vượt quá 5 kí tự</value>
+  </data>
+  <data name="messStringUsername" xml:space="preserve">
+    <value>Tài khoản không vượt quá 50 kí tự</value>
+  </data>
   <data name="numberLessons" xml:space="preserve">
     <value>Số tiết</value>
   </data>
@@ -197,6 +308,9 @@
   </data>
   <data name="resultListForSubject" xml:space="preserve">
     <value>Danh sách kết quả môn</value>
+  </data>
+  <data name="roles" xml:space="preserve">
+    <value>Quyền</value>
   </data>
   <data name="score" xml:space="preserve">
     <value>Điểm</value>
@@ -236,6 +350,12 @@
   </data>
   <data name="teacherList" xml:space="preserve">
     <value>Danh sách giảng viên</value>
+  </data>
+  <data name="user" xml:space="preserve">
+    <value>Người dùng</value>
+  </data>
+  <data name="userList" xml:space="preserve">
+    <value>Danh sách người dùng</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Tài khoản</value>

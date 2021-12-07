@@ -3,11 +3,11 @@
 @{
     if (ViewBag.Loai == 0)
     {
-        ViewBag.Title = Resources.Content.studentList;
+        ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.studentList;
     }
     else
     {
-        ViewBag.Title = Resources.Content.studentListForFaculty;
+        ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.studentListForFaculty;
     }
 }
 
@@ -18,11 +18,11 @@
     {
 
         <p>
-            <a href='@Url.Action("Create")' class="btn btn-primary">@Resources.Content.create</a>
+            <a href='@Url.Action("Create")' class="btn btn-primary">@_51800882_51800187_QLSinhVien.Res.LangResource.create</a>
         </p>
     }
 
-    @Html.DropDownList("MaKhoa", null, "-- " + @Resources.Content.faculty + " --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
+    @Html.DropDownList("MaKhoa", null, "-- " + @_51800882_51800187_QLSinhVien.Res.LangResource.faculty + " --", new { @class = "form-control", @onChange = "SelectedValue(this)" })
 </div>
 
 
@@ -31,25 +31,25 @@
     <table class="table table-bordered">
         <tr>
             <th>
-                @Resources.Content.studentId
+                @Html.DisplayNameFor(model => model.MaSV)
             </th>
             <th>
-                @Resources.Content.fullName
+                @Html.DisplayNameFor(model => model.HoTen)
             </th>
             <th>
-                @Resources.Content.birthDay
+                @Html.DisplayNameFor(model => model.NgaySinh)
             </th>
             <th>
-                @Resources.Content.gender
+                @Html.DisplayNameFor(model => model.GioiTinh)
             </th>
             <th>
-                @Resources.Content.facultyName
+                @Html.DisplayNameFor(model => model.Khoa.TenKhoa)
             </th>
             @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
             {
                 <th></th>
             }
-            </tr>
+        </tr>
 
         @foreach (var item in Model)
         {
@@ -74,11 +74,11 @@
                  @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
                 {
                 <td>
-                    <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">@Resources.Content.edit</a>
+                    <a href='@Url.Action("Edit", new { id = item.MaSV })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
 
-                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">@Resources.Content.delete</a>
+                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.MaSV" data_name="@item.HoTen">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
 
-                    <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">@Resources.Content.checkResult</a>
+                    <a href='@Url.Action("IndexByMaSinhVien", "KetQua", new { masv = item.MaSV })' class="btn btn-success">@_51800882_51800187_QLSinhVien.Res.LangResource.checkResult</a>
                 </td>
                  }
             </tr>
@@ -112,7 +112,7 @@
                     var atag = $(this);
                     var data_id = atag.attr('data_id');
                     var data_name = atag.attr('data_name');
-                    if (!confirm("Bạn có chắc chắn xóa " + data_name + "?"))
+                    if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + data_name + "?"))
                         return;
                     $.ajax(
                         {
@@ -120,11 +120,11 @@
                             method: "DELETE",
                             success: function (data) {
                                 atag.closest('tr').remove();
-                                alert("Đã xóa thành công Sinh viên " + data_name);
+                                alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.student) ' + data_name);
                                 return;
                             },
                             error: function () {
-                                alert("Đã xóa thất bại Sinh viên " + data_name);
+                                alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteError) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.student) ' + data_name);
                             }
                         }
                     );

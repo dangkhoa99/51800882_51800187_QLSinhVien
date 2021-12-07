@@ -5,20 +5,21 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using _51800882_51800187_QLSinhVien.Res;
 
 namespace _51800882_51800187_QLSinhVien.Models
 {
     public class Khoa
     {
         [Key]
-        [Required(ErrorMessage = "Vui lòng nhập Mã Khoa")]
-        [StringLength(5, ErrorMessage = "Mã Khoa không vượt quá 5 kí tự")]
-        [DisplayName("Mã Khoa")]
+        [Required(ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messRequiredFacultyId")]
+        [StringLength(5, ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messStringFacultyId")]
+        [Display(Name = "facultyId", ResourceType = typeof(LangResource))]
         public string MaKhoa { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập Tên Khoa")]
-        [StringLength(100, ErrorMessage = "Mã Khoa không vượt quá 100 kí tự")]
-        [DisplayName("Tên Khoa")]
+        [Required(ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messRequiredFacultyName")]
+        [StringLength(100, ErrorMessageResourceType = typeof(LangResource), ErrorMessageResourceName = "messStringFacultyName")]
+        [Display(Name = "facultyName", ResourceType = typeof(LangResource))]
         public string TenKhoa { get; set; }
 
         [JsonIgnore]

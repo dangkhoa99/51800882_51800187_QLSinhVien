@@ -5,16 +5,18 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using _51800882_51800187_QLSinhVien.Res;
 
 namespace _51800882_51800187_QLSinhVien.Controllers
 {
     public class MonHocController : Controller
     {
+        // GET: MonHoc
         MonHocDAO dao = new MonHocDAO(new QLSVContext());
         string apiUrl = "https://localhost:44328/api/";
 
+        // Danh sách môn học
         [Authorize(Roles = "admin, user")]
-        // GET: MonHoc
         public ActionResult Index()
         {
             IList<MonHoc> mh = null;
@@ -33,17 +35,16 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 
                     mh = readTask.Result;
                 }
-                else //web api sent error response 
+                else
                 {
-
                     ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
                 }
             }
             return View(mh);
         }
 
+        // Danh sách môn học của một giảng viên dạy
         [Authorize(Roles = "user")]
-        // GET: MonHoc
         public ActionResult IndexByMaGV(string magv)
         {
             IList<MonHoc> mh = null;
@@ -62,15 +63,15 @@ namespace _51800882_51800187_QLSinhVien.Controllers
 
                     mh = readTask.Result;
                 }
-                else //web api sent error response 
+                else
                 {
-
                     ModelState.AddModelError(string.Empty, "Server error. Please contact admin.");
                 }
             }
             return View("Index", mh);
         }
 
+        // Tạo form Create MonHoc
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
@@ -79,6 +80,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View();
         }
 
+        // Create MonHoc
         [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Create(MonHoc mh)
@@ -106,7 +108,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Mã MH đã tồn tại.");
+                    ModelState.AddModelError(string.Empty, LangResource.messExistsSubjectID);
                 }
             }
             var db = new QLSVContext();
@@ -114,6 +116,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(mh);
         }
 
+        // Tạo form Edit MonHoc
         [Authorize(Roles = "admin")]
         public ActionResult Edit(string id)
         {
@@ -141,6 +144,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers
             return View(mh);
         }
 
+        // Edit MonHoc
         [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Edit(MonHoc mh)
