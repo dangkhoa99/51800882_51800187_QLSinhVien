@@ -14,6 +14,7 @@ else
     <head>
         <title>@_51800882_51800187_QLSinhVien.Res.LangResource.login</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     </head>
     <body>
         <div style="display: flex; justify-content: flex-end; margin-right: 20px; margin-top:20px;">
@@ -32,7 +33,10 @@ else
                 {
                     @Html.TextBoxFor(m => m.userName, new { @placeholder = @_51800882_51800187_QLSinhVien.Res.LangResource.username })
                     @Html.ValidationMessageFor(m => m.userName, "", new { @class = "text-danger" })
-                    @Html.PasswordFor(m => m.password, new { @placeholder = @_51800882_51800187_QLSinhVien.Res.LangResource.password })
+                    <div style="display: flex; align-items: center;">
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @type = "password", @id = "id_password", @placeholder = @_51800882_51800187_QLSinhVien.Res.LangResource.password, @style="position: static" } })
+                        <i class="far fa-eye fa-eye-slash" id="togglePassword" style="cursor: pointer; position: absolute; right:50px"></i>
+                    </div>
                     @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
                     <button type="submit" style="text-transform: uppercase">@_51800882_51800187_QLSinhVien.Res.LangResource.login</button>
 
@@ -42,6 +46,18 @@ else
 
     </body>
 </html>
+
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#id_password');
+
+    togglePassword.addEventListener('click', function (e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
+
 <style>
     .login-page {
         width: 400px;
@@ -60,51 +76,51 @@ else
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     }
 
-    .form input {
-        outline: 0;
-        background: #f2f2f2;
-        width: 100%;
-        border-radius: 8px;
-        border: 0;
-        margin: 0 0 15px;
-        padding: 15px;
-        box-sizing: border-box;
-        font-size: 14px;
-    }
+        .form input {
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border-radius: 8px;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
 
-    .form button {
-        text-transform: uppercase;
-        outline: 0;
-        background: #0061AD;
-        width: 100%;
-        border-radius: 8px;
-        border: 0;
-        padding: 15px;
-        color: #FFFFFF;
-        font-size: 14px;
-        -webkit-transition: all 0.3 ease;
-        transition: all 0.3 ease;
-        cursor: pointer;
-    }
+        .form button {
+            text-transform: uppercase;
+            outline: 0;
+            background: #0061AD;
+            width: 100%;
+            border-radius: 8px;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
 
-    .form button:hover, .form button:active, .form button:focus {
-        opacity: 0.9;
-        transition: 0.4s ease-out;
-    }
+            .form button:hover, .form button:active, .form button:focus {
+                opacity: 0.9;
+                transition: 0.4s ease-out;
+            }
 
-    .form .message {
-        margin: 15px 0 0;
-        color: #b3b3b3;
-        font-size: 12px;
-    }
+        .form .message {
+            margin: 15px 0 0;
+            color: #b3b3b3;
+            font-size: 12px;
+        }
 
-    .form .message a {
-        color: #4CAF50;
-        text-decoration: none;
-    }
+            .form .message a {
+                color: #4CAF50;
+                text-decoration: none;
+            }
 
-    .form .register-form {
-        display: none;
-    }
+        .form .register-form {
+            display: none;
+        }
 </style>
 }

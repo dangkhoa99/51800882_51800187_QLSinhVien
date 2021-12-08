@@ -55,8 +55,9 @@ namespace _51800882_51800187_QLSinhVien.Controllers
                 MyUserDAO dao = new MyUserDAO(new QLSVContext());
 
                 var us = dao.CheckUser(user);
-                var data = us.MaGV + "," + us.id;
+                
                 if (us != null) {
+                    var data = us.MaGV + "," + us.id;
                     if (us.MaGV == null)
                     {
                         data = "admin," + us.id;

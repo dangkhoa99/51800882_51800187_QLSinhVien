@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using _51800882_51800187_QLSinhVien.Res;
 
 namespace _51800882_51800187_QLSinhVien.Controllers
 {
@@ -60,18 +61,33 @@ namespace _51800882_51800187_QLSinhVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var client = new HttpClient())
+                if (u.MaGV == null)
                 {
-                    client.BaseAddress = new Uri(apiUrl);
-
-                    //HTTP POST
-                    var postTask = client.PostAsJsonAsync<MyUser>("MyUserAPI", u);
-                    postTask.Wait();
-
-                    var result = postTask.Result;
-                    if (result.IsSuccessStatusCode)
+                    ViewBag.ErrorGV = LangResource.messRequiredTeacherName;
+                }
+                else 
+                { 
+                    var existUserName = dao.ExistUserName(u.userName);
+                    if (!existUserName)
                     {
-                        return RedirectToAction("Index");
+                        using (var client = new HttpClient())
+                        {
+                            client.BaseAddress = new Uri(apiUrl);
+
+                            //HTTP POST
+                            var postTask = client.PostAsJsonAsync<MyUser>("MyUserAPI", u);
+                            postTask.Wait();
+
+                            var result = postTask.Result;
+                            if (result.IsSuccessStatusCode)
+                            {
+                                return RedirectToAction("Index");
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        ModelState.AddModelError(string.Empty, LangResource.messExistsUserName);
                     }
                 }
             }

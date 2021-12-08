@@ -17,6 +17,11 @@
         <h2 style="text-transform:uppercase" class="text-center" style="text-transform:uppercase">@ViewBag.Title <b>@ViewBag.TenMH</b></h2>
     }
     var STT = 1;
+    FormsIdentity id = (FormsIdentity)User.Identity;
+    FormsAuthenticationTicket ticket = id.Ticket;
+    var data = ticket.UserData;
+
+    string gv = data.Split(",".ToCharArray())[0];
 }
 
 
@@ -98,7 +103,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Diem)
             </td>
-            
+
             <td>
                 @if (Roles.IsUserInRole(User.Identity.Name, "admin"))
                 {
@@ -107,13 +112,14 @@
                         <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
                     }
                 }
-                else {
+                else
+                {
                     <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
-                } 
+                }
 
-                    <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
-                </td>
-            
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
+            </td>
+
         </tr>
         STT++;
     }
@@ -125,6 +131,14 @@
     <div>
         @Html.ActionLink(_51800882_51800187_QLSinhVien.Res.LangResource.back, "Index", "SinhVien")
     </div>
+}
+
+@if (Roles.IsUserInRole(User.Identity.Name, "user"))
+{
+    if (ViewBag.Loai == 2)
+    {
+        @Html.ActionLink(_51800882_51800187_QLSinhVien.Res.LangResource.back, "IndexByMaGV", "MonHoc", new { magv = @gv }, null)
+    }
 }
 
 @section scripts{

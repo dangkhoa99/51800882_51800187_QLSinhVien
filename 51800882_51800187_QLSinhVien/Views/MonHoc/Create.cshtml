@@ -43,7 +43,7 @@
             @Html.LabelFor(model => model.Khoa.TenKhoa, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("MaKhoa", null, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Khoa.TenKhoa, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.MaKhoa, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.create;
+    string errorGV = ViewBag.ErrorGV;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -25,8 +26,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @id = "myInput", @type = "password" } })
                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                <br />
+                <input type="checkbox" onclick="myFunction()">Show Password
             </div>
         </div>
 
@@ -42,7 +45,7 @@
             @Html.LabelFor(model => model.GiangViens.HoTen, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("MaGV", null, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaGV, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("MaGV", errorGV, new { @class = "text-danger" })
             </div>
         </div>
 
@@ -57,3 +60,14 @@
 <div>
     @Html.ActionLink(@_51800882_51800187_QLSinhVien.Res.LangResource.back, "Index")
 </div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>

@@ -207,6 +207,9 @@
   <data name="messExistsTeacherID" xml:space="preserve">
     <value>Mã GV đã tồn tại</value>
   </data>
+  <data name="messExistsUserName" xml:space="preserve">
+    <value>Tên tài khoản đã tồn tại</value>
+  </data>
   <data name="messQuestionDelete" xml:space="preserve">
     <value>Bạn có chắc chắn xóa</value>
   </data>
@@ -254,6 +257,9 @@
   </data>
   <data name="messRequiredTeacherId" xml:space="preserve">
     <value>Vui lòng nhập Mã GV</value>
+  </data>
+  <data name="messRequiredTeacherName" xml:space="preserve">
+    <value>Vui lòng chọn Giảng Viên</value>
   </data>
   <data name="messRequiredUsername" xml:space="preserve">
     <value>Vui lòng nhập Tài khoản</value>

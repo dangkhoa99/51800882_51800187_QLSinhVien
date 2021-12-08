@@ -28,9 +28,22 @@ namespace _51800882_51800187_QLSinhVien.Models
         public bool AddUser(MyUser u)
         {
             u.roles = "user";
+
+            var existUserName = db.Users.Where(us => us.userName == u.userName).FirstOrDefault();
+            if (existUserName != null)
+                return false;
+
             db.Users.Add(u);
             db.SaveChanges();
             return true;
+        }
+
+        public bool ExistUserName(string userName)
+        {
+            var existUserName = db.Users.Where(us => us.userName == userName).FirstOrDefault();
+            if (existUserName != null)
+                return true;
+            return false;
         }
 
         public bool EditUser(MyUser u)

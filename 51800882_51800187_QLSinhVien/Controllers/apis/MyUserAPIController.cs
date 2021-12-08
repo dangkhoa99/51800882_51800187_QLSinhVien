@@ -48,7 +48,7 @@ namespace _51800882_51800187_QLSinhVien.Controllers.apis
                 return BadRequest("Not a valid model");
 
             if (!dao.AddUser(model))
-                return BadRequest("Error");
+                return BadRequest("Exist Username in DB");
 
             return Ok(model);
         }

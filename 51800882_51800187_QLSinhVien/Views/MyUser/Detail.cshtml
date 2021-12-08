@@ -1,7 +1,7 @@
 ﻿@model _51800882_51800187_QLSinhVien.Models.MyUser
 
 @{
-    ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.user;
+    ViewBag.Title = _51800882_51800187_QLSinhVien.Res.LangResource.detail;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -29,6 +29,11 @@
         <tr>
             <td>@Html.DisplayNameFor(model => model.MaGV)</td>
             <td>@Html.DisplayFor(model => model.MaGV)</td>
+        </tr>
+
+        <tr style="background-color: #eee">
+            <td>@_51800882_51800187_QLSinhVien.Res.LangResource.faculty</td>
+            <td>@Html.DisplayFor(model => model.GiangViens.Khoa.TenKhoa)</td>
         </tr>
     </table>
 </div>

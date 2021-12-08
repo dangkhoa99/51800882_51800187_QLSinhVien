@@ -207,6 +207,9 @@
   <data name="messExistsTeacherID" xml:space="preserve">
     <value>Teacher ID already exists</value>
   </data>
+  <data name="messExistsUserName" xml:space="preserve">
+    <value>UserName already exists</value>
+  </data>
   <data name="messQuestionDelete" xml:space="preserve">
     <value>Are you sure delete</value>
   </data>
@@ -254,6 +257,9 @@
   </data>
   <data name="messRequiredTeacherId" xml:space="preserve">
     <value>Please enter Teacher ID</value>
+  </data>
+  <data name="messRequiredTeacherName" xml:space="preserve">
+    <value>Please enter Teacher</value>
   </data>
   <data name="messRequiredUsername" xml:space="preserve">
     <value>Please enter Username</value>

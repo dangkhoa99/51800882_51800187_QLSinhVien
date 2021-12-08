@@ -331,6 +331,15 @@ namespace _51800882_51800187_QLSinhVien.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UserName already exists.
+        /// </summary>
+        public static string messExistsUserName {
+            get {
+                return ResourceManager.GetString("messExistsUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure delete.
         /// </summary>
         public static string messQuestionDelete {
@@ -471,6 +480,15 @@ namespace _51800882_51800187_QLSinhVien.Res {
         public static string messRequiredTeacherId {
             get {
                 return ResourceManager.GetString("messRequiredTeacherId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter Teacher.
+        /// </summary>
+        public static string messRequiredTeacherName {
+            get {
+                return ResourceManager.GetString("messRequiredTeacherName", resourceCulture);
             }
         }
         
