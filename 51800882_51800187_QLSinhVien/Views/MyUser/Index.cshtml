@@ -45,7 +45,7 @@
             <td>
                 <a href='@Url.Action("Edit", new { id = item.id })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
 
-                <a href='#' class="btn btn-danger btn-remove" data_id="@item.id">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.id" data_name="@item.userName">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
             </td>
         </tr>
     }
@@ -59,7 +59,8 @@
                 e.preventDefault();
                 var atag = $(this);
                 var data_id = atag.attr('data_id');
-                if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + "?"))
+                data_name = atag.attr('data_name');
+                if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.user) ' + data_name + "?"))
                     return;
                 $.ajax(
                     {
@@ -67,11 +68,11 @@
                         method: "DELETE",
                         success: function (data) {
                             atag.closest('tr').remove();
-                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.user) ');
+                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.user) ' + data_name);
                             return;
                         },
                         error: function () {
-                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteError) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.user) ');
+                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteError) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.user) ' + data_name);
                         }
                     }
                 );

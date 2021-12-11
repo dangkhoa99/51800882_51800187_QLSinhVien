@@ -187,7 +187,16 @@
     <value>Đã xóa thất bại</value>
   </data>
   <data name="messDeleteErrorFaculty" xml:space="preserve">
-    <value>. Vui lòng thử lại khi Khoa không có Sinh Viên !!!</value>
+    <value>. Vui lòng thử lại khi Khoa không có Sinh Viên/Môn Học/Giảng Viên !!!</value>
+  </data>
+  <data name="messDeleteErrorStudent" xml:space="preserve">
+    <value>. Vui lòng thử lại khi Sinh Viên chưa có Kết Quả !!!</value>
+  </data>
+  <data name="messDeleteErrorSubject" xml:space="preserve">
+    <value>. Vui lòng thử lại khi Môn Học chưa có Kết Quả/Giảng Viên !!!</value>
+  </data>
+  <data name="messDeleteErrorTeacher" xml:space="preserve">
+    <value>. Vui lòng thử lại khi Giảng Viên chưa có Tài khoản !!!</value>
   </data>
   <data name="messDeleteSuccess" xml:space="preserve">
     <value>Đã xóa thành công</value>
@@ -321,6 +330,9 @@
   <data name="score" xml:space="preserve">
     <value>Điểm</value>
   </data>
+  <data name="showPassword" xml:space="preserve">
+    <value>Hiện mật khẩu</value>
+  </data>
   <data name="student" xml:space="preserve">
     <value>Sinh Viên</value>
   </data>
@@ -358,10 +370,10 @@
     <value>Danh sách giảng viên</value>
   </data>
   <data name="user" xml:space="preserve">
-    <value>Người dùng</value>
+    <value>Tài khoản người dùng</value>
   </data>
   <data name="userList" xml:space="preserve">
-    <value>Danh sách người dùng</value>
+    <value>Danh sách Tài khoản người dùng</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Tài khoản</value>

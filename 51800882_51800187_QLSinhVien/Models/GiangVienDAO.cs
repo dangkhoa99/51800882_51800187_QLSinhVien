@@ -56,6 +56,10 @@ namespace _51800882_51800187_QLSinhVien.Models
             if (gv == null)
                 return false;
 
+            var account = db.Users.FirstOrDefault(u => u.MaGV == MaGV);
+            if (account != null)
+                return false;
+
             db.GiangViens.Remove(gv);
             db.SaveChanges();
             return true;

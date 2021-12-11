@@ -117,7 +117,7 @@
                     <a href='@Url.Action("Edit", new { stt = item.STT })' class="btn btn-warning">@_51800882_51800187_QLSinhVien.Res.LangResource.edit</a>
                 }
 
-                <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
+                <a href='#' class="btn btn-danger btn-remove" data_id="@item.STT" data_name_mh="@item.MonHocs.TenMH" data_name_sv="@item.SinhViens.HoTen">@_51800882_51800187_QLSinhVien.Res.LangResource.delete</a>
             </td>
 
         </tr>
@@ -159,7 +159,9 @@
                 e.preventDefault();
                 var atag = $(this);
                 var data_id = atag.attr('data_id');
-                if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + "?"))
+                var data_name_mh = atag.attr('data_name_mh');
+                var data_name_sv = atag.attr('data_name_sv');
+                if (!confirm('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messQuestionDelete) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.result) ' + data_name_mh + ' - ' + data_name_sv + "?"))
                     return;
                 $.ajax(
                     {
@@ -167,7 +169,7 @@
                         method: "DELETE",
                         success: function (data) {
                             atag.closest('tr').remove();
-                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess)');
+                            alert('@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.messDeleteSuccess) ' + '@Html.Raw(@_51800882_51800187_QLSinhVien.Res.LangResource.result) ' + data_name_mh + ' - ' + data_name_sv);
                             return;
                         },
                         failed: function () {

@@ -50,6 +50,12 @@ namespace _51800882_51800187_QLSinhVien.Models
             var sv = db.SinhViens.FirstOrDefault(s => s.MaKhoa == MaKhoa);
             if (sv != null)
                 return false;
+            var mh = db.MonHocs.FirstOrDefault(m => m.MaKhoa == MaKhoa);
+            if (mh != null)
+                return false;
+            var gv = db.GiangViens.FirstOrDefault(t => t.MaKhoa == MaKhoa);
+            if (gv != null)
+                return false;
             db.Khoas.Remove(kh);
             db.SaveChanges();
             return true;

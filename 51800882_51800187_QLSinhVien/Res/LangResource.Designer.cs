@@ -268,11 +268,38 @@ namespace _51800882_51800187_QLSinhVien.Res {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to . Please try again when the Faculty has no Students!!!.
+        ///   Looks up a localized string similar to . Please try again when the Faculty has no Students/Subjects/Teachers !!!.
         /// </summary>
         public static string messDeleteErrorFaculty {
             get {
                 return ResourceManager.GetString("messDeleteErrorFaculty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to . Please try again when the Student has no Result !!!.
+        /// </summary>
+        public static string messDeleteErrorStudent {
+            get {
+                return ResourceManager.GetString("messDeleteErrorStudent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to . Please try again when the Subject has no Result/Teachers !!!.
+        /// </summary>
+        public static string messDeleteErrorSubject {
+            get {
+                return ResourceManager.GetString("messDeleteErrorSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to . Please try again when the Teacher has no Account !!!.
+        /// </summary>
+        public static string messDeleteErrorTeacher {
+            get {
+                return ResourceManager.GetString("messDeleteErrorTeacher", resourceCulture);
             }
         }
         
@@ -673,6 +700,15 @@ namespace _51800882_51800187_QLSinhVien.Res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show password.
+        /// </summary>
+        public static string showPassword {
+            get {
+                return ResourceManager.GetString("showPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Student.
         /// </summary>
         public static string student {
@@ -781,7 +817,7 @@ namespace _51800882_51800187_QLSinhVien.Res {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User.
+        ///   Looks up a localized string similar to User Account.
         /// </summary>
         public static string user {
             get {
@@ -790,7 +826,7 @@ namespace _51800882_51800187_QLSinhVien.Res {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User List.
+        ///   Looks up a localized string similar to User Account List.
         /// </summary>
         public static string userList {
             get {

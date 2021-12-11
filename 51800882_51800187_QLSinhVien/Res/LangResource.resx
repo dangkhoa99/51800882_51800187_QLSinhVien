@@ -187,7 +187,16 @@
     <value>Failed to delete</value>
   </data>
   <data name="messDeleteErrorFaculty" xml:space="preserve">
-    <value>. Please try again when the Faculty has no Students!!!</value>
+    <value>. Please try again when the Faculty has no Students/Subjects/Teachers !!!</value>
+  </data>
+  <data name="messDeleteErrorStudent" xml:space="preserve">
+    <value>. Please try again when the Student has no Result !!!</value>
+  </data>
+  <data name="messDeleteErrorSubject" xml:space="preserve">
+    <value>. Please try again when the Subject has no Result/Teachers !!!</value>
+  </data>
+  <data name="messDeleteErrorTeacher" xml:space="preserve">
+    <value>. Please try again when the Teacher has no Account !!!</value>
   </data>
   <data name="messDeleteSuccess" xml:space="preserve">
     <value>Successfully deleted</value>
@@ -321,6 +330,9 @@
   <data name="score" xml:space="preserve">
     <value>Score</value>
   </data>
+  <data name="showPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
   <data name="student" xml:space="preserve">
     <value>Student</value>
   </data>
@@ -358,10 +370,10 @@
     <value>Teacher List</value>
   </data>
   <data name="user" xml:space="preserve">
-    <value>User</value>
+    <value>User Account</value>
   </data>
   <data name="userList" xml:space="preserve">
-    <value>User List</value>
+    <value>User Account List</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>UserName</value>

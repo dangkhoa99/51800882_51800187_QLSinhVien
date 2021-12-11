@@ -59,6 +59,10 @@ namespace _51800882_51800187_QLSinhVien.Models
             if (kq != null)
                 return false;
 
+            var gv = db.GiangViens.FirstOrDefault(t => t.MaMH == MaMH);
+            if (gv != null)
+                return false;
+
             db.MonHocs.Remove(mh);
             db.SaveChanges();
             return true;
